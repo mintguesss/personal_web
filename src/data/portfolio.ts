@@ -7,16 +7,16 @@ export const siteData = {
   // ---------- 基本資訊 ----------
   name: "黃予岑",
   nameEn: "Ken",
-  title: "資訊管理學系 大四生",
+  title: "資訊管理學系 大四",
   institution: "輔仁大學",
   email: "a03111006@gmail.com",
   phone: "0939-160-311",
   location: "基隆市安樂區",
-  tagline: "NLP · Fraud Detection · Web Development",
+  tagline: "ML · NLP · Fraud Detection · Web Development",
   bio: [
-    "輔仁大學資訊管理系大四生，即將升讀中央大學資訊管理研究所。",
-    "專注於 NLP、機器學習與全端開發，熱衷於將技術應用於真實社會問題。目前進行國科會大專生研究計畫，研究以 AI 整合技術提升詐騙辨識精確度。",
-    "喜歡從頭打造系統、解決複雜問題，在開發過程中培養了快速調適與持續學習的習慣。",
+    "輔仁大學資訊管理系大四，即將升讀中央大學資訊管理研究所。",
+    "專注於 機器學習、電腦視覺、NLP、機器學習與全端開發，熱衷於將技術應用於真實社會問題。目前進行國科會大專生研究計畫，研究以 AI 整合技術提升詐騙辨識精確度。",
+    "喜歡從頭打造系統、訓練模型、解決複雜問題，在開發過程中培養了快速調適與持續學習的習慣。",
   ],
 
   // ---------- 社群連結 ----------
@@ -32,21 +32,21 @@ export const siteData = {
       school: "國立中央大學",
       dept: "資訊管理研究所",
       degree: "碩士（甄試錄取）",
-      period: "2025 — 預計",
-      badge: "甄試錄取",
+      period: "2026 — 預計",
+      badge: "",
     },
     {
       school: "輔仁大學",
       dept: "資訊管理學系",
       degree: "學士",
-      period: "2021 — 2025",
+      period: "2022 — 2026",
       badge: "班排前十 / 書卷獎",
     },
     {
       school: "臺北市立成功高中",
       dept: "",
       degree: "高中",
-      period: "2018 — 2021",
+      period: "2019 — 2022",
       badge: "",
     },
   ],
@@ -75,7 +75,7 @@ export const siteData = {
       id: "nsc",
       title: "國科會大專生研究計畫",
       subtitle: "計畫編號：114-2813-C-030-031-E",
-      period: "2024 — 2025",
+      period: "2025 — 2026",
       type: "research" as const,
       tags: ["BERT", "CLIP", "PaddleOCR", "TF-IDF", "NLP"],
       description:
@@ -140,20 +140,21 @@ export const siteData = {
   skills: {
     "程式語言": ["Python", "JavaScript", "TypeScript", "PHP", "Java", "SQL"],
     "前端框架": ["React", "Next.js", "HTML/CSS"],
-    "AI / ML": ["BERT", "CLIP", "PaddleOCR", "Hugging Face", "Scikit-learn"],
+    "AI / ML": ["BERT", "CLIP", "PaddleOCR", "YOLO", "Scikit-learn"],
     "後端 / 資料庫": ["Flask", "Node.js", "MySQL", "Firebase"],
     "雲端 / 工具": ["AWS Cloud Architecting", "Git", "Excel"],
   },
 
   // ---------- 獎項 / 榮譽 ----------
   awards: [
-    { year: "2025", title: "管理學院學術獎章", org: "輔仁大學" },
+    { year: "2025", title: "管理學院學術獎章*2", org: "輔仁大學" },
     { year: "2025", title: "專題發表優秀組別（第 42 屆）", org: "輔仁大學資訊管理系" },
     { year: "2025", title: "第 30 屆資訊應用服務創新競賽 — 校內推薦", org: "輔仁大學" },
-    { year: "2024", title: "第 22 屆育秀盃創意獎佳作", org: "育秀盃" },
-    { year: "2024", title: "113 學年度第 2 學期書卷獎", org: "輔仁大學" },
+    { year: "2025", title: "第 22 屆育秀盃創意獎佳作", org: "育秀盃" },
+    { year: "2025", title: "113 學年度第 2 學期書卷獎", org: "輔仁大學" },
+    { year: "2025", title: "AI 微學程結業", org: "輔仁大學" },
+    { year: "2025", title: "班級代表", org: "輔仁大學資訊管理系" },
     { year: "2024", title: "AWS Academy Graduate — Cloud Architecting", org: "AWS" },
-    { year: "2024", title: "AI 微學程結業", org: "輔仁大學" },
     { year: "2023", title: "班級代表", org: "輔仁大學資訊管理系" },
   ],
 
@@ -166,12 +167,6 @@ export const siteData = {
       desc: "負責國三數學及自然科目解題教學",
     },
     {
-      role: "時薪人員",
-      company: "達美樂披薩",
-      period: "2024.01 — 至今",
-      desc: "內外場事務、外送",
-    },
-    {
       role: "暑期工讀",
       company: "金格食品",
       period: "2024.07 — 2024.09",
@@ -182,6 +177,12 @@ export const siteData = {
       company: "圓圓堂純米麻糬",
       period: "2024.01 — 2024.02",
       desc: "食材處理、產品製作與封裝出貨",
+    },
+    {
+      role: "時薪人員",
+      company: "達美樂披薩",
+      period: "2025.01 — 2025.09",
+      desc: "內外場事務",
     },
   ],
 } as const

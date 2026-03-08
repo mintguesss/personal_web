@@ -7,7 +7,7 @@ import { siteData } from '@/data/portfolio'
 
 export const metadata: Metadata = {
   title: { default: `${siteData.nameEn} | Portfolio`, template: `%s | ${siteData.nameEn}` },
-  description: `${siteData.institution} ${siteData.title}，專注於 NLP、詐騙偵測與全端開發。`,
+  description: `${siteData.institution} ${siteData.title}，專注於 ML、NLP、詐騙偵測與全端開發。`,
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
