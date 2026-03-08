@@ -14,7 +14,31 @@ export default function ContactPage() {
           <p style={{ fontSize:'0.95rem', color:'var(--text-2)', lineHeight:1.85, maxWidth:'400px', marginBottom:'3rem' }}>
             歡迎研究合作、實習機會或任何交流。不管是技術問題、專案合作還是單純打招呼，都很歡迎寫信。
           </p>
-          <a href={'mailto:'+siteData.email} style={{ fontFamily:'var(--font-display)', fontSize:'clamp(1.1rem,2.5vw,1.6rem)', fontWeight:300, color:'var(--accent)', borderBottom:'1px solid var(--accent)', paddingBottom:'4px', display:'inline-block' }}>{siteData.email}</a>
+          <a
+  href={'mailto:' + siteData.email}
+  style={{
+    fontFamily:'var(--font-display)',
+    fontSize:'clamp(1.1rem,2.5vw,1.6rem)',
+    fontWeight:300,
+    color:'var(--accent)',
+    paddingBottom:'6px',
+    display:'inline-block',
+    textDecoration:'none',
+    position:'relative'
+  }}
+>
+  {siteData.email}
+  <span
+    style={{
+      position:'absolute',
+      left:0,
+      bottom:0,
+      width:'70%',
+      height:'1px',
+      background:'var(--accent)'
+    }}
+  />
+</a>
         </div>
         <div style={{ padding:'clamp(4rem,8vw,8rem) clamp(2rem,5vw,5rem)', display:'flex', flexDirection:'column', justifyContent:'center' }}>
           {[
@@ -23,9 +47,9 @@ export default function ContactPage() {
             { label:'Institution', value:siteData.institution+' '+siteData.title, href:'' },
             ...(siteData.links.github ? [{ label:'GitHub', value:siteData.links.github, href:siteData.links.github }] : []),
           ].map(({ label, value, href }) => (
-            <div key={label} style={{ padding:'2rem 0', borderBottom:'1px solid var(--border)', display:'grid', gridTemplateColumns:'110px 1fr', gap:'2rem', alignItems:'center' }}>
+            <div key={label} style={{ padding:'2rem 0', borderBottom:'1px solid var(--border)', display:'grid', gridTemplateColumns:'120px 1fr', gap:'2rem', alignItems:'center' }}>
               <span style={{ fontFamily:'var(--font-mono)', fontSize:'0.65rem', letterSpacing:'0.15em', color:'var(--muted)', textTransform:'uppercase' }}>{label}</span>
-              {href ? <a href={href} target={href.startsWith('http')?'_blank':undefined} rel="noreferrer" style={{ fontSize:'0.95rem', color:'var(--text)' }}>{value}</a> : <span style={{ fontSize:'0.95rem' }}>{value}</span>}
+              {href ? <a href={href} target={href.startsWith('http')?'_blank':undefined} rel="noreferrer" style={{ fontSize:'0.95rem', color:'var(--text)',textDecoration:'none' }}>{value}</a> : <span style={{ fontSize:'0.95rem' }}>{value}</span>}
             </div>
           ))}
           <div style={{ paddingTop:'3rem' }}>

@@ -10,7 +10,7 @@ export default function AboutPage() {
       <div style={{ borderBottom:'1px solid var(--border)', padding:'3rem clamp(2rem,5vw,5rem) 2.5rem', maxWidth:'1100px', margin:'0 auto' }}>
         <p style={{ fontFamily:'var(--font-mono)', fontSize:'0.65rem', letterSpacing:'0.2em', color:'var(--accent)', textTransform:'uppercase', marginBottom:'0.75rem' }}>About</p>
         <h1 style={{ fontFamily:'var(--font-display)', fontSize:'clamp(2rem,4vw,3rem)', fontWeight:300, lineHeight:1.05 }}>
-          關於我 <em style={{ fontStyle:'italic', color:'var(--muted)' }}>/ Ken Huang</em>
+          關於我 <em style={{ fontStyle:'italic', color:'var(--muted)' }}>/ Ken</em>
         </h1>
       </div>
 
@@ -18,9 +18,6 @@ export default function AboutPage() {
 
         {/* ── Bio + Info ── 左 bio，右 info，大致等高 */}
         <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'4rem', marginBottom:'4rem', alignItems:'start' }}>
-          <div style={{ display:'flex', flexDirection:'column', gap:'1rem' }}>
-            {siteData.bio.map((p, i) => <p key={i} style={{ fontSize:'0.93rem', color:'var(--text-2)', lineHeight:1.9 }}>{p}</p>)}
-          </div>
           <div>
             {[['學校',siteData.institution],['科系',siteData.title],['Email',siteData.email],['電話',siteData.phone],['位置',siteData.location]].map(([label,value]) => (
               <div key={String(label)} style={{ borderTop:'1px solid var(--border)', padding:'0.85rem 0' }}>
@@ -31,6 +28,10 @@ export default function AboutPage() {
               </div>
             ))}
           </div>
+          <div style={{ display:'flex', flexDirection:'column', gap:'1rem' }}>
+            {siteData.bio.map((p, i) => <p key={i} style={{ fontSize:'0.93rem', color:'var(--text-2)', lineHeight:1.9 }}>{p}</p>)}
+          </div>
+          
         </div>
 
         {/* ── Education ── */}
