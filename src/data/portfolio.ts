@@ -6,7 +6,7 @@
 export const siteData = {
   // ---------- 基本資訊 ----------
   name: "黃予岑",
-  nameEn: "Ken Huang",
+  nameEn: "Ken",
   title: "資訊管理學系 大四生",
   institution: "輔仁大學",
   email: "a03111006@gmail.com",
