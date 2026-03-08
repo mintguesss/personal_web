@@ -84,7 +84,7 @@ export const siteData = {
         "AUC-ROC: 0.873 → 0.929",
         "NLM denoising + Otsu thresholding 預處理",
         "CLIP 零樣本語意篩選",
-        "指導教授：許文錦",
+        "指導教授：廖建翔",
       ],
       link: "",
     },
