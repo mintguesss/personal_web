@@ -12,43 +12,36 @@ export const siteData = {
   email: "a03111006@gmail.com",
   phone: "0939-160-311",
   location: "基隆市安樂區",
-  tagline: "ML · NLP · Fraud Detection · Web Development",
+
+  // 首頁打字條列
+  taglines: [
+    'ML & CV Researcher',
+    'Full-Stack Developer',
+    'Graduate of Fu Jen Catholic University (2026)',
+    'Incoming M.S. Student @ NCU (2026)',
+  ],
+
+  // 首頁 Core Skills chips（獨立控制，不一定要跟 skills 完全一樣）
+  homeSkills: ['React', 'Next.js', 'Python', 'OCR', 'YOLO', 'BERT', 'NLP'],
+
   bio: [
-    "目前就讀輔仁大學資訊管理系大四，即將升讀中央大學資訊管理研究所。",
-    "專注於 機器學習、電腦視覺、NLP、機器學習與全端開發，熱衷於將技術應用於真實社會問題。目前進行國科會大專生研究計畫，研究以 AI 整合技術提升詐騙辨識精確度。",
+    "目前就讀輔仁大學資訊管理系，即將升讀中央大學資訊管理研究所。",
+    "專注於機器學習、電腦視覺、NLP 與全端開發，熱衷於將技術應用於真實社會問題。目前進行國科會大專生研究計畫，研究以 AI 整合技術提升詐騙辨識精確度。",
     "喜歡從頭打造系統、訓練模型、解決複雜問題，在開發過程中培養了快速調適與持續學習的習慣。",
   ],
 
   // ---------- 社群連結 ----------
   links: {
-    github: "",      // 填入 "https://github.com/你的帳號"
-    linkedin: "",    // 填入你的 LinkedIn URL
+    github: "",
+    linkedin: "",
     email: "mailto:a03111006@gmail.com",
   },
 
   // ---------- 學歷 ----------
   education: [
-    {
-      school: "國立中央大學",
-      dept: "資訊管理研究所",
-      degree: "碩士（甄試錄取）",
-      period: "2026 — 2028",
-      badge: "",
-    },
-    {
-      school: "輔仁大學",
-      dept: "資訊管理學系",
-      degree: "學士",
-      period: "2022 — 2026",
-      badge: "班排前十 / 書卷獎",
-    },
-    {
-      school: "臺北市立成功高中",
-      dept: "",
-      degree: "高中",
-      period: "2019 — 2022",
-      badge: "",
-    },
+    { school: "國立中央大學", dept: "資訊管理研究所", degree: "碩士（甄試錄取）", period: "2026 — 2028", badge: "" },
+    { school: "輔仁大學", dept: "資訊管理學系", degree: "學士", period: "2022 — 2026", badge: "班排前十 / 書卷獎" },
+    { school: "臺北市立成功高中", dept: "", degree: "高中", period: "2019 — 2022", badge: "" },
   ],
 
   // ---------- 研究 / 專案 ----------
@@ -60,15 +53,8 @@ export const siteData = {
       period: "2024 — 2025",
       type: "project" as const,
       tags: ["BERT", "OCR", "NLP", "React", "Python Flask", "Firebase"],
-      description:
-        "結合 AI、NLP、OCR 與爬蟲技術，開發多模態詐騙辨識平台。可處理文字、網址、圖片、檔案等輸入，輸出詐騙相似度百分比、關鍵字分析與情緒操控指標，並附帶沉浸式防詐教育小遊戲。",
-      highlights: [
-        "BERT fine-tuning 詐騙文字分類",
-        "PaddleOCR + 影像預處理提升辨識率",
-        "CLIP 語意匹配篩選詐騙內容",
-        "Gemini 模型自動萃取關鍵字與詐騙類型",
-        "育秀盃創意獎佳作 / 專題發表優秀組別",
-      ],
+      description: "結合 AI、NLP、OCR 與爬蟲技術，開發多模態詐騙辨識平台。可處理文字、網址、圖片、檔案等輸入，輸出詐騙相似度百分比、關鍵字分析與情緒操控指標，並附帶沉浸式防詐教育小遊戲。",
+      highlights: ["BERT fine-tuning 詐騙文字分類", "PaddleOCR + 影像預處理提升辨識率", "CLIP 語意匹配篩選詐騙內容", "Gemini 模型自動萃取關鍵字與詐騙類型", "育秀盃創意獎佳作 / 專題發表優秀組別"],
       link: "https://drive.google.com/drive/folders/1_G7nwt538wlxG21TaQK8OMSoWe3znhS9?usp=sharing",
     },
     {
@@ -78,14 +64,8 @@ export const siteData = {
       period: "2025 — 2026",
       type: "research" as const,
       tags: ["BERT", "CLIP", "PaddleOCR", "TF-IDF", "NLP"],
-      description:
-        "結合 AI 整合技術以提升詐騙辨識精確度。針對現有 OCR 辨識不足問題，透過影像預處理（NLM降噪、Otsu閾值化）與 CLIP 語意篩選，改善 BERT 分類模型輸入品質，AUC-ROC 從 0.873 提升至 0.929。",
-      highlights: [
-        "AUC-ROC: 0.873 → 0.929",
-        "NLM denoising + Otsu thresholding 預處理",
-        "CLIP 零樣本語意篩選",
-        "指導教授：廖建翔",
-      ],
+      description: "結合 AI 整合技術以提升詐騙辨識精確度。針對現有 OCR 辨識不足問題，透過影像預處理（NLM降噪、Otsu閾值化）與 CLIP 語意篩選，改善 BERT 分類模型輸入品質，AUC-ROC 從 0.873 提升至 0.929。",
+      highlights: ["AUC-ROC: 0.873 → 0.929", "NLM denoising + Otsu thresholding 預處理", "CLIP 零樣本語意篩選", "指導教授：廖建翔"],
       link: "",
     },
     {
@@ -95,14 +75,8 @@ export const siteData = {
       period: "2025",
       type: "research" as const,
       tags: ["XAI", "SHAP", "Machine Learning", "WAF", "Incremental Learning"],
-      description:
-        "提出 AI 強化 WAF 框架，結合 TF-IDF / Transformer embedding 與 HTTP 行為特徵，使用 PyTAIL 實作 Human-in-the-Loop 增量學習，並以 XAI/SHAP 提供可解釋規則建議。",
-      highlights: [
-        "偵測 SQL Injection、XSS 等變形攻擊",
-        "SHAP 可解釋特徵分析",
-        "Human-in-the-Loop 增量訓練",
-        "自動生成 WAF 規則建議",
-      ],
+      description: "提出 AI 強化 WAF 框架，結合 TF-IDF / Transformer embedding 與 HTTP 行為特徵，使用 PyTAIL 實作 Human-in-the-Loop 增量學習，並以 XAI/SHAP 提供可解釋規則建議。",
+      highlights: ["偵測 SQL Injection、XSS 等變形攻擊", "SHAP 可解釋特徵分析", "Human-in-the-Loop 增量訓練", "自動生成 WAF 規則建議"],
       link: "",
     },
     {
@@ -112,14 +86,8 @@ export const siteData = {
       period: "2023",
       type: "project" as const,
       tags: ["PHP", "MySQL", "HTML/CSS", "JavaScript"],
-      description:
-        "解決學校缺乏統一請假系統問題，自動帶入課表、Email 通知教師、出席統計及助教帳號等完整功能。",
-      highlights: [
-        "自動帶入個人課表",
-        "Email 自動通知機制",
-        "教師 / 學生 / 助教多角色權限",
-        "即時回報對話框",
-      ],
+      description: "解決學校缺乏統一請假系統問題，自動帶入課表、Email 通知教師、出席統計及助教帳號等完整功能。",
+      highlights: ["自動帶入個人課表", "Email 自動通知機制", "教師 / 學生 / 助教多角色權限", "即時回報對話框"],
       link: "",
     },
     {
@@ -129,8 +97,7 @@ export const siteData = {
       period: "2023",
       type: "project" as const,
       tags: ["React", "JavaScript"],
-      description:
-        "協助使用者從候選禮物清單透過轉盤決策，整合圖片、價格、購買連結，一鍵跳轉購買頁面。",
+      description: "協助使用者從候選禮物清單透過轉盤決策，整合圖片、價格、購買連結，一鍵跳轉購買頁面。",
       highlights: ["React SPA 架構", "動態轉盤動畫", "購物清單篩選功能"],
       link: "",
     },
@@ -160,29 +127,9 @@ export const siteData = {
 
   // ---------- 工作經驗 ----------
   experience: [
-    {
-      role: "解題老師",
-      company: "文城教育學院",
-      period: "2023.11 — 2024.06",
-      desc: "負責國三數學及自然科目解題教學",
-    },
-    {
-      role: "暑期工讀",
-      company: "金格食品",
-      period: "2024.07 — 2024.09",
-      desc: "拜訪客戶、店內事務協助",
-    },
-    {
-      role: "後場人員",
-      company: "圓圓堂純米麻糬",
-      period: "2024.01 — 2024.02",
-      desc: "食材處理、產品製作與封裝出貨",
-    },
-    {
-      role: "時薪人員",
-      company: "達美樂披薩",
-      period: "2025.01 — 2025.09",
-      desc: "內外場事務",
-    },
+    { role: "解題老師", company: "文城教育學院", period: "2023.11 — 2024.06", desc: "負責國三數學及自然科目解題教學" },
+    { role: "暑期工讀", company: "金格食品", period: "2024.07 — 2024.09", desc: "拜訪客戶、店內事務協助" },
+    { role: "後場人員", company: "圓圓堂純米麻糬", period: "2024.01 — 2024.02", desc: "食材處理、產品製作與封裝出貨" },
+    { role: "時薪人員", company: "達美樂披薩", period: "2025.01 — 2025.09", desc: "內外場事務" },
   ],
 } as const

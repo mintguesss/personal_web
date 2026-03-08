@@ -21,13 +21,15 @@ export default function Home() {
     transition: `opacity 0.7s ${delay}ms ease, transform 0.7s ${delay}ms ease`,
   })
 
-  const taglines = ['NLP & Fraud Detection Researcher', 'Full-Stack Developer', 'Graduate Student @ NCU (2025)']
+  // 從 education 動態拉底座資料
+  const undergrad = siteData.education.find(e => e.school === '輔仁大學')
+  const grad = siteData.education.find(e => e.school === '國立中央大學')
   const stats = [
-    ['輔仁大學', '資訊管理系'],
-    ['中央大學', '研究所（2026）'],
-    ['8+', 'Awards'],
-    ['5', 'Projects'],
-  ] as [string,string][]
+    [undergrad?.school ?? '輔仁大學', undergrad?.dept ?? '資訊管理系'],
+    [grad?.school ?? '中央大學', `研究所（2026）`],
+    [`${siteData.awards.length}+`, 'Awards'],
+    [`${siteData.projects.length}`, 'Projects'],
+  ] as [string, string][]
 
   return (
     <div style={{ minHeight:'100vh' }}>
@@ -62,9 +64,9 @@ export default function Home() {
               <p style={{ fontSize:'0.88rem', color:'var(--text-2)', lineHeight:1.9, maxWidth:'440px' }}>{siteData.bio[0]}</p>
             </div>
             <div style={{ ...fade(330), display:'flex', flexDirection:'column', gap:'0.35rem', marginBottom:'2rem' }}>
-              {taglines.map((t, i) => (
+              {(siteData.taglines as readonly string[]).map((t, i) => (
                 <div key={t} style={{ display:'flex', alignItems:'center', gap:'0.6rem' }}>
-                  <span style={{ width:'14px', height:'1px', background:'var(--accent)', display:'block', flexShrink:0, opacity:0.4 + i * 0.2 }} />
+                  <span style={{ width:'14px', height:'1px', background:'var(--accent)', display:'block', flexShrink:0, opacity:0.4 + i * 0.15 }} />
                   <span style={{ fontFamily:'var(--font-mono)', fontSize:'0.72rem', color:'var(--text-2)', letterSpacing:'0.03em' }}>{t}</span>
                 </div>
               ))}
@@ -76,7 +78,7 @@ export default function Home() {
             <div style={{ ...fade(460) }}>
               <p style={{ fontFamily:'var(--font-mono)', fontSize:'0.58rem', letterSpacing:'0.15em', color:'var(--muted)', textTransform:'uppercase', marginBottom:'0.5rem' }}>Core Skills</p>
               <div style={{ display:'flex', flexWrap:'wrap', gap:'0.35rem' }}>
-                {['BERT','NLP','React','Next.js','Python','OCR','AWS'].map(s => (
+                {(siteData.homeSkills as readonly string[]).map(s => (
                   <span key={s} style={{ fontFamily:'var(--font-mono)', fontSize:'0.67rem', padding:'0.2em 0.7em', borderRadius:'2px', background:'var(--bg-2)', color:'var(--text-2)', border:'1px solid var(--border)' }}>{s}</span>
                 ))}
               </div>
@@ -84,11 +86,11 @@ export default function Home() {
           </div>
         </div>
 
-        {/* 底部 stats 橫條 — 縮窄用 maxWidth 對齊內容 */}
+        {/* 底部 stats 橫條 */}
         <div style={{ ...fade(520), borderTop:'1px solid var(--border)' }}>
           <div style={{ display:'grid', gridTemplateColumns:'repeat(4,1fr)' }}>
             {stats.map(([num, label], i) => (
-              <div key={label} style={{ padding:'1.25rem 8rem', borderRight:i<3?'1px solid var(--border)':'none' }}>
+              <div key={label} style={{ padding:'1.25rem 7.5rem', borderRight:i<3?'1px solid var(--border)':'none' }}>
                 <div style={{ fontFamily:'var(--font-display)', fontSize:'1.1rem', fontWeight:400, lineHeight:1, marginBottom:'0.2rem', color:'var(--text)' }}>{num}</div>
                 <div style={{ fontFamily:'var(--font-mono)', fontSize:'0.58rem', letterSpacing:'0.1em', color:'var(--muted)', textTransform:'uppercase' }}>{label}</div>
               </div>
