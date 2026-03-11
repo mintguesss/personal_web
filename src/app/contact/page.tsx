@@ -47,13 +47,13 @@ const CONTACT_ITEMS = [
     href: (siteData.links as Record<string,string>).line || '',
     note: '即時聯繫',
   },
-  {
-    icon: <GithubSVG />,
-    label: 'GitHub',
-    value: 'github.com/mintguesss',
-    href: 'https://github.com/mintguesss',
-    note: '查看程式碼',
-  },
+  // {
+  //   icon: <GithubSVG />,
+  //   label: 'GitHub',
+  //   value: 'github.com/mintguesss',
+  //   href: 'https://github.com/mintguesss',
+  //   note: '查看程式碼',
+  // },
 ]
 
 export default function ContactPage() {
@@ -61,7 +61,7 @@ export default function ContactPage() {
     <div style={{ paddingTop:'64px', minHeight:'100vh' }}>
 
       {/* Header */}
-      <div style={{ borderBottom:'1px solid var(--border)', background:'var(--bg-2)' }}>
+      <div style={{ borderBottom:'1px solid var(--border)' }}>
         <div style={{ maxWidth:'1100px', margin:'0 auto', padding:'clamp(3rem,6vw,5rem) clamp(1.5rem,5vw,4rem) 2.5rem' }}>
           <p style={{ fontFamily:'var(--font-mono)', fontSize:'0.72rem', letterSpacing:'0.2em', color:'var(--accent)', textTransform:'uppercase', marginBottom:'0.75rem' }}>Get In Touch</p>
           <h1 style={{ fontFamily:'var(--font-display)', fontSize:'clamp(2.5rem,5vw,4rem)', fontWeight:300, lineHeight:1.1 }}>
@@ -78,14 +78,7 @@ export default function ContactPage() {
             <p style={{ fontSize:'1.05rem', color:'var(--text-2)', lineHeight:1.9, marginBottom:'2.5rem' }}>
               歡迎研究合作、實習機會或任何技術交流。不管是專案合作、問題討論還是單純打招呼，都很歡迎聯繫。
             </p>
-            <a href={`mailto:${siteData.email}`} style={{
-              fontFamily:'var(--font-display)', fontSize:'clamp(1.1rem,2vw,1.5rem)',
-              fontWeight:300, color:'var(--accent)', textDecoration:'none',
-              display:'inline-block', paddingBottom:'6px', position:'relative',
-            }}>
-              {siteData.email}
-              <span style={{ position:'absolute', left:0, bottom:0, width:'100%', height:'1px', background:'var(--accent)', opacity:0.4 }} />
-            </a>
+            
 
             {/* 其他資訊 */}
             <div style={{ marginTop:'3rem', display:'flex', flexDirection:'column', gap:'0' }}>
@@ -142,15 +135,6 @@ export default function ContactPage() {
               </div>
             ))}
 
-            {/* CTA */}
-            <div style={{ marginTop:'2rem' }}>
-              <a href={`mailto:${siteData.email}`} style={{
-                display:'inline-flex', alignItems:'center', gap:'0.5rem',
-                fontFamily:'var(--font-mono)', fontSize:'0.78rem', letterSpacing:'0.1em',
-                textTransform:'uppercase', padding:'0.85em 2em',
-                background:'var(--accent)', color:'#fff', borderRadius:'2px', textDecoration:'none',
-              }}>Send Email</a>
-            </div>
           </div>
 
         </div>

@@ -26,8 +26,8 @@ export const siteData = {
     github: "",
     linkedin: "",
     email: "mailto:a03111006@gmail.com",
-    instagram: "",   // 填入 https://www.instagram.com/你的帳號
-    line: "",        // 填入 https://line.me/ti/p/你的LineID
+    instagram: "https://www.instagram.com/ken._.yuuuu/",   // 填入 https://www.instagram.com/你的帳號
+    line: "https://line.me/ti/p/-QSe-xEn3K",        // 填入 https://line.me/ti/p/你的LineID
   },
 
   education: [
@@ -126,9 +126,10 @@ export const siteData = {
   skills: {
     "程式語言": ["Python", "JavaScript", "TypeScript", "PHP", "Java", "SQL"],
     "前端框架": ["React", "Next.js", "HTML/CSS"],
-    "AI / ML": ["BERT", "CLIP", "PaddleOCR", "YOLO", "Scikit-learn"],
-    "後端 / 資料庫": ["Flask", "Node.js", "MySQL", "Firebase"],
+    "AI / ML": ["BERT", "PaddleOCR", "YOLO", "Scikit-learn" , "Pytorch",],
+    "後端": ["Flask", "Node.js",  "Laravel"],
     "雲端 / 工具": ["AWS Cloud Architecting", "Git", "Excel"],
+    "資料庫": ["MySQL", "Firebase"],
   },
 
   awards: [
