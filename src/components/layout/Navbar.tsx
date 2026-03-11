@@ -59,15 +59,22 @@ export default function Navbar() {
         borderBottom: scrolled ? '1px solid var(--border)' : 'none',
         transition: 'all 0.3s',
       }}>
-        <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 1.5rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: '64px' }}>
+        <div style={{
+          maxWidth: '1100px', margin: '0 auto', padding: '0 1.5rem',
+          display: 'grid',
+          gridTemplateColumns: isMobile ? '1fr auto auto' : '1fr 1fr 1fr',
+          alignItems: 'center', height: '64px',
+        }}>
+
+          {/* Left — logo */}
           <Link href="/" style={{ display: 'flex', flexDirection: 'column', lineHeight: 1.1, textDecoration: 'none' }}>
             <span style={{ fontFamily: 'var(--font-display)', fontSize: '1.1rem', fontWeight: 600, color: 'var(--text)' }}>{siteData.name}</span>
             <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.6rem', color: 'var(--muted)', letterSpacing: '0.12em' }}>{siteData.nameEn.toUpperCase()}</span>
           </Link>
 
-          {/* 桌面 nav */}
+          {/* Center — links（桌面才顯示） */}
           {!isMobile && (
-            <nav style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
+            <nav style={{ display: 'flex', gap: '2rem', alignItems: 'center', justifyContent: 'center' }}>
               {LINKS.map(({ href, label }) => (
                 <Link key={href} href={href} style={{
                   fontFamily: 'var(--font-mono)', fontSize: '0.73rem', letterSpacing: '0.1em',
@@ -76,57 +83,79 @@ export default function Navbar() {
                   fontWeight: pathname === href ? 500 : 400, transition: 'color 0.2s',
                 }}>{label}</Link>
               ))}
-              <button onClick={toggleDark} style={{
-                marginLeft: '1rem', background: 'none', border: '1px solid var(--border-2)',
-                borderRadius: '99px', cursor: 'pointer', padding: '0.3em 0.75em',
-                display: 'flex', alignItems: 'center', gap: '0.4rem',
-                fontFamily: 'var(--font-mono)', fontSize: '0.65rem', color: 'var(--muted)',
-              }}>
-                {dark ? '☀ Light' : '☾ Dark'}
-              </button>
             </nav>
           )}
 
-          {/* 漢堡按鈕 */}
-          {isMobile && (
-            <button onClick={() => setOpen(v => !v)} aria-label="選單" style={{
-              background: 'none', border: 'none', cursor: 'pointer',
-              display: 'flex', flexDirection: 'column', gap: '5px', padding: '4px',
+          {/* Right — dark toggle + 漢堡 */}
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: '0.75rem' }}>
+            <button onClick={toggleDark} style={{
+              background: 'none', border: '1px solid var(--border-2)', borderRadius: '99px',
+              cursor: 'pointer', padding: '0.3em 0.75em',
+              display: 'flex', alignItems: 'center', gap: '0.4rem',
+              fontFamily: 'var(--font-mono)', fontSize: '0.65rem', color: 'var(--muted)',
+              whiteSpace: 'nowrap',
             }}>
-              {[0, 1, 2].map(i => (
-                <span key={i} style={{
-                  display: 'block', width: '20px', height: '1.2px',
-                  background: 'var(--text)', borderRadius: '2px', transition: 'all 0.3s',
-                  transform: open ? (i === 0 ? 'rotate(45deg) translate(4px,4px)' : i === 2 ? 'rotate(-45deg) translate(4px,-4px)' : 'none') : 'none',
-                  opacity: open && i === 1 ? 0 : 1,
-                }} />
-              ))}
+              {dark ? '☀ Light' : '☾ Dark'}
             </button>
-          )}
+
+            {isMobile && (
+              <button onClick={() => setOpen(v => !v)} aria-label="選單" style={{
+                background: 'none', border: 'none', cursor: 'pointer',
+                display: 'flex', flexDirection: 'column', gap: '5px', padding: '4px',
+              }}>
+                {[0, 1, 2].map(i => (
+                  <span key={i} style={{
+                    display: 'block', width: '20px', height: '1.2px',
+                    background: 'var(--text)', borderRadius: '2px', transition: 'all 0.3s',
+                    transform: open ? (i === 0 ? 'rotate(45deg) translate(4px,4px)' : i === 2 ? 'rotate(-45deg) translate(4px,-4px)' : 'none') : 'none',
+                    opacity: open && i === 1 ? 0 : 1,
+                  }} />
+                ))}
+              </button>
+            )}
+          </div>
+
         </div>
       </header>
 
-      {/* Mobile menu */}
-      {open && isMobile && (
-        <div style={{
-          position: 'fixed', top: '64px', left: 0, right: 0, bottom: 0,
-          background: 'var(--bg)', zIndex: 49,
-          display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '2.5rem',
-        }}>
-          {LINKS.map(({ href, label }) => (
-            <Link key={href} href={href} style={{
-              fontFamily: 'var(--font-display)', fontSize: '2rem', fontWeight: 300,
-              color: pathname === href ? 'var(--accent)' : 'var(--text)', textDecoration: 'none',
-            }}>{label}</Link>
-          ))}
-          <button onClick={toggleDark} style={{
-            fontFamily: 'var(--font-mono)', fontSize: '0.8rem', color: 'var(--muted)',
-            background: 'none', border: '1px solid var(--border-2)', borderRadius: '99px',
-            padding: '0.4em 1.2em', cursor: 'pointer',
+      {/* 右側滑入選單 */}
+      {isMobile && (
+        <>
+          {/* 背景遮罩 */}
+          <div onClick={() => setOpen(false)} style={{
+            position: 'fixed', inset: 0, zIndex: 48,
+            background: 'rgba(0,0,0,0.3)',
+            opacity: open ? 1 : 0,
+            pointerEvents: open ? 'auto' : 'none',
+            transition: 'opacity 0.3s',
+          }} />
+
+          {/* 側邊面板 */}
+          <div style={{
+            position: 'fixed', top: 0, right: 0, bottom: 0, zIndex: 49,
+            width: '260px',
+            background: 'var(--bg)',
+            borderLeft: '1px solid var(--border)',
+            transform: open ? 'translateX(0)' : 'translateX(100%)',
+            transition: 'transform 0.3s cubic-bezier(0.4,0,0.2,1)',
+            display: 'flex', flexDirection: 'column',
+            paddingTop: '80px', paddingBottom: '2rem',
+            paddingLeft: '2rem', paddingRight: '2rem',
           }}>
-            {dark ? '☀ Light Mode' : '☾ Dark Mode'}
-          </button>
-        </div>
+            <nav style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
+              {LINKS.map(({ href, label }) => (
+                <Link key={href} href={href} style={{
+                  fontFamily: 'var(--font-mono)', fontSize: '0.85rem', letterSpacing: '0.1em',
+                  textTransform: 'uppercase', textDecoration: 'none',
+                  color: pathname === href ? 'var(--accent)' : 'var(--text)',
+                  fontWeight: pathname === href ? 500 : 400,
+                  padding: '1rem 0',
+                  borderBottom: '1px solid var(--border)',
+                }}>{label}</Link>
+              ))}
+            </nav>
+          </div>
+        </>
       )}
     </>
   )
