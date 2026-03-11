@@ -53,20 +53,20 @@ export default function Home() {
           {/* Right */}
           <div className="hero-content">
             <div style={{ ...fade(100), marginBottom: '0.6rem' }}>
-              <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65rem', letterSpacing: '0.2em', color: 'var(--accent)', textTransform: 'uppercase' }}>Information Management</p>
+              <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.78rem', letterSpacing: '0.2em', color: 'var(--accent)', textTransform: 'uppercase' }}>Information Management</p>
             </div>
             <div style={{ ...fade(180), marginBottom: '1.25rem' }}>
               <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(2.8rem,5vw,4.2rem)', fontWeight: 300, lineHeight: 1.05, letterSpacing: '-0.02em', marginBottom: '0.2rem' }}>{siteData.name}</h1>
               <p style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(0.9rem,1.4vw,1.15rem)', fontWeight: 300, fontStyle: 'italic', color: 'var(--muted)' }}>{siteData.nameEn}</p>
             </div>
             <div style={{ ...fade(260), marginBottom: '1.5rem' }}>
-              <p style={{ fontSize: '0.88rem', color: 'var(--text-2)', lineHeight: 1.9, maxWidth: '440px' }}>{siteData.bio[0]}</p>
+              <p style={{ fontSize: '1rem', color: 'var(--text-2)', lineHeight: 1.9, maxWidth: '440px' }}>{siteData.bio[0]}</p>
             </div>
             <div style={{ ...fade(330), display: 'flex', flexDirection: 'column', gap: '0.35rem', marginBottom: '2rem' }}>
               {(siteData.taglines as readonly string[]).map((t, i) => (
                 <div key={t} style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
                   <span style={{ width: '14px', height: '1px', background: 'var(--accent)', display: 'block', flexShrink: 0, opacity: 0.4 + i * 0.15 }} />
-                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.72rem', color: 'var(--text-2)', letterSpacing: '0.03em' }}>{t}</span>
+                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.8rem', color: 'var(--text-2)', letterSpacing: '0.03em' }}>{t}</span>
                 </div>
               ))}
             </div>
@@ -75,7 +75,7 @@ export default function Home() {
               <Link href="/contact" style={{ fontFamily: 'var(--font-mono)', fontSize: '0.72rem', letterSpacing: '0.1em', textTransform: 'uppercase', padding: '0.65em 1.6em', background: 'transparent', color: 'var(--text)', border: '1px solid var(--border-2)', borderRadius: '2px', textDecoration: 'none' }}>Contact</Link>
             </div>
             <div style={{ ...fade(460) }}>
-              <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.58rem', letterSpacing: '0.15em', color: 'var(--muted)', textTransform: 'uppercase', marginBottom: '0.5rem' }}>Core Skills</p>
+              <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.72rem', letterSpacing: '0.15em', color: 'var(--muted)', textTransform: 'uppercase', marginBottom: '0.5rem' }}>Core Skills</p>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.35rem' }}>
                 {(siteData.homeSkills as readonly string[]).map(s => (
                   <span key={s} style={{ fontFamily: 'var(--font-mono)', fontSize: '0.67rem', padding: '0.2em 0.7em', borderRadius: '2px', background: 'var(--bg-2)', color: 'var(--text-2)', border: '1px solid var(--border)' }}>{s}</span>
@@ -86,12 +86,12 @@ export default function Home() {
         </div>
 
         {/* 底部 stats */}
-        <div style={{ ...fade(520), borderTop: '1px solid var(--border)' }}>
-          <div className="stats-grid">
+        <div style={{ ...fade(520), borderTop:'1px solid var(--border)' }}>
+          <div style={{ display:'grid', gridTemplateColumns:'repeat(4,1fr)' }}>
             {stats.map(([num, label], i) => (
-              <div key={label} className="stats-cell" style={{ borderRight: i < 3 ? '1px solid var(--border)' : 'none' }}>
-                <div style={{ fontFamily: 'var(--font-display)', fontSize: '1.1rem', fontWeight: 400, lineHeight: 1, marginBottom: '0.2rem', color: 'var(--text)' }}>{num}</div>
-                <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.58rem', letterSpacing: '0.1em', color: 'var(--muted)', textTransform: 'uppercase' }}>{label}</div>
+              <div key={label} style={{ padding:'1.25rem 7.5rem', borderRight:i<3?'1px solid var(--border)':'none' }}>
+                <div style={{ fontFamily:'var(--font-display)', fontSize:'1.1rem', fontWeight:400, lineHeight:1, marginBottom:'0.2rem', color:'var(--text)' }}>{num}</div>
+                <div style={{ fontFamily:'var(--font-mono)', fontSize:'0.58rem', letterSpacing:'0.1em', color:'var(--muted)', textTransform:'uppercase' }}>{label}</div>
               </div>
             ))}
           </div>

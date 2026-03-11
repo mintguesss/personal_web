@@ -1,10 +1,4 @@
-// ============================================================
-// src/data/portfolio.ts
-// ⭐ 所有個人資料集中在這裡，改這裡就能更新整個網站
-// ============================================================
-
 export const siteData = {
-  // ---------- 基本資訊 ----------
   name: "黃予岑",
   nameEn: "Ken",
   title: "資訊管理學系 大四",
@@ -13,7 +7,6 @@ export const siteData = {
   phone: "0939-160-311",
   location: "基隆市安樂區",
 
-  // 首頁打字條列
   taglines: [
     'ML & CV Researcher',
     'Full-Stack Developer',
@@ -21,7 +14,6 @@ export const siteData = {
     'Incoming M.S. Student @ NCU (2026)',
   ],
 
-  // 首頁 Core Skills chips（獨立控制，不一定要跟 skills 完全一樣）
   homeSkills: ['React', 'Next.js', 'Python', 'OCR', 'YOLO', 'BERT', 'NLP'],
 
   bio: [
@@ -30,21 +22,49 @@ export const siteData = {
     "喜歡從頭打造系統、訓練模型、解決複雜問題，在開發過程中培養了快速調適與持續學習的習慣。",
   ],
 
-  // ---------- 社群連結 ----------
   links: {
     github: "",
     linkedin: "",
     email: "mailto:a03111006@gmail.com",
+    instagram: "",   // 填入 https://www.instagram.com/你的帳號
+    line: "",        // 填入 https://line.me/ti/p/你的LineID
   },
 
-  // ---------- 學歷 ----------
   education: [
-    { school: "國立中央大學", dept: "資訊管理研究所", degree: "碩士（甄試錄取）", period: "2026 — 2028", badge: "" },
-    { school: "輔仁大學", dept: "資訊管理學系", degree: "學士", period: "2022 — 2026", badge: "班排前十 / 書卷獎" },
-    { school: "臺北市立成功高中", dept: "", degree: "高中", period: "2019 — 2022", badge: "" },
+    {
+      school: "國立中央大學",
+      dept: "資訊管理研究所",
+      degree: "碩士（甄試錄取）",
+      period: "2026 — 2028",
+      badge: "備取錄取",
+      highlights: [
+        { label: "研究方向", items: ["自然語言處理", "機器學習應用"] },
+      ],
+    },
+    {
+      school: "輔仁大學",
+      dept: "資訊管理學系",
+      degree: "學士",
+      period: "2022 — 2026",
+      badge: "班排前十 / 書卷獎",
+      highlights: [
+        { label: "學術", items: ["管理學院學術獎章 ×2", "書卷獎", "班排前十"] },
+        { label: "專題", items: ["騙局雷達 — 育秀盃佳作", "第 42 屆專題發表優秀組別"] },
+        { label: "職務", items: ["班級代表", "國科會大專生研究計畫"] },
+      ],
+    },
+    {
+      school: "臺北市立成功高中",
+      dept: "",
+      degree: "高中",
+      period: "2019 — 2022",
+      badge: "",
+      highlights: [
+        { label: "經歷", items: ["班級幹部", "參加各類競賽"] },
+      ],
+    },
   ],
 
-  // ---------- 研究 / 專案 ----------
   projects: [
     {
       id: "fraud-radar",
@@ -103,7 +123,6 @@ export const siteData = {
     },
   ],
 
-  // ---------- 技能 ----------
   skills: {
     "程式語言": ["Python", "JavaScript", "TypeScript", "PHP", "Java", "SQL"],
     "前端框架": ["React", "Next.js", "HTML/CSS"],
@@ -112,7 +131,6 @@ export const siteData = {
     "雲端 / 工具": ["AWS Cloud Architecting", "Git", "Excel"],
   },
 
-  // ---------- 獎項 / 榮譽 ----------
   awards: [
     { year: "2025", title: "管理學院學術獎章*2", org: "輔仁大學" },
     { year: "2025", title: "專題發表優秀組別（第 42 屆）", org: "輔仁大學資訊管理系" },
@@ -125,11 +143,40 @@ export const siteData = {
     { year: "2023", title: "班級代表", org: "輔仁大學資訊管理系" },
   ],
 
-  // ---------- 工作經驗 ----------
+  contactLinks: [
+    { label: 'Email',     value: 'a03111006@gmail.com',  href: 'mailto:a03111006@gmail.com', icon: 'gmail' },
+    { label: 'Instagram', value: '@mintguesss',           href: 'https://www.instagram.com/ken._.yuuuu/',icon: 'ig' },
+    { label: 'Line',      value: 'mintguesss',            href: 'https://line.me/ti/p/-QSe-xEn3K',icon: 'line' },
+    { label: 'GitHub',    value: 'github.com/mintguesss', href: 'https://github.com/mintguesss', icon: 'github' },
+  ],
   experience: [
-    { role: "解題老師", company: "文城教育學院", period: "2023.11 — 2024.06", desc: "負責國三數學及自然科目解題教學" },
-    { role: "暑期工讀", company: "金格食品", period: "2024.07 — 2024.09", desc: "拜訪客戶、店內事務協助" },
-    { role: "後場人員", company: "圓圓堂純米麻糬", period: "2024.01 — 2024.02", desc: "食材處理、產品製作與封裝出貨" },
-    { role: "時薪人員", company: "達美樂披薩", period: "2025.01 — 2025.09", desc: "內外場事務" },
+    {
+      role: "解題老師",
+      company: "文城教育學院",
+      period: "2023.11 — 2024.06",
+      desc: "負責國三數學及自然科目解題教學",
+      tags: ["教學", "數學", "自然"],
+    },
+    {
+      role: "暑期工讀",
+      company: "金格食品",
+      period: "2024.07 — 2024.09",
+      desc: "拜訪客戶、店內事務協助",
+      tags: ["業務", "客戶服務"],
+    },
+    {
+      role: "後場人員",
+      company: "圓圓堂純米麻糬",
+      period: "2024.01 — 2024.02",
+      desc: "食材處理、產品製作與封裝出貨",
+      tags: ["生產", "食品"],
+    },
+    {
+      role: "時薪人員",
+      company: "達美樂披薩",
+      period: "2025.01 — 2025.09",
+      desc: "內外場事務",
+      tags: ["餐飲", "服務"],
+    },
   ],
 } as const
