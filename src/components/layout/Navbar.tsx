@@ -8,8 +8,7 @@ const LINKS = [
   { href: '/',         label: 'Home' },
   { href: '/about',    label: 'About' },
   { href: '/projects', label: 'Projects' },
-  { href: '/skills',   label: 'Skills' },
-  { href: '/awards',   label: 'Awards' },
+  { href: '/skills_awards',   label: 'Skills & Awards' },
   { href: '/contact',  label: 'Contact' },
 ]
 
@@ -91,10 +90,10 @@ export default function Navbar() {
 
           {/* Center links (desktop) */}
           {!isMobile && (
-            <nav style={{ display:'flex', gap:'1.75rem', alignItems:'center', justifyContent:'center' }}>
+            <nav style={{ display:'flex', gap:'1.2rem', alignItems:'center', justifyContent:'center' }}>
               {LINKS.map(({ href, label }) => (
                 <Link key={href} href={href} style={{
-                  fontFamily:'var(--font-mono)', fontSize:'0.73rem', letterSpacing:'0.1em',
+                  fontFamily:'var(--font-mono)', fontSize:'0.68rem', letterSpacing:'0.06em',
                   textTransform:'uppercase', textDecoration:'none',
                   color: pathname===href ? 'var(--accent)' : 'var(--muted)',
                   fontWeight: pathname===href ? 500 : 400, transition:'color 0.2s',

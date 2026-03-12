@@ -133,16 +133,17 @@ export const siteData = {
   },
 
   awards: [
-    { year: "2025", title: "管理學院學術獎章*2", org: "輔仁大學" },
-    { year: "2025", title: "專題發表優秀組別（第 42 屆）", org: "輔仁大學資訊管理系" },
-    { year: "2025", title: "第 30 屆資訊應用服務創新競賽 — 校內推薦", org: "輔仁大學" },
-    { year: "2025", title: "第 22 屆育秀盃創意獎佳作", org: "育秀盃" },
-    { year: "2025", title: "113 學年度第 2 學期書卷獎", org: "輔仁大學" },
-    { year: "2025", title: "AI 微學程結業", org: "輔仁大學" },
-    { year: "2025", title: "班級代表", org: "輔仁大學資訊管理系" },
-    { year: "2024", title: "AWS Academy Graduate — Cloud Architecting", org: "AWS" },
-    { year: "2023", title: "班級代表", org: "輔仁大學資訊管理系" },
-  ],
+  { year: '2025', title: '管理學院學術獎章*2',    org: '輔仁大學',           category: 'school',      image: '/personal_web/awards/slide2.jpg', link: '' },
+  { year: '2025', title: '專題發表優秀組別（第 42 屆）', org: '輔仁大學資訊管理系', category: 'competition', image: '', link: 'https://im.mgt.ncu.edu.tw/teacher' },
+  { year: '2025', title: '第 30 屆資訊應用服務創新競賽 — 校內推薦', org: '輔仁大學', category: 'competition',    image: '', link: '' },
+  { year: '2025', title: '第 22 屆育秀盃創意獎佳作', org: '育秀盃',           category: 'competition', image: '', link: '' },
+  { year: '2025', title: '國科會大專生研究計畫', org: '國科會',           category: 'research', image: '', link: 'https://wsts.nstc.gov.tw/STSWeb/Award/AwardMultiQuery.aspx' },
+  { year: '2025', title: '113 學年度第 2 學期書卷獎', org: '輔仁大學',         category: 'school',      image: '', link: '' },
+  { year: '2025', title: 'AI 微學程結業',          org: '輔仁大學',           category: 'school',      image: '', link: '' },
+  { year: '2025', title: '班級代表',               org: '輔仁大學資訊管理系',  category: 'school',      image: '', link: '' },
+  { year: '2024', title: 'AWS Academy Graduate — Cloud Architecting', org: 'AWS', category: 'school', image: '', link: '' },
+  { year: '2023', title: '班級代表',               org: '輔仁大學資訊管理系',  category: 'school',      image: '', link: '' },
+] as const,
 
   contactLinks: [
     { label: 'Email',     value: 'a03111006@gmail.com',  href: 'mailto:a03111006@gmail.com', icon: 'gmail' },

@@ -6,7 +6,7 @@
 
 :root {
   --bg:#f4f5f7; --bg-2:#eceef2; --surface:#ffffff; --surface-2:#f8f9fb;
-  --border:#ecedef; --border-2:#d0d4dc;
+  --border:#e8e7e7; --border-2:#d0d4dc;
   --text:#1a1d23; --text-2:#3d4251; --muted:#9ba1b3;
   --accent:#3b5bdb; --accent-light:#eef2ff; --accent-mid:#748ffc;
   --font-display:'Playfair Display',serif; --font-body:'DM Sans',sans-serif; --font-mono:'DM Mono',monospace;
@@ -91,10 +91,8 @@ html { transition: background 0.3s, color 0.3s; }
   .stats-cell:nth-child(2) { border-right: none !important; }
   .stats-cell:nth-child(3) { border-right: 1px solid var(--border) !important; }
 
-  /* About */
+  /* About — inline grid 直接用 style，這邊保留 class fallback */
   .about-bio-grid { grid-template-columns: 1fr !important; gap: 2rem !important; }
-  .edu-row { grid-template-columns: 1fr !important; gap: 0.5rem !important; }
-  .edu-row .edu-badge { margin-top: 0.25rem; }
   .work-grid { grid-template-columns: 1fr !important; }
 
   /* Contact */
@@ -102,15 +100,11 @@ html { transition: background 0.3s, color 0.3s; }
   .contact-left { border-right: none !important; border-bottom: 1px solid var(--border); }
   .contact-info-row { grid-template-columns: 90px 1fr !important; gap: 1rem !important; }
 
-  /* Awards */
-  .award-row { grid-template-columns: 1fr !important; gap: 0.25rem !important; }
-  .award-year-grid { grid-template-columns: 50px 1fr !important; gap: 1rem !important; }
+  /* Skills+Awards — 讓左右排變上下 */
+  .skills-row { grid-template-columns: 1fr !important; gap: 1.5rem !important; }
+  .awards-cols { grid-template-columns: 1fr !important; }
 
-  /* Navbar */
-  .nav-links { display: none !important; }
-  .nav-hamburger { display: flex !important; }
-
-  /* General padding reduction */
+  /* General */
   .page-header { padding: 2rem 1.5rem 1.5rem !important; }
   .page-body { padding: 2rem 1.5rem !important; }
 }
