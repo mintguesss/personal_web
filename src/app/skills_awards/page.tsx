@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { siteData } from '@/data/portfolio'
 
 type Award = { year: string; title: string; org: string; category: string; image?: string; link?: string }
@@ -12,8 +12,16 @@ const MONO: React.CSSProperties = {
 const PAD = 'clamp(1.5rem,5vw,4rem)'
 
 export default function SkillsAwardsPage() {
-  const [hovered, setHovered] = useState<string | null>(null)
+  const [hovered, setHovered]   = useState<string | null>(null)
   const [modalImg, setModalImg] = useState<string | null>(null)
+  const [mobile, setMobile]     = useState(false)
+
+  useEffect(() => {
+    const check = () => setMobile(window.innerWidth < 768)
+    check()
+    window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
+  }, [])
 
   const skillEntries = Object.entries(siteData.skills)
   const awards       = siteData.awards as unknown as Award[]
@@ -34,9 +42,9 @@ export default function SkillsAwardsPage() {
         </div>
       </div>
 
-      {/* ══ Skills 兩欄 ══ */}
+      {/* ══ Skills grid ══ */}
       <div style={{ maxWidth: '1100px', margin: '0 auto', padding: `2rem ${PAD} 0` }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0 3rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: mobile ? '1fr' : '1fr 1fr', gap: '0 3rem' }}>
           {skillEntries.map(([group, items]) => (
             <div key={group} style={{ padding: '1.75rem 0', borderBottom: '1px solid var(--border)' }}>
               <h2 style={{ fontFamily: 'var(--font-display)', fontSize: '1.2rem', fontWeight: 400, color: 'var(--text)', marginBottom: '1rem' }}>{group}</h2>
@@ -74,8 +82,14 @@ export default function SkillsAwardsPage() {
       <div style={{ borderTop: '1px solid var(--border)' }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto', padding: `0 ${PAD} clamp(3rem,5vw,5rem)` }}>
 
-          {/* Research + Competition 卡片，點直接跳連結 */}
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2.5rem', padding: '2.5rem 0', borderBottom: '1px solid var(--border)' }}>
+          {/* Research + Competition → mobile 一欄 */}
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: mobile ? '1fr' : '1fr 1fr',
+            gap: mobile ? '2rem' : '2.5rem',
+            padding: '2.5rem 0',
+            borderBottom: '1px solid var(--border)',
+          }}>
             {[
               { label: 'Research',     items: research },
               { label: 'Competitions', items: competition },
@@ -89,45 +103,43 @@ export default function SkillsAwardsPage() {
                       ? { href: a.link, target: '_blank', rel: 'noreferrer', style: { textDecoration: 'none' } }
                       : {}
                     return (
-                      <Wrapper key={`${a.year}-${a.title}`} {...wrapperProps}>
+                      <Wrapper key={`${a.year}-${a.title}`} {...(wrapperProps as any)}>
                         <div
-                            style={{
-                              display: 'grid',
-                              gridTemplateColumns: a.image ? '100px 1fr' : '1fr',
-                              gap: '1rem',
-                              padding: '1.1rem',
-                              border: '1px solid #d4d4d4',
-                              borderRadius: '6px',
-                              background: 'var(--bg)',
-                              cursor: a.link ? 'pointer' : 'default',
-                              transition: 'transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease',
-                            }}
-                            onMouseEnter={e => {
-                              if (!a.link) return
-                              const el = e.currentTarget as HTMLDivElement
-                              el.style.borderColor = 'var(--accent)'
-                              el.style.boxShadow = '0 8px 22px rgba(0,0,0,0.08)'
-                              el.style.transform = 'translateY(-3px)'
-                            }}
-                            onMouseLeave={e => {
-                              const el = e.currentTarget as HTMLDivElement
-                              el.style.borderColor = '#9e9d9d'
-                              el.style.boxShadow = '0 0 0 rgba(0,0,0,0)'
-                              el.style.transform = 'translateY(0)'
-                            }}
-                          >
-                          {/* 左側圖片 */}
+                          style={{
+                            display: 'grid',
+                            gridTemplateColumns: a.image ? '80px 1fr' : '1fr',
+                            gap: '0.85rem',
+                            padding: '1.1rem',
+                            border: '1px solid var(--border)',
+                            borderRadius: '6px',
+                            background: 'var(--bg)',
+                            cursor: a.link ? 'pointer' : 'default',
+                            transition: 'transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease',
+                          }}
+                          onMouseEnter={e => {
+                            if (!a.link) return
+                            const el = e.currentTarget as HTMLDivElement
+                            el.style.borderColor = 'var(--accent)'
+                            el.style.boxShadow = '0 8px 22px rgba(0,0,0,0.08)'
+                            el.style.transform = 'translateY(-3px)'
+                          }}
+                          onMouseLeave={e => {
+                            const el = e.currentTarget as HTMLDivElement
+                            el.style.borderColor = 'var(--border)'
+                            el.style.boxShadow = 'none'
+                            el.style.transform = 'translateY(0)'
+                          }}
+                        >
                           {a.image && (
-                            <div style={{ width: '100px', height: '80px', borderRadius: '3px', overflow: 'hidden', background: 'var(--bg-2)', flexShrink: 0 }}>
+                            <div style={{ width: '80px', height: '70px', borderRadius: '3px', overflow: 'hidden', background: 'var(--bg-2)', flexShrink: 0 }}>
                               <img src={a.image} alt={a.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                             </div>
                           )}
-                          {/* 右側文字 */}
                           <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                             <h3 style={{ fontFamily: 'var(--font-display)', fontSize: '0.98rem', fontWeight: 400, lineHeight: 1.4, color: 'var(--text)', marginBottom: '0.4rem' }}>{a.title}</h3>
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                               <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.62rem', color: 'var(--muted)' }}>{a.org}</span>
-                              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                              <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
                                 <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.62rem', color: 'var(--accent)' }}>{a.year}</span>
                                 {a.link && <span style={{ fontSize: '0.7rem', color: 'var(--accent)' }}>↗</span>}
                               </div>
@@ -142,10 +154,10 @@ export default function SkillsAwardsPage() {
             ))}
           </div>
 
-          {/* 在校榮譽 列點，有圖的點開 modal */}
+          {/* 在校榮譽 → mobile 一欄 */}
           <div style={{ padding: '2.5rem 0' }}>
             <p style={{ ...MONO, marginBottom: '1.25rem' }}>在校榮譽</p>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0 3rem' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: mobile ? '1fr' : '1fr 1fr', gap: '0 3rem' }}>
               {school.map((a) => (
                 <div
                   key={`${a.year}-${a.title}`}
@@ -173,7 +185,7 @@ export default function SkillsAwardsPage() {
         </div>
       </div>
 
-      {/* ══ Modal：只有圖片 ══ */}
+      {/* ══ Modal ══ */}
       {modalImg && (
         <div
           onClick={() => setModalImg(null)}
