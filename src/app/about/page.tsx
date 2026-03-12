@@ -2,22 +2,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { siteData } from '@/data/portfolio'
 
-const SLIDES = [
-  '/personal_web/slides/Slide1.jpg',
-  '/personal_web/slides/Slide2.jpg',
-  '/personal_web/slides/Slide3.jpg',
-  '/personal_web/slides/Slide4.jpg',
-  '/personal_web/slides/Slide5.jpg',
-]
-
-const CAPTIONS = [
-  '輔仁大學資訊管理系',
-  '國科會大專生研究計畫',
-  '騙局雷達 — 畢業專題',
-  '育秀盃創意獎佳作',
-  '即將升讀中央大學資訊管理研究所',
-]
-
 const EXP_ICONS: Record<string, string> = {
   '文城教育學院':   '📚',
   '金格食品':       '🏢',
@@ -29,90 +13,40 @@ type EduHighlight = { label: string; items: readonly string[] }
 type Edu = { school: string; dept: string; degree: string; period: string; badge: string; highlights: readonly EduHighlight[] }
 type Exp = { role: string; company: string; period: string; desc: string; tags: readonly string[] }
 
-const SECTION: React.CSSProperties = {
-  maxWidth: '1100px', margin: '0 auto',
-  padding: 'clamp(3rem,5vw,4.5rem) clamp(2rem,6vw,5rem) clamp(3rem,5vw,4.5rem) clamp(5rem,9vw,8rem)',
-}
 const SECTION_LABEL: React.CSSProperties = {
   fontFamily: 'var(--font-mono)', fontSize: '0.72rem', letterSpacing: '0.2em',
   color: 'var(--accent)', textTransform: 'uppercase', marginBottom: '2rem',
 }
-const DIVIDER: React.CSSProperties = { borderTop: '1px solid var(--border)' }
 
 export default function AboutPage() {
-  const [current, setCurrent] = useState(0)
-  const [fading, setFading]   = useState(false)
-  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
-
-  const goTo = (idx: number) => {
-    if (idx === current) return
-    setFading(true)
-    setTimeout(() => { setCurrent(idx); setFading(false) }, 300)
-  }
+  const [mobile, setMobile] = useState(false)
   useEffect(() => {
-    timerRef.current = setTimeout(() => goTo((current + 1) % SLIDES.length), 4000)
-    return () => { if (timerRef.current) clearTimeout(timerRef.current) }
-  }, [current])
+    const check = () => setMobile(window.innerWidth < 768)
+    check(); window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
+  }, [])
 
   const education = siteData.education as unknown as Edu[]
   const experience = siteData.experience as unknown as Exp[]
 
+  const PAD = mobile
+    ? '2rem 1.5rem'
+    : 'clamp(3rem,5vw,4.5rem) clamp(2rem,5vw,4rem) clamp(3rem,5vw,4.5rem) clamp(3rem,7vw,6rem)'
+
   return (
     <div style={{ paddingTop: '64px', minHeight: '100vh' }}>
 
-      <div style={{ borderBottom:'1px solid var(--border)', padding:'5rem clamp(2rem,5vw,5rem) 2.5rem', maxWidth:'1100px', margin:'0 auto' }}>
-        <p style={{ fontFamily:'var(--font-mono)', fontSize:'0.65rem', letterSpacing:'0.2em', color:'var(--accent)', textTransform:'uppercase', marginBottom:'0.75rem' }}>About</p>
-        <h1 style={{ fontFamily:'var(--font-display)', fontSize:'clamp(2rem,4vw,3rem)', fontWeight:300, lineHeight:1.05 }}>
-          關於我 <em style={{ fontStyle:'italic', color:'var(--muted)' }}>/ Ken</em>
+      <div style={{ borderBottom: '1px solid var(--border)', padding: mobile ? '4rem 1.5rem 2rem' : '5rem clamp(2rem,5vw,5rem) 2.5rem', maxWidth: '1100px', margin: '0 auto' }}>
+        <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65rem', letterSpacing: '0.2em', color: 'var(--accent)', textTransform: 'uppercase', marginBottom: '0.75rem' }}>About</p>
+        <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(2rem,4vw,3rem)', fontWeight: 300, lineHeight: 1.05 }}>
+          關於我 <em style={{ fontStyle: 'italic', color: 'var(--muted)' }}>/ Ken</em>
         </h1>
       </div>
 
-      {/* 幻燈片
-      <div style={{ padding: '5rem 0 0', display: 'flex', justifyContent: 'center' }}>
-        <div style={{ position: 'relative', width: '50%', height: 'clamp(550px,22vw,300px)', overflow: 'hidden', borderRadius: '4px' }}>
-          <img
-            key={current}
-            src={SLIDES[current]}
-            alt={CAPTIONS[current]}
-            style={{
-              position: 'absolute', inset: 0, width: '100%', height: '100%',
-              objectFit: 'fill', objectPosition: 'center 35%',
-              opacity: fading ? 0 : 1, transition: 'opacity 0.35s ease',
-            }}
-          />
-          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 60%)' }} />
-          <p style={{
-            position: 'absolute', bottom: '2.2rem', left: '1.5rem',
-            fontFamily: 'var(--font-mono)', fontSize: '0.72rem', letterSpacing: '0.18em',
-            color: 'rgba(255,255,255,0.92)', textTransform: 'uppercase',
-            opacity: fading ? 0 : 1, transition: 'opacity 0.3s',
-          }}>{CAPTIONS[current]}</p>
-          <div style={{ position: 'absolute', bottom: '0.85rem', left: '1.5rem', display: 'flex', gap: '0.4rem' }}>
-            {SLIDES.map((_, i) => (
-              <button key={i} onClick={() => goTo(i)} style={{
-                width: i === current ? '22px' : '6px', height: '6px', borderRadius: '99px',
-                border: 'none', cursor: 'pointer', padding: 0,
-                background: i === current ? '#fff' : 'rgba(255,255,255,0.35)', transition: 'all 0.3s',
-              }} />
-            ))}
-          </div>
-          {([-1, 1] as const).map(dir => (
-            <button key={dir} onClick={() => goTo((current + dir + SLIDES.length) % SLIDES.length)} style={{
-              position: 'absolute', top: '50%', transform: 'translateY(-50%)',
-              [dir === -1 ? 'left' : 'right']: '0.75rem',
-              background: 'rgba(255,255,255,0.15)', backdropFilter: 'blur(4px)',
-              border: '1px solid rgba(255,255,255,0.2)', borderRadius: '50%',
-              width: '34px', height: '34px', cursor: 'pointer', color: '#fff',
-              fontSize: '1.1rem', display: 'flex', alignItems: 'center', justifyContent: 'center',
-            }}>{dir === -1 ? '‹' : '›'}</button>
-          ))}
-        </div>
-      </div> */}
-
       {/* Bio + Profile */}
-      <div style={{ ...DIVIDER, marginTop: '2.5rem' }}>
-        <div style={SECTION}>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', alignItems: 'start' }}>
+      <div style={{ borderTop: '1px solid var(--border)', marginTop: '2.5rem' }}>
+        <div style={{ maxWidth: '1100px', margin: '0 auto', padding: PAD }}>
+          <div style={{ display: 'grid', gridTemplateColumns: mobile ? '1fr' : '1fr 1fr', gap: mobile ? '2rem' : '4rem', alignItems: 'start' }}>
             <div>
               <p style={SECTION_LABEL}>Profile</p>
               {([
@@ -121,7 +55,7 @@ export default function AboutPage() {
                 ['Email', siteData.email],
                 ['電話', siteData.phone],
                 ['位置', siteData.location],
-              ] as [string,string][]).map(([label, value]) => (
+              ] as [string, string][]).map(([label, value]) => (
                 <div key={label} style={{ borderTop: '1px solid var(--border)', padding: '0.9rem 0' }}>
                   <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.62rem', letterSpacing: '0.15em', color: 'var(--muted)', textTransform: 'uppercase', marginBottom: '0.3rem' }}>{label}</p>
                   {label === 'Email'
@@ -143,19 +77,22 @@ export default function AboutPage() {
       </div>
 
       {/* Education */}
-      <div style={DIVIDER}>
-        <div style={SECTION}>
+      <div style={{ borderTop: '1px solid var(--border)' }}>
+        <div style={{ maxWidth: '1100px', margin: '0 auto', padding: PAD }}>
           <p style={SECTION_LABEL}>Education</p>
-          <div style={{ position: 'relative', paddingLeft: '2rem' }}>
+          <div style={{ position: 'relative', paddingLeft: mobile ? '1.25rem' : '2rem' }}>
             <div style={{ position: 'absolute', left: '4px', top: '8px', bottom: '8px', width: '1px', background: 'var(--border-2)' }} />
             {education.map((e, i) => (
               <div key={e.school} style={{
                 position: 'relative',
                 paddingBottom: i < education.length - 1 ? '3.5rem' : 0,
-                display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '3rem', alignItems: 'start',
+                display: 'grid',
+                gridTemplateColumns: mobile ? '1fr' : '1fr 1fr',
+                gap: mobile ? '1rem' : '3rem',
+                alignItems: 'start',
               }}>
                 <div style={{
-                  position: 'absolute', left: '-2rem', top: '7px',
+                  position: 'absolute', left: mobile ? '-1.25rem' : '-2rem', top: '7px',
                   width: '10px', height: '10px', borderRadius: '50%', zIndex: 1,
                   background: i === 0 ? 'var(--accent)' : 'var(--bg)',
                   border: `2px solid ${i === 0 ? 'var(--accent)' : 'var(--border-2)'}`,
@@ -169,7 +106,7 @@ export default function AboutPage() {
                   {e.dept && <p style={{ fontSize: '0.95rem', color: 'var(--text-2)' }}>{e.dept} — {e.degree}</p>}
                 </div>
                 {e.highlights.length > 0 && (
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2,1fr)', gap: '1rem 1.5rem', paddingTop: '0.1rem' }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: mobile ? '1fr' : 'repeat(2,1fr)', gap: '1rem 1.5rem', paddingTop: '0.1rem' }}>
                     {e.highlights.map(h => (
                       <div key={h.label}>
                         <p style={{ fontFamily: 'var(--font-display)', fontSize: '1.05rem', fontWeight: 400, color: 'var(--text)', marginBottom: '0.45rem' }}>{h.label}</p>
@@ -192,10 +129,10 @@ export default function AboutPage() {
       </div>
 
       {/* Work Experience */}
-      <div style={DIVIDER}>
-        <div style={SECTION}>
+      <div style={{ borderTop: '1px solid var(--border)' }}>
+        <div style={{ maxWidth: '1100px', margin: '0 auto', padding: PAD }}>
           <p style={SECTION_LABEL}>Work Experience</p>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2,1fr)', gap: '0 3rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: mobile ? '1fr' : 'repeat(2,1fr)', gap: '0 3rem' }}>
             {experience.map((e) => (
               <div key={e.company} style={{
                 display: 'grid', gridTemplateColumns: '56px 1fr',

@@ -5,7 +5,13 @@ import { siteData } from '@/data/portfolio'
 
 export default function Home() {
   const [visible, setVisible] = useState(false)
+  const [mobile, setMobile]   = useState(false)
   useEffect(() => { const t = setTimeout(() => setVisible(true), 80); return () => clearTimeout(t) }, [])
+  useEffect(() => {
+    const check = () => setMobile(window.innerWidth < 768)
+    check(); window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
+  }, [])
 
   type P = typeof siteData.projects[number]
   const featured = (siteData.projects as unknown as P[]).slice(0, 3)
@@ -34,11 +40,21 @@ export default function Home() {
     <div style={{ minHeight: '100vh' }}>
       <section style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
 
-        <div className="hero-grid" style={{ flex: 1, alignItems: 'center' }}>
+        <div style={{
+          flex: 1, display: 'grid',
+          gridTemplateColumns: mobile ? '1fr' : '50% 50%',
+          alignItems: 'center',
+        }}>
 
           {/* Left — photo */}
-          <div className="hero-photo">
-            <div style={{ ...fadeLeft(0), position: 'relative', width: '45%', borderRadius: '4px', overflow: 'hidden', aspectRatio: '3/4' }}>
+          <div style={{
+            padding: mobile ? '6rem 3rem 2rem' : '5rem 2rem 0 2.5rem',
+            borderRight: mobile ? 'none' : '1px solid var(--border)',
+            borderBottom: mobile ? '1px solid var(--border)' : 'none',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            height: mobile ? 'auto' : '100%',
+          }}>
+            <div style={{ ...fadeLeft(0), position: 'relative', width: mobile ? '55%' : '45%', borderRadius: '4px', overflow: 'hidden', aspectRatio: '3/4' }}>
               <img
                 src='/personal_web/photo.jpg'
                 alt={siteData.name}
@@ -51,7 +67,7 @@ export default function Home() {
           </div>
 
           {/* Right */}
-          <div className="hero-content">
+          <div style={{ padding: mobile ? '2rem 1.5rem 2.5rem' : '4rem 4rem 4rem 5rem', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
             <div style={{ ...fade(100), marginBottom: '0.6rem' }}>
               <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.78rem', letterSpacing: '0.2em', color: 'var(--accent)', textTransform: 'uppercase' }}>Information Management</p>
             </div>
@@ -86,12 +102,18 @@ export default function Home() {
         </div>
 
         {/* 底部 stats */}
-        <div style={{ ...fade(520), borderTop:'1px solid var(--border)' }}>
-          <div style={{ display:'grid', gridTemplateColumns:'repeat(4,1fr)' }}>
+        <div style={{ ...fade(520), borderTop: '1px solid var(--border)' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: mobile ? 'repeat(2,1fr)' : 'repeat(4,1fr)' }}>
             {stats.map(([num, label], i) => (
-              <div key={label} style={{ padding:'1.25rem 7.5rem', borderRight:i<3?'1px solid var(--border)':'none' }}>
-                <div style={{ fontFamily:'var(--font-display)', fontSize:'1.1rem', fontWeight:400, lineHeight:1, marginBottom:'0.2rem', color:'var(--text)' }}>{num}</div>
-                <div style={{ fontFamily:'var(--font-mono)', fontSize:'0.58rem', letterSpacing:'0.1em', color:'var(--muted)', textTransform:'uppercase' }}>{label}</div>
+              <div key={label} style={{
+                padding: 'clamp(0.85rem,2vw,1.25rem) clamp(1rem,3vw,2rem)',
+                borderRight: mobile
+                  ? (i % 2 === 0 ? '1px solid var(--border)' : 'none')
+                  : (i < 3 ? '1px solid var(--border)' : 'none'),
+                borderBottom: mobile && i < 2 ? '1px solid var(--border)' : 'none',
+              }}>
+                <div style={{ fontFamily: 'var(--font-display)', fontSize: '1.1rem', fontWeight: 400, lineHeight: 1, marginBottom: '0.2rem', color: 'var(--text)' }}>{num}</div>
+                <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.58rem', letterSpacing: '0.1em', color: 'var(--muted)', textTransform: 'uppercase' }}>{label}</div>
               </div>
             ))}
           </div>
@@ -108,7 +130,7 @@ export default function Home() {
           </div>
           <Link href="/projects" style={{ fontFamily: 'var(--font-mono)', fontSize: '0.72rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--accent)', borderBottom: '1px solid var(--accent)', paddingBottom: '2px', textDecoration: 'none' }}>View All</Link>
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(280px,1fr))', gap: '1px', background: 'var(--border)' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(260px,1fr))', gap: '1px', background: 'var(--border)' }}>
           {featured.map((p, i) => (
             <div key={p.id} style={{ background: 'var(--bg)', padding: '2.5rem 2rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
