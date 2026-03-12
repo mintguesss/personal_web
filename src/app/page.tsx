@@ -106,7 +106,7 @@ export default function Home() {
           <div style={{ display: 'grid', gridTemplateColumns: mobile ? 'repeat(2,1fr)' : 'repeat(4,1fr)' }}>
             {stats.map(([num, label], i) => (
               <div key={label} style={{
-                padding: 'clamp(0.85rem,2vw,1.25rem) clamp(1rem,3vw,2rem)',
+                padding: 'clamp(0.85rem,2vw,1.25rem) clamp(7rem,9vw,8rem)',
                 borderRight: mobile
                   ? (i % 2 === 0 ? '1px solid var(--border)' : 'none')
                   : (i < 3 ? '1px solid var(--border)' : 'none'),

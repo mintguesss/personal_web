@@ -82,7 +82,7 @@ export default function SkillsAwardsPage() {
       <div style={{ borderTop: '1px solid var(--border)' }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto', padding: `0 ${PAD} clamp(3rem,5vw,5rem)` }}>
 
-          {/* Research + Competition → mobile 一欄 */}
+          {/* Research + Competition */}
           <div style={{
             display: 'grid',
             gridTemplateColumns: mobile ? '1fr' : '1fr 1fr',
@@ -95,7 +95,7 @@ export default function SkillsAwardsPage() {
               { label: 'Competitions', items: competition },
             ].map(({ label, items }) => (
               <div key={label}>
-                <p style={{ ...MONO, marginBottom: '1.25rem' }}>{label}</p>
+                <p style={{ ...MONO, fontSize: '0.78rem', marginBottom: '1.25rem' }}>{label}</p>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                   {items.map((a) => {
                     const Wrapper = a.link ? 'a' : 'div'
@@ -136,13 +136,11 @@ export default function SkillsAwardsPage() {
                             </div>
                           )}
                           <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-                            <h3 style={{ fontFamily: 'var(--font-display)', fontSize: '0.98rem', fontWeight: 400, lineHeight: 1.4, color: 'var(--text)', marginBottom: '0.4rem' }}>{a.title}</h3>
-                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                              <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.62rem', color: 'var(--muted)' }}>{a.org}</span>
-                              <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.62rem', color: 'var(--accent)' }}>{a.year}</span>
-                                {a.link && <span style={{ fontSize: '0.7rem', color: 'var(--accent)' }}>↗</span>}
-                              </div>
+                            <h3 style={{ fontFamily: 'var(--font-display)', fontSize: '1.08rem', fontWeight: 400, lineHeight: 1.4, color: 'var(--text)', marginBottom: '0.4rem' }}>{a.title}</h3>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                              <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.72rem', color: 'var(--muted)' }}>{a.org}</span>
+                              <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.72rem', color: 'var(--accent)' }}>{a.year}</span>
+                              {a.link && <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.72rem', color: 'var(--accent)', marginLeft: 'auto' }}>查看 →</span>}
                             </div>
                           </div>
                         </div>
@@ -154,29 +152,46 @@ export default function SkillsAwardsPage() {
             ))}
           </div>
 
-          {/* 在校榮譽 → mobile 一欄 */}
+          {/* 在校榮譽 */}
           <div style={{ padding: '2.5rem 0' }}>
-            <p style={{ ...MONO, marginBottom: '1.25rem' }}>在校榮譽</p>
-            <div style={{ display: 'grid', gridTemplateColumns: mobile ? '1fr' : '1fr 1fr', gap: '0 3rem' }}>
+            <p style={{ ...MONO, fontSize: '0.78rem', marginBottom: '1.25rem' }}>在校榮譽</p>
+            <div style={{ display: 'grid', gridTemplateColumns: mobile ? '1fr' : '1fr 1fr', gap: '0.75rem 3rem' }}>
               {school.map((a) => (
                 <div
                   key={`${a.year}-${a.title}`}
                   onClick={() => a.image ? setModalImg(a.image) : undefined}
                   style={{
                     display: 'flex', gap: '0.75rem', alignItems: 'flex-start',
-                    padding: '0.9rem 0', borderBottom: '1px solid var(--border)',
+                    padding: '0.9rem 0.75rem',
+                    border: '1px solid var(--border)',
+                    borderRadius: '6px',
+                    background: 'var(--bg)',
                     cursor: a.image ? 'pointer' : 'default',
+                    transition: 'transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease',
+                  }}
+                  onMouseEnter={e => {
+                    if (!a.image) return
+                    const el = e.currentTarget as HTMLDivElement
+                    el.style.borderColor = 'var(--accent)'
+                    el.style.boxShadow = '0 8px 22px rgba(0,0,0,0.08)'
+                    el.style.transform = 'translateY(-3px)'
+                  }}
+                  onMouseLeave={e => {
+                    const el = e.currentTarget as HTMLDivElement
+                    el.style.borderColor = 'var(--border)'
+                    el.style.boxShadow = 'none'
+                    el.style.transform = 'translateY(0)'
                   }}
                 >
-                  <span style={{ color: 'var(--accent)', fontSize: '0.65rem', marginTop: '0.3rem', flexShrink: 0 }}>▸</span>
+                  <span style={{ color: 'var(--accent)', fontSize: '0.75rem', marginTop: '0.25rem', flexShrink: 0 }}>▸</span>
                   <div style={{ flex: 1 }}>
-                    <span style={{ fontFamily: 'var(--font-display)', fontSize: '0.95rem', fontWeight: 400, color: 'var(--text)' }}>{a.title}</span>
-                    <div style={{ display: 'flex', gap: '0.75rem', marginTop: '0.15rem' }}>
-                      <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.6rem', color: 'var(--muted)' }}>{a.org}</span>
-                      <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.6rem', color: 'var(--accent)' }}>{a.year}</span>
+                    <span style={{ fontFamily: 'var(--font-display)', fontSize: '1.05rem', fontWeight: 400, color: 'var(--text)' }}>{a.title}</span>
+                    <div style={{ display: 'flex', gap: '0.75rem', marginTop: '0.2rem' }}>
+                      <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.7rem', color: 'var(--muted)' }}>{a.org}</span>
+                      <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.7rem', color: 'var(--accent)' }}>{a.year}</span>
                     </div>
                   </div>
-                  {a.image && <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.6rem', color: 'var(--accent)', flexShrink: 0, marginTop: '0.3rem' }}>證書 ↗</span>}
+                  {a.image && <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.72rem', color: 'var(--accent)', flexShrink: 0, marginTop: '0.25rem', whiteSpace: 'nowrap' }}>查看證書 →</span>}
                 </div>
               ))}
             </div>
