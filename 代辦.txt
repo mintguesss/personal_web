@@ -1,0 +1,14 @@
+紀錄
+3/12
+skills & awards 合併&重新設計
+
+
+
+代辦:
+
+skills & awards資料上傳    查看證書往下一排  skill border radius多一點
+幻燈片是否要
+about資訊更新
+project作品頁面製作
+contact改成activity contact塞到首頁 記得響應式
+導覽列做hover

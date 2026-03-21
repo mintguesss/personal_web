@@ -9,7 +9,7 @@ const LINKS = [
   { href: '/about',         label: 'About' },
   { href: '/projects',      label: 'Projects' },
   { href: '/skills_awards', label: 'Skills & Awards' },
-  { href: '/contact',       label: 'Contact' },
+  { href: '/activity', label: 'Activity' },
 ]
 
 const IgIcon = () => (
