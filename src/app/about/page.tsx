@@ -34,7 +34,7 @@ export default function AboutPage() {
     : 'clamp(3rem,5vw,4.5rem) clamp(2rem,5vw,4rem) clamp(3rem,5vw,4.5rem) clamp(3rem,7vw,6rem)'
 
   return (
-    <div style={{ paddingTop: '64px', minHeight: '100vh' }}>
+    <div style={{ paddingTop: '30px', minHeight: '50vh' }}>
 
       <div style={{ borderBottom: '1px solid var(--border)', padding: mobile ? '4rem 1.5rem 2rem' : '5rem clamp(2rem,5vw,5rem) 2.5rem', maxWidth: '1100px', margin: '0 auto' }}>
         <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65rem', letterSpacing: '0.2em', color: 'var(--accent)', textTransform: 'uppercase', marginBottom: '0.75rem' }}>About</p>
@@ -44,7 +44,7 @@ export default function AboutPage() {
       </div>
 
       {/* Bio + Profile */}
-      <div style={{ borderTop: '1px solid var(--border)', marginTop: '2.5rem' }}>
+      <div style={{ borderTop: '1px solid var(--border)', marginTop: '0rem' }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto', padding: PAD }}>
           <div style={{ display: 'grid', gridTemplateColumns: mobile ? '1fr' : '1fr 1fr', gap: mobile ? '2rem' : '4rem', alignItems: 'start' }}>
             <div>
@@ -78,14 +78,14 @@ export default function AboutPage() {
 
       {/* Education */}
       <div style={{ borderTop: '1px solid var(--border)' }}>
-        <div style={{ maxWidth: '1100px', margin: '0 auto', padding: PAD }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto', padding: PAD }}>
           <p style={SECTION_LABEL}>Education</p>
           <div style={{ position: 'relative', paddingLeft: mobile ? '1.25rem' : '2rem' }}>
             <div style={{ position: 'absolute', left: '4px', top: '8px', bottom: '8px', width: '1px', background: 'var(--border-2)' }} />
             {education.map((e, i) => (
               <div key={e.school} style={{
                 position: 'relative',
-                paddingBottom: i < education.length - 1 ? '3.5rem' : 0,
+                paddingBottom: i < education.length - 1 ? '5rem' : 0,
                 display: 'grid',
                 gridTemplateColumns: mobile ? '1fr' : '1fr 1fr',
                 gap: mobile ? '1rem' : '3rem',
@@ -106,15 +106,14 @@ export default function AboutPage() {
                   {e.dept && <p style={{ fontSize: '0.95rem', color: 'var(--text-2)' }}>{e.dept} — {e.degree}</p>}
                 </div>
                 {e.highlights.length > 0 && (
-                  <div style={{ display: 'grid', gridTemplateColumns: mobile ? '1fr' : 'repeat(2,1fr)', gap: '1rem 1.5rem', paddingTop: '0.1rem' }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: mobile ? '1fr' : 'repeat(2,1fr)', gap: '2.5rem 1.5rem', paddingTop: '0.1rem' }}>
                     {e.highlights.map(h => (
                       <div key={h.label}>
-                        <p style={{ fontFamily: 'var(--font-display)', fontSize: '1.05rem', fontWeight: 400, color: 'var(--text)', marginBottom: '0.45rem' }}>{h.label}</p>
-                        <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
+                          <p style={{ fontFamily: 'var(--font-display)', fontSize: '1.05rem', fontWeight: 440, color: 'var(--text)', marginBottom: '0.45rem' }}>{h.label}</p>                        <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
                           {h.items.map(item => (
                             <li key={item} style={{ display: 'flex', gap: '0.5rem', alignItems: 'flex-start' }}>
                               <span style={{ color: 'var(--accent)', flexShrink: 0, fontSize: '0.65rem', marginTop: '0.3rem' }}>▸</span>
-                              <span style={{ fontSize: '0.9rem', color: 'var(--text-2)', lineHeight: 1.65 }}>{item}</span>
+                              <span style={{ fontSize: '0.9rem', color: 'var(--text-3)', lineHeight: 1.65 }}>{item}</span>
                             </li>
                           ))}
                         </ul>

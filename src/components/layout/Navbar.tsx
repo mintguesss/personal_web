@@ -5,11 +5,11 @@ import { usePathname } from 'next/navigation'
 import { siteData } from '@/data/portfolio'
 
 const LINKS = [
-  { href: '/',              label: 'Home' },
-  { href: '/about',         label: 'About' },
-  { href: '/projects',      label: 'Projects' },
-  { href: '/skills_awards', label: 'Skills & Awards' },
-  { href: '/activity', label: 'Activity' },
+  { href: '/', label: 'Home' },
+  { href: '/about', label: 'About' },
+  { href: '/projects', label: 'Projects' },
+  { href: '/skills', label: 'Skills' },
+  { href: '/awards', label: 'Awards' },
 ]
 
 const IgIcon = () => (

@@ -120,49 +120,11 @@ export default function SkillsAwardsPage() {
   }
 
   return (
-    <div style={{ paddingTop: '64px', minHeight: '100vh' }}>
-
-      {/* ══ Skills Header ══ */}
-      <div style={{ borderBottom: '1px solid var(--border)' }}>
-        <div style={{ maxWidth: '1100px', margin: '0 auto', padding: `clamp(2.5rem,5vw,4rem) ${PAD} 2rem` }}>
-          <p style={{ ...MONO, marginBottom: '0.6rem' }}>Expertise</p>
-          <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(2rem,4vw,3.2rem)', fontWeight: 300 }}>
-            Skills &amp; <em style={{ fontStyle: 'italic', color: 'var(--muted)' }}>Technologies</em>
-          </h1>
-        </div>
-      </div>
-
-      {/* ══ Skills grid ══ */}
-      <div style={{ maxWidth: '1100px', margin: '0 auto', padding: `2rem ${PAD} 0` }}>
-        <div style={{ display: 'grid', gridTemplateColumns: mobile ? '1fr' : '1fr 1fr', gap: '0 3rem' }}>
-          {skillEntries.map(([group, items]) => (
-            <div key={group} style={{ padding: '1.75rem 0', borderBottom: '1px solid var(--border)' }}>
-              <h2 style={{ fontFamily: 'var(--font-display)', fontSize: '1.2rem', fontWeight: 400, color: 'var(--text)', marginBottom: '1rem' }}>{group}</h2>
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem' }}>
-                {(items as readonly string[]).map((skill) => {
-                  const id = `${group}-${skill}`
-                  const on = hovered === id
-                  return (
-                    <span key={skill} onMouseEnter={() => setHovered(id)} onMouseLeave={() => setHovered(null)} style={{
-                      fontFamily: 'var(--font-mono)', fontSize: '0.78rem',
-                      padding: '0.3em 0.85em', borderRadius: '3px', cursor: 'default',
-                      transition: 'background 0.15s, color 0.15s, border-color 0.15s',
-                      background: on ? 'var(--accent)' : 'var(--bg-2)',
-                      color: on ? '#fff' : 'var(--text-2)',
-                      border: `1px solid ${on ? 'var(--accent)' : 'var(--border)'}`,
-                    }}>{skill}</span>
-                  )
-                })}
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-
+    <div style={{ paddingTop: '30px', minHeight: '100vh' }}>
+      
       {/* ══ Awards Header ══ */}
       <div style={{ borderTop: '1px solid var(--border)', marginTop: '2.5rem' }}>
-        <div style={{ maxWidth: '1100px', margin: '0 auto', padding: `clamp(2rem,4vw,3rem) ${PAD} 1.75rem` }}>
-          <p style={{ ...MONO, marginBottom: '0.6rem' }}>Recognition</p>
+        <div style={{ maxWidth: '1200px', margin: '0 auto', padding: `clamp(2rem,4vw,3rem) ${PAD} 1.75rem` }}>
           <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(1.8rem,3.5vw,2.8rem)', fontWeight: 300 }}>
             Awards &amp; <em style={{ fontStyle: 'italic', color: 'var(--muted)' }}>Honors</em>
           </h2>
@@ -170,20 +132,12 @@ export default function SkillsAwardsPage() {
       </div>
 
       <div style={{ borderTop: '1px solid var(--border)' }}>
-        <div style={{ maxWidth: '1100px', margin: '0 auto', padding: `0 ${PAD} clamp(3rem,5vw,5rem)` }}>
-
-          {/* Research */}
-          <div style={{ padding: '2.5rem 0', borderBottom: '1px solid var(--border)' }}>
-            <p style={{ ...MONO, fontSize: '0.78rem', marginBottom: '1.25rem' }}>Research</p>
-            <div style={{ display: 'grid', gridTemplateColumns: mobile ? '1fr' : 'repeat(2,1fr)', gap: '3rem' }}>
-              {research.map(a => <AwardCard key={`${a.year}-${a.title}`} a={a} />)}
-            </div>
-          </div>
+        <div style={{ maxWidth: '1200px', margin: '0 auto', padding: `0 ${PAD} clamp(3rem,5vw,5rem)` }}>
 
           {/* Competitions */}
-          <div style={{ padding: '2.5rem 0', borderBottom: '1px solid var(--border)' }}>
+          <div style={{ padding: '2rem 0', borderBottom: '1px solid var(--border)' }}>
             <p style={{ ...MONO, fontSize: '0.78rem', marginBottom: '1.25rem' }}>Competitions</p>
-            <div style={{ display: 'grid', gridTemplateColumns: mobile ? '1fr' : 'repeat(2,1fr)', gap: '3rem' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: mobile ? '1fr' : 'repeat(2,1fr)', gap: '6rem' }}>
               {competition.map(a => <AwardCard key={`${a.year}-${a.title}`} a={a} />)}
             </div>
           </div>
@@ -191,7 +145,7 @@ export default function SkillsAwardsPage() {
           {/* 在校榮譽 */}
           <div style={{ padding: '2.5rem 0' }}>
             <p style={{ ...MONO, fontSize: '0.78rem', marginBottom: '1.25rem' }}>在校榮譽</p>
-            <div style={{ display: 'grid', gridTemplateColumns: mobile ? '1fr' : '1fr 1fr', gap: '1rem 3rem' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: mobile ? '1fr' : '1fr 1fr', gap: '1rem 5rem' }}>
               {school.map((a) => {
                 const clickable = !!(a.image || a.link)
                 return (
@@ -254,17 +208,18 @@ export default function SkillsAwardsPage() {
             display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem',
           }}
         >
-          <div onClick={e => e.stopPropagation()} style={{ position: 'relative', maxWidth: '600px', maxHeight: '80vh', width: '100%' }}>
-            <img src={modalImg} alt="證書" style={{ width: '100%', height: '100%', objectFit: 'contain', borderRadius: '4px' }} />
-            <button
-              onClick={() => setModalImg(null)}
-              style={{
-                position: 'absolute', top: '-2.5rem', right: 0,
-                background: 'none', border: 'none', color: '#fff',
-                fontFamily: 'var(--font-mono)', fontSize: '0.72rem',
-                cursor: 'pointer', letterSpacing: '0.1em',
-              }}
-            >ESC 關閉</button>
+          <div onClick={e => e.stopPropagation()} style={{ position: 'relative', maxHeight: '85vh', maxWidth: '90vw' }}>
+            <img src={modalImg} alt="" style={{
+              maxHeight: '85vh', maxWidth: '90vw',
+              width: 'auto', height: 'auto',
+              objectFit: 'contain', borderRadius: '4px', display: 'block',
+            }} />
+            <button onClick={() => setModalImg(null)} style={{
+              position: 'absolute', top: '-2.5rem', right: 0,
+              background: 'none', border: 'none', color: '#fff',
+              fontFamily: 'var(--font-mono)', fontSize: '0.72rem',
+              cursor: 'pointer', letterSpacing: '0.1em',
+            }}>ESC 關閉</button>
           </div>
         </div>
       )}

@@ -35,11 +35,11 @@ export const siteData = {
     {
       school: "國立中央大學",
       dept: "資訊管理研究所",
-      degree: "碩士（甄試錄取）",
+      degree: "碩士",
       period: "2026 — 2028",
-      badge: "備取錄取",
+      badge: "推甄錄取",
       highlights: [
-        { label: "研究方向", items: ["自然語言處理", "機器學習應用"] },
+        { label: "研究方向", items: ["電腦視覺", "機器學習應用", "情緒辨識"] },
       ],
     },
     {
@@ -49,9 +49,11 @@ export const siteData = {
       period: "2022 — 2026",
       badge: "班排前十 / 書卷獎",
       highlights: [
-        { label: "學術", items: ["管理學院學術獎章 ×2", "書卷獎", "班排前十"] },
-        { label: "專題", items: ["騙局雷達 — 育秀盃佳作", "第 42 屆專題發表優秀組別"] },
-        { label: "職務", items: ["班級代表", "國科會大專生研究計畫"] },
+        { label: "學術", items: ["管理學院學術獎章 ×2", "書卷獎 / 班排10%", "AI微學程 / 雲端學程"] },
+        { label: "專題", items: ["騙局雷達 Fraud Radar", "第 22 屆育秀盃創意獎佳作", "第 42 屆專題發表優秀組別"] },
+        { label: "職務", items: ["班級代表*2", "副班級代表*1"] },
+        { label: "活動", items: ["舉辦制服趴", "資管系羽毛球隊", "永續淨灘活動"] },
+
       ],
     },
     {
@@ -61,7 +63,10 @@ export const siteData = {
       period: "2019 — 2022",
       badge: "",
       highlights: [
-        { label: "經歷", items: ["班級幹部", "參加各類競賽"] },
+        { label: "職務", items: ["班級代表", "圍棋社公關"] },
+        { label: "證照", items: ["MTA(微軟專業應用國際認證) ", "GLAD(人工智能素養國際認證) "] },
+        { label: "競賽", items: ["APCS(大學程式設計先修檢定)", "教育盃圍棋錦標賽團體組"] },
+        { label: "活動", items: ["舉辦圍棋社寒訓"] },
       ],
     },
   ],
@@ -138,26 +143,51 @@ export const siteData = {
     "資料庫": ["MySQL", "Firebase"],
   },
 
+
+ certifications: [
+  { name: 'AWS Academy Cloud Architecting', issuer: 'AWS', date: '2024.05', image: '/personal_web/skills/AWS.png', objectPosition: '10% 80%' },
+  { name: 'AI 微學程', issuer: '輔仁大學', date: '2025', image: '/personal_web/skills/AI微學程.png', objectPosition: '10% 6%' },
+  { name: '雲端服務趨勢學程', issuer: '輔仁大學', date: '進行中', image: '', objectPosition: 'center' },
+],
+  coursework: [
+    { name: '機器學習', tag: 'ML' },
+    { name: '大型語言模型（LLM）', tag: 'AI' },
+    { name: '網頁設計', tag: 'Web' },
+    { name: '雲端應用', tag: 'Cloud' },
+    { name: '資料庫管理', tag: 'Data' },
+    { name: '系統分析與設計', tag: 'System' },
+    { name: '電腦視覺', tag: 'CV' },
+    { name: '計算機概論', tag: 'CS' },
+    { name: '資料結構', tag: 'CS' },
+  ],
+
+  languages: [
+  { name: 'Mandarin', level: 'Native' },
+  { name: 'English',  level: 'TOEIC 750', scoreImage: '/personal_web/skills/toeic.jpg' },
+],
+
+  interests: [
+  { emoji: '🎮', name: '電玩' },
+  { emoji: '🎸', name: '吉他' },
+  { emoji: '🏎️', name: 'F1' },
+  { emoji: '🎳', name: '保齡球' },
+  { emoji: '⛸️', name: '溜冰' },
+  { emoji: '⚫', name: '圍棋' },
+  { emoji: '🏸', name: '羽毛球' },
+  { emoji: '🏑', name: '曲棍球' },
+  { emoji: '🛌', name: '睡覺' },
+  { emoji: '🌊', name: '海洋' },
+],
+
   awards: [
     { year: '2025', title: '第 22 屆育秀盃創意獎佳作',                 org: '育秀盃',             category: 'competition', image: '/personal_web/awards/育秀杯.jpg',         link: '' },
-    { year: '2025', title: '管理學院學術獎章*2',                       org: '輔仁大學',           category: 'school',      image: '/personal_web/awards/academic-medal.jpg',    link: '' },
     { year: '2025', title: '專題發表優秀組別（第 42 屆）',              org: '輔仁大學資訊管理系', category: 'competition', image: '/personal_web/awards/專題發表.jpg',    link: 'https://im.mgt.ncu.edu.tw/teacher' },
-    { year: '2025', title: '國科會大專生研究計畫',                      org: '國科會',             category: 'research',    image: '/personal_web/awards/國科會.png',          link: 'https://wsts.nstc.gov.tw/STSWeb/Award/AwardMultiQuery.aspx' },
-    { year: '2025', title: '113 學年度第 2 學期書卷獎',                 org: '輔仁大學',           category: 'school',      image: '/personal_web/awards/book-award.jpg',         link: '' },
-    { year: '2025', title: 'AI 微學程結業',                             org: '輔仁大學',           category: 'school',      image: '/personal_web/awards/ai-program-cert.jpg',   link: '' },
-    { year: '2025', title: '班級代表',                                  org: '輔仁大學資訊管理系', category: 'school',      image: '',                                            link: '' },
-    { year: '2024', title: 'AWS Academy Graduate — Cloud Architecting', org: 'AWS',                category: 'school',      image: '/personal_web/awards/aws-cert.jpg',           link: '' },
-    { year: '2023', title: '班級代表',                                  org: '輔仁大學資訊管理系', category: 'school',      image: '',                                            link: '' },
-  ] as const,
 
-  activities: [
-    {
-      title: '制服趴 2024',
-      date: '2024.06',
-      location: '輔仁大學',
-      desc: '系上制服主題派對，擔任籌備委員，負責場地佈置與活動流程規劃。',
-      image: '/personal_web/activities/uniform-party.jpg',
-    },
+    { year: '2025', title: '113 學年度第 2 學期書卷獎',                 org: '輔仁大學',           category: 'school',      image: '/personal_web/awards/書卷獎.png',         link: '' },
+    { year: '2025', title: '管理學院學術獎章1',                       org: '輔仁大學',           category: 'school',      image: '/personal_web/awards/獎章1.jpg',    link: '' },
+    { year: '2025', title: '管理學院學術獎章2',                       org: '輔仁大學',           category: 'school',      image: '/personal_web/awards/獎章2.jpg',    link: '' },
+    { year: '2025', title: '班級代表',                                  org: '輔仁大學資訊管理系', category: 'school',      image: '',                                            link: '' },
+    { year: '2023', title: '班級代表',                                  org: '輔仁大學資訊管理系', category: 'school',      image: '',                                            link: '' },
   ] as const,
 
   contactLinks: [
