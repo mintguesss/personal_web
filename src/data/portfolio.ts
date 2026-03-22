@@ -181,7 +181,7 @@ export const siteData = {
 
   awards: [
     { year: '2025', title: '第 22 屆育秀盃創意獎佳作',                 org: '育秀盃',             category: 'competition', image: '/personal_web/awards/育秀杯.jpg',         link: '' },
-    { year: '2025', title: '專題發表優秀組別（第 42 屆）',              org: '輔仁大學資訊管理系', category: 'competition', image: '/personal_web/awards/專題發表.jpg',    link: 'https://im.mgt.ncu.edu.tw/teacher' },
+    { year: '2025', title: '專題發表優秀組別（第 42 屆）',              org: '輔仁大學資訊管理系', category: 'competition', image: '/personal_web/awards/專題發表.jpg',    link: '' },
 
     { year: '2025', title: '113 學年度第 2 學期書卷獎',                 org: '輔仁大學',           category: 'school',      image: '/personal_web/awards/書卷獎.png',         link: '' },
     { year: '2025', title: '管理學院學術獎章1',                       org: '輔仁大學',           category: 'school',      image: '/personal_web/awards/獎章1.jpg',    link: '' },

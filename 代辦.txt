@@ -7,11 +7,18 @@ contact改成activity
 contact塞到首頁
 skills & awards card重作
 
+3/23
+skill拆出來重作 笑死怎麼又回到十天前
+skill加了一堆東西
+skill和award照片新增
+about資料完善
+
+
 
 代辦:
-skill感覺可以塞到最下面 並且不用標題了  research在作品有了
-about資訊更新
-skills & awards資料上傳  
-幻燈片是否要
-project作品頁面製作
 導覽列做hover
+project作品頁面製作 卡片顏色想一下
+Interests可以搞點好玩的 放點照片或影片
+Coursework再想想
+
+幻燈片是否要
