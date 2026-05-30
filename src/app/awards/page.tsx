@@ -121,8 +121,7 @@ export default function SkillsAwardsPage() {
 
   return (
     <div style={{ paddingTop: '30px', minHeight: '100vh' }}>
-      
-      {/* ══ Awards Header ══ */}
+
       <div style={{ borderTop: '1px solid var(--border)', marginTop: '2.5rem' }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto', padding: `clamp(2rem,4vw,3rem) ${PAD} 1.75rem` }}>
           <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(1.8rem,3.5vw,2.8rem)', fontWeight: 300 }}>

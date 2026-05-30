@@ -217,9 +217,9 @@ export default function Home() {
                 <h3 style={{ fontFamily: 'var(--font-display)', fontSize: '1.2rem', fontWeight: 400, marginBottom: '0.3rem' }}>{p.title}</h3>
                 <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.68rem', color: 'var(--muted)' }}>{p.period}</p>
               </div>
-              <p style={{ fontSize: '0.88rem', color: 'var(--text-2)', lineHeight: 1.75, flex: 1 }}>{p.description.slice(0, 100)}...</p>
+              <p style={{ fontSize: '0.88rem', color: 'var(--text-2)', lineHeight: 1.75, flex: 1 }}>{(p.description as string).slice(0, 100)}...</p>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem', paddingTop: '0.5rem', borderTop: '1px solid var(--border)' }}>
-                {p.tags.slice(0, 3).map(t => <span key={t} style={{ fontFamily: 'var(--font-mono)', fontSize: '0.67rem', padding: '0.2em 0.7em', borderRadius: '2px', background: 'var(--bg-2)', color: 'var(--text-2)', border: '1px solid var(--border)' }}>{t}</span>)}
+                {(p.tags as readonly string[]).slice(0, 3).map(t => <span key={t} style={{ fontFamily: 'var(--font-mono)', fontSize: '0.67rem', padding: '0.2em 0.7em', borderRadius: '2px', background: 'var(--bg-2)', color: 'var(--text-2)', border: '1px solid var(--border)' }}>{t}</span>)}
               </div>
             </div>
           ))}

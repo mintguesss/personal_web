@@ -1,5 +1,6 @@
 'use client'
 import { useState, useEffect, useRef } from 'react'
+import Link from 'next/link'
 import { siteData } from '@/data/portfolio'
 
 function R({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
@@ -63,18 +64,23 @@ export default function ProjectsPage() {
                 <p style={{ fontSize: '0.88rem', color: 'var(--text-2)', lineHeight: 1.8 }}>{p.description}</p>
 
                 <ul style={{ display: 'flex', flexDirection: 'column', gap: '0.3rem' }}>
-                  {p.highlights.map(h => (
+                  {(p.highlights as readonly string[]).map(h => (
                     <li key={h} style={{ display: 'flex', gap: '0.5rem', fontSize: '0.84rem', color: 'var(--text-2)' }}>
                       <span style={{ color: 'var(--accent)', flexShrink: 0 }}>▸</span>{h}
                     </li>
                   ))}
                 </ul>
 
-                <div style={{ marginTop: 'auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.5rem', paddingTop: '0.75rem', borderTop: '1px solid var(--border)' }}>
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.35rem' }}>
-                    {p.tags.map(t => <span key={t} className="tag">{t}</span>)}
+                <div style={{ marginTop: 'auto', paddingTop: '0.75rem', borderTop: '1px solid var(--border)' }}>
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.35rem', marginBottom: '0.6rem' }}>
+                    {(p.tags as readonly string[]).map(t => <span key={t} className="tag">{t}</span>)}
                   </div>
-                  {p.link && <a href={p.link} target="_blank" rel="noreferrer" style={{ fontSize: '0.8rem', fontFamily: 'var(--font-mono)', color: 'var(--accent)', textDecoration: 'none', fontWeight: 500 }}>查看 →</a>}
+                  <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                    <Link
+                      href={`/projects/${p.id}`}
+                      style={{ fontSize: '0.78rem', fontFamily: 'var(--font-mono)', color: 'var(--accent)', textDecoration: 'none', fontWeight: 500 }}
+                    >查看 →</Link>
+                  </div>
                 </div>
               </div>
             </R>

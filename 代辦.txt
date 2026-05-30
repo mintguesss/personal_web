@@ -22,3 +22,7 @@ Interests可以搞點好玩的 放點照片或影片
 Coursework再想想
 
 幻燈片是否要
+
+git add .
+git commit -m "update"
+git push
