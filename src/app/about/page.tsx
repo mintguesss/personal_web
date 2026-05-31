@@ -13,6 +13,24 @@ type EduHighlight = { label: string; items: readonly string[] }
 type Edu = { school: string; dept: string; degree: string; period: string; badge: string; highlights: readonly EduHighlight[] }
 type Exp = { role: string; company: string; period: string; desc: string; tags: readonly string[] }
 
+function R({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
+  const [show, setShow] = useState(false)
+  const ref = useRef<HTMLDivElement>(null)
+  useEffect(() => {
+    const el = ref.current; if (!el) return
+    const rect = el.getBoundingClientRect()
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      const t = setTimeout(() => setShow(true), delay)
+      return () => clearTimeout(t)
+    } else {
+      const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setShow(true); obs.disconnect() } }, { threshold: 0.06 })
+      obs.observe(el)
+      return () => obs.disconnect()
+    }
+  }, [delay])
+  return <div ref={ref} style={{ opacity: show ? 1 : 0, transform: show ? 'none' : 'translateY(20px)', transition: 'opacity 0.6s ease, transform 0.6s ease' }}>{children}</div>
+}
+
 const SECTION_LABEL: React.CSSProperties = {
   fontFamily: 'var(--font-mono)', fontSize: '0.72rem', letterSpacing: '0.2em',
   color: 'var(--accent)', textTransform: 'uppercase', marginBottom: '2rem',
@@ -36,17 +54,19 @@ export default function AboutPage() {
   return (
     <div style={{ paddingTop: '30px', minHeight: '50vh' }}>
 
-      <div style={{ borderBottom: '1px solid var(--border)', padding: mobile ? '4rem 1.5rem 2rem' : '5rem clamp(2rem,5vw,5rem) 2.5rem', maxWidth: '1100px', margin: '0 auto' }}>
-        <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65rem', letterSpacing: '0.2em', color: 'var(--accent)', textTransform: 'uppercase', marginBottom: '0.75rem' }}>About</p>
-        <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(2rem,4vw,3rem)', fontWeight: 300, lineHeight: 1.05 }}>
-          關於我 <em style={{ fontStyle: 'italic', color: 'var(--muted)' }}>/ Ken</em>
-        </h1>
-      </div>
+      <R>
+        <div style={{ borderBottom: '1px solid var(--border)', padding: mobile ? '4rem 1.5rem 2rem' : '5rem clamp(2rem,5vw,5rem) 2.5rem', maxWidth: '1100px', margin: '0 auto' }}>
+          <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65rem', letterSpacing: '0.2em', color: 'var(--accent)', textTransform: 'uppercase', marginBottom: '0.75rem' }}>About</p>
+          <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(2rem,4vw,3rem)', fontWeight: 300, lineHeight: 1.05 }}>
+            關於我 <em style={{ fontStyle: 'italic', color: 'var(--muted)' }}>/ Ken</em>
+          </h1>
+        </div>
+      </R>
 
       {/* Bio + Profile */}
       <div style={{ borderTop: '1px solid var(--border)', marginTop: '0rem' }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto', padding: PAD }}>
-          <div style={{ display: 'grid', gridTemplateColumns: mobile ? '1fr' : '1fr 1fr', gap: mobile ? '2rem' : '4rem', alignItems: 'start' }}>
+          <R delay={60}><div style={{ display: 'grid', gridTemplateColumns: mobile ? '1fr' : '1fr 1fr', gap: mobile ? '2rem' : '4rem', alignItems: 'start' }}>
             <div>
               <p style={SECTION_LABEL}>Profile</p>
               {([
@@ -72,7 +92,7 @@ export default function AboutPage() {
                 ))}
               </div>
             </div>
-          </div>
+          </div></R>
         </div>
       </div>
 
@@ -83,7 +103,7 @@ export default function AboutPage() {
           <div style={{ position: 'relative', paddingLeft: mobile ? '1.25rem' : '2rem' }}>
             <div style={{ position: 'absolute', left: '4px', top: '8px', bottom: '8px', width: '1px', background: 'var(--border-2)' }} />
             {education.map((e, i) => (
-              <div key={e.school} style={{
+              <R key={e.school} delay={80 + i * 100}><div style={{
                 position: 'relative',
                 paddingBottom: i < education.length - 1 ? '5rem' : 0,
                 display: 'grid',
@@ -106,7 +126,7 @@ export default function AboutPage() {
                   {e.dept && <p style={{ fontSize: '0.95rem', color: 'var(--text-2)' }}>{e.dept} — {e.degree}</p>}
                 </div>
                 {e.highlights.length > 0 && (
-                  <div style={{ display: 'grid', gridTemplateColumns: mobile ? '1fr' : 'repeat(2,1fr)', gap: '2.5rem 1.5rem', paddingTop: '0.1rem' }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(180px,1fr))', gap: '1.5rem 1.5rem', paddingTop: '0.1rem' }}>
                     {e.highlights.map(h => (
                       <div key={h.label}>
                           <p style={{ fontFamily: 'var(--font-display)', fontSize: '1.05rem', fontWeight: 440, color: 'var(--text)', marginBottom: '0.45rem' }}>{h.label}</p>                        <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
@@ -121,7 +141,7 @@ export default function AboutPage() {
                     ))}
                   </div>
                 )}
-              </div>
+              </div></R>
             ))}
           </div>
         </div>
@@ -132,8 +152,8 @@ export default function AboutPage() {
         <div style={{ maxWidth: '1100px', margin: '0 auto', padding: PAD }}>
           <p style={SECTION_LABEL}>Work Experience</p>
           <div style={{ display: 'grid', gridTemplateColumns: mobile ? '1fr' : 'repeat(2,1fr)', gap: '0 3rem' }}>
-            {experience.map((e) => (
-              <div key={e.company} style={{
+            {experience.map((e, i) => (
+              <R key={e.company} delay={60 + i * 80}><div style={{
                 display: 'grid', gridTemplateColumns: '56px 1fr',
                 gap: '1.25rem', padding: '1.75rem 0',
                 borderTop: '1px solid var(--border)',
@@ -155,7 +175,7 @@ export default function AboutPage() {
                   <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65rem', color: 'var(--muted)', letterSpacing: '0.08em', marginBottom: '0.5rem' }}>{e.period}</p>
                   <p style={{ fontSize: '0.92rem', color: 'var(--text-2)', lineHeight: 1.75 }}>{e.desc}</p>
                 </div>
-              </div>
+              </div></R>
             ))}
           </div>
         </div>

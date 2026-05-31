@@ -2,33 +2,26 @@
 import { useState, useRef, useEffect } from 'react'
 import Link from 'next/link'
 import { siteData } from '@/data/portfolio'
+import { projectsDetail } from '@/data/projectsDetail'
 
 type Project = typeof siteData.projects[number]
 
 function R({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
+  const [show, setShow] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
   useEffect(() => {
     const el = ref.current; if (!el) return
-    el.style.transitionDelay = `${delay}ms`; el.classList.add('reveal')
-    const obs = new IntersectionObserver(([e]) => {
-      if (e.isIntersecting) { el.classList.add('visible'); obs.disconnect() }
-    }, { threshold: 0.06 })
-    obs.observe(el); return () => obs.disconnect()
+    const rect = el.getBoundingClientRect()
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      const t = setTimeout(() => setShow(true), delay)
+      return () => clearTimeout(t)
+    } else {
+      const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setShow(true); obs.disconnect() } }, { threshold: 0.06 })
+      obs.observe(el)
+      return () => obs.disconnect()
+    }
   }, [delay])
-  return <div ref={ref}>{children}</div>
-}
-
-type FraudData = {
-  overview: string
-  mobileNote: string
-  myRole: string
-  features: readonly { title: string; desc: string; image: string }[]
-  detectionPipeline: { step: string; title: string; desc: string; techs: readonly string[]; color: string }[]
-  awards: readonly string[]
-  teamSize: number
-  advisor: string
-  logo: string
-  poster: string
+  return <div ref={ref} style={{ opacity: show ? 1 : 0, transform: show ? 'none' : 'translateY(20px)', transition: 'opacity 0.6s ease, transform 0.6s ease' }}>{children}</div>
 }
 
 function FeatureImg({ src, label, onClick }: { src: string; label: string; onClick: () => void }) {
@@ -78,7 +71,7 @@ function FeatureImg({ src, label, onClick }: { src: string; label: string; onCli
 }
 
 export default function FraudRadarDetail({ project, mobile }: { project: Project; mobile: boolean }) {
-  const fr = project as unknown as Project & FraudData
+  const fr = projectsDetail['fraud-radar']
   const [modalImg, setModalImg] = useState<string | null>(null)
   const [roleOpen, setRoleOpen] = useState(false)
   const [posterHovered, setPosterHovered] = useState(false)
@@ -289,19 +282,8 @@ export default function FraudRadarDetail({ project, mobile }: { project: Project
           </R>
         </div>
 
-        {/* 使用技術 */}
-        <div style={{ padding: '2.5rem 0' }}>
-          <R>
-            <h2 style={{ ...secTitle, marginBottom: '1.1rem' }}>使用技術</h2>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
-              {(project.tags as readonly string[]).map(t => (
-                <span key={t} className="tag" style={{ fontSize: '0.78rem', padding: '0.3em 1em' }}>{t}</span>
-              ))}
-            </div>
-          </R>
-        </div>
 
-        <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+        <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' ,marginTop: '1.5rem'}}>
           <R><Link href="/projects" className="btn-outline" style={{ textDecoration: 'none' }}>← 回到專案列表</Link></R>
           {project.link && (
             <R delay={60}>

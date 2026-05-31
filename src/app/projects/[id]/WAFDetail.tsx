@@ -1,36 +1,31 @@
 'use client'
-import { useRef, useEffect } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import Link from 'next/link'
 import { siteData } from '@/data/portfolio'
+import { projectsDetail } from '@/data/projectsDetail'
 
 type Project = typeof siteData.projects[number]
 
 function R({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
+  const [show, setShow] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
   useEffect(() => {
     const el = ref.current; if (!el) return
-    el.style.transitionDelay = `${delay}ms`; el.classList.add('reveal')
-    const obs = new IntersectionObserver(([e]) => {
-      if (e.isIntersecting) { el.classList.add('visible'); obs.disconnect() }
-    }, { threshold: 0.06 })
-    obs.observe(el); return () => obs.disconnect()
+    const rect = el.getBoundingClientRect()
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      const t = setTimeout(() => setShow(true), delay)
+      return () => clearTimeout(t)
+    } else {
+      const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setShow(true); obs.disconnect() } }, { threshold: 0.06 })
+      obs.observe(el)
+      return () => obs.disconnect()
+    }
   }, [delay])
-  return <div ref={ref}>{children}</div>
-}
-
-type WafData = {
-  status: string
-  documents: readonly { title: string; path: string; filename: string }[]
-  background: string
-  researchQuestions: readonly string[]
-  methodology: string
-  researchSteps: readonly { step: string; title: string; desc: string; color: string }[]
-  expectedResults: string
-  references: readonly string[]
+  return <div ref={ref} style={{ opacity: show ? 1 : 0, transform: show ? 'none' : 'translateY(20px)', transition: 'opacity 0.6s ease, transform 0.6s ease' }}>{children}</div>
 }
 
 export default function WAFDetail({ project, mobile }: { project: Project; mobile: boolean }) {
-  const waf = project as unknown as Project & WafData
+  const waf = projectsDetail['waf']
   const pad = mobile ? '0 1.5rem' : '0 clamp(2rem,5vw,4.5rem)'
   const sec: React.CSSProperties = { padding: '2.5rem 0', borderBottom: '1px solid var(--border)' }
   const secTitle: React.CSSProperties = {
@@ -60,7 +55,7 @@ export default function WAFDetail({ project, mobile }: { project: Project; mobil
           </div>
         </R>
         <R delay={100}>
-          <h1 style={{ fontFamily: 'var(--font-display)', fontSize: mobile ? '1.6rem' : 'clamp(1.8rem,3.2vw,2.4rem)', fontWeight: 700, lineHeight: 1.25, color: 'var(--text)', marginBottom: '0.5rem' }}>
+          <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(1.5rem,3.2vw,2.4rem)', fontWeight: 700, lineHeight: 1.25, color: 'var(--text)', marginBottom: '0.5rem' }}>
             {project.subtitle}
           </h1>
           <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.82rem', color: 'var(--muted)', marginBottom: '1rem' }}>{project.title} · {project.period}</p>

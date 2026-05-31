@@ -2,36 +2,30 @@
 import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { siteData } from '@/data/portfolio'
+import { projectsDetail } from '@/data/projectsDetail'
 
 type Project = typeof siteData.projects[number]
 
 function R({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
+  const [show, setShow] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
   useEffect(() => {
     const el = ref.current; if (!el) return
-    el.style.transitionDelay = `${delay}ms`; el.classList.add('reveal')
-    const obs = new IntersectionObserver(([e]) => {
-      if (e.isIntersecting) { el.classList.add('visible'); obs.disconnect() }
-    }, { threshold: 0.06 })
-    obs.observe(el); return () => obs.disconnect()
+    const rect = el.getBoundingClientRect()
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      const t = setTimeout(() => setShow(true), delay)
+      return () => clearTimeout(t)
+    } else {
+      const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setShow(true); obs.disconnect() } }, { threshold: 0.06 })
+      obs.observe(el)
+      return () => obs.disconnect()
+    }
   }, [delay])
-  return <div ref={ref}>{children}</div>
-}
-
-type NscData = {
-  status: string
-  researchBackground: string
-  researchSummary: string
-  researchProblems: { title: string; desc: string; color: string }[]
-  metrics: { label: string; sub: string; before: string; after: string; badge: string; barVal: number; color: string }[]
-  metricsNote: string
-  pipeline: { step: string; title: string; desc: string; techs: readonly string[]; color: string }[]
-  contributions: readonly string[]
-  documents: readonly { title: string; path: string; filename: string }[]
+  return <div ref={ref} style={{ opacity: show ? 1 : 0, transform: show ? 'none' : 'translateY(20px)', transition: 'opacity 0.6s ease, transform 0.6s ease' }}>{children}</div>
 }
 
 export default function NSCDetail({ project, mobile }: { project: Project; mobile: boolean }) {
-  const nsc = project as unknown as Project & NscData
+  const nsc = projectsDetail['nsc']
   const [bars, setBars] = useState(nsc.metrics.map(() => 0))
   useEffect(() => {
     const t = setTimeout(() => setBars(nsc.metrics.map(m => m.barVal)), 500)
@@ -63,7 +57,7 @@ export default function NSCDetail({ project, mobile }: { project: Project; mobil
         <R delay={60}>
           <div style={{ display: 'flex', gap: '0.5rem', margin: '1.25rem 0 1.1rem', flexWrap: 'wrap' }}>
             <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', padding: '0.25em 0.9em', borderRadius: '99px', background: 'rgba(16,185,129,0.1)', color: '#059669', border: '1px solid rgba(16,185,129,0.25)' }}>研究</span>
-            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', padding: '0.25em 0.9em', borderRadius: '99px', background: 'var(--bg-2)', color: 'var(--text-3)', border: '1px solid var(--border-2)' }}>{(project as any).status ?? '進行中'}</span>
+            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', padding: '0.25em 0.9em', borderRadius: '99px', background: 'var(--bg-2)', color: 'var(--text-3)', border: '1px solid var(--border-2)' }}>{nsc.status}</span>
           </div>
         </R>
         <R delay={100}>
@@ -127,7 +121,7 @@ export default function NSCDetail({ project, mobile }: { project: Project; mobil
             <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', letterSpacing: '0.14em', color: 'var(--muted)', textTransform: 'uppercase', marginBottom: '0.85rem' }}>研究問題</p>
             <div style={{ display: 'grid', gridTemplateColumns: mobile ? '1fr 1fr' : 'repeat(4,1fr)', gap: '1px', background: 'var(--border)' }}>
               {nsc.researchProblems.map(({ title, desc, color }) => (
-                <div key={title} style={{ background: 'var(--bg)', padding: '1.25rem 1.5rem' }}>
+                <div key={title} style={{ background: 'var(--bg)', padding: mobile ? '1rem' : '1.25rem 1.5rem' }}>
                   <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.82rem', color: color + '99', fontWeight: 600, marginBottom: '0.5rem' }}>{title}</p>
                   <p style={{ fontSize: '0.88rem', color: 'var(--text-3)', lineHeight: 1.7 }}>{desc}</p>
                 </div>
@@ -229,7 +223,7 @@ export default function NSCDetail({ project, mobile }: { project: Project; mobil
         <div style={{ padding: '2.5rem 0' }}>
           <R>
             <h2 style={{ ...secTitle, marginBottom: '1.25rem' }}>計畫資訊</h2>
-            <div style={{ display: 'grid', gridTemplateColumns: mobile ? '1fr 1fr' : 'repeat(4,1fr)', gap: '1.5rem 2rem' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: mobile ? '1fr 1fr' : 'repeat(4,1fr)', gap: mobile ? '1rem' : '1.5rem 2rem' }}>
               {[
                 { k: '指導教授', v: '廖建翔' },
                 { k: '所屬單位', v: '輔仁大學 資管系' },

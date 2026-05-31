@@ -6,20 +6,26 @@ import NSCDetail from './NSCDetail'
 import FraudRadarDetail from './FraudRadarDetail'
 import WAFDetail from './WAFDetail'
 import GiftRouletteDetail from './GiftRouletteDetail'
+import LeaveSystemDetail from './LeaveSystemDetail'
 
 type Project = typeof siteData.projects[number]
 
 function R({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
+  const [show, setShow] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
   useEffect(() => {
     const el = ref.current; if (!el) return
-    el.style.transitionDelay = `${delay}ms`; el.classList.add('reveal')
-    const obs = new IntersectionObserver(([e]) => {
-      if (e.isIntersecting) { el.classList.add('visible'); obs.disconnect() }
-    }, { threshold: 0.06 })
-    obs.observe(el); return () => obs.disconnect()
+    const rect = el.getBoundingClientRect()
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      const t = setTimeout(() => setShow(true), delay)
+      return () => clearTimeout(t)
+    } else {
+      const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setShow(true); obs.disconnect() } }, { threshold: 0.06 })
+      obs.observe(el)
+      return () => obs.disconnect()
+    }
   }, [delay])
-  return <div ref={ref}>{children}</div>
+  return <div ref={ref} style={{ opacity: show ? 1 : 0, transform: show ? 'none' : 'translateY(20px)', transition: 'opacity 0.6s ease, transform 0.6s ease' }}>{children}</div>
 }
 
 /* ─── Generic fallback ────────────────────────────────────────── */
@@ -45,7 +51,7 @@ function GenericDetail({ project, mobile }: { project: Project; mobile: boolean 
             </div>
           </R>
           <R delay={120}>
-            <h1 style={{ fontFamily: 'var(--font-display)', fontSize: mobile ? '2.4rem' : 'clamp(2.6rem,5.5vw,4.2rem)', fontWeight: 700, lineHeight: 1.1, letterSpacing: '-0.01em', marginBottom: '0.75rem', color: 'var(--text)' }}>
+            <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(1.7rem,5vw,4.2rem)', fontWeight: 700, lineHeight: 1.1, letterSpacing: '-0.01em', marginBottom: '0.75rem', color: 'var(--text)' }}>
               {project.title}
             </h1>
           </R>
@@ -125,5 +131,6 @@ export default function ProjectDetailClient({ id }: { id: string }) {
   if (id === 'fraud-radar') return <FraudRadarDetail project={project} mobile={mobile} />
   if (id === 'waf') return <WAFDetail project={project} mobile={mobile} />
   if (id === 'gift-roulette') return <GiftRouletteDetail project={project} mobile={mobile} />
+  if (id === 'leave-system') return <LeaveSystemDetail project={project} mobile={mobile} />
   return <GenericDetail project={project} mobile={mobile} />
 }

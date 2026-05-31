@@ -2,20 +2,26 @@
 import { useState, useRef, useEffect } from 'react'
 import Link from 'next/link'
 import { siteData } from '@/data/portfolio'
+import { projectsDetail } from '@/data/projectsDetail'
 
 type Project = typeof siteData.projects[number]
 
 function R({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
+  const [show, setShow] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
   useEffect(() => {
     const el = ref.current; if (!el) return
-    el.style.transitionDelay = `${delay}ms`; el.classList.add('reveal')
-    const obs = new IntersectionObserver(([e]) => {
-      if (e.isIntersecting) { el.classList.add('visible'); obs.disconnect() }
-    }, { threshold: 0.06 })
-    obs.observe(el); return () => obs.disconnect()
+    const rect = el.getBoundingClientRect()
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      const t = setTimeout(() => setShow(true), delay)
+      return () => clearTimeout(t)
+    } else {
+      const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setShow(true); obs.disconnect() } }, { threshold: 0.06 })
+      obs.observe(el)
+      return () => obs.disconnect()
+    }
   }, [delay])
-  return <div ref={ref}>{children}</div>
+  return <div ref={ref} style={{ opacity: show ? 1 : 0, transform: show ? 'none' : 'translateY(20px)', transition: 'opacity 0.6s ease, transform 0.6s ease' }}>{children}</div>
 }
 
 function FeatureImg({ src, label, onClick }: { src: string; label: string; onClick: () => void }) {
@@ -23,7 +29,7 @@ function FeatureImg({ src, label, onClick }: { src: string; label: string; onCli
   const [hovered, setHovered] = useState(false)
   const wrapStyle: React.CSSProperties = {
     borderRadius: '6px', overflow: 'hidden', border: '1px solid var(--border)',
-    aspectRatio: '16/9', background: 'var(--bg-2)', position: 'relative',
+    background: 'var(--surface)', position: 'relative',
     cursor: 'pointer', transition: 'transform 0.22s ease, box-shadow 0.22s ease',
     transform: hovered ? 'translateY(-4px)' : 'translateY(0)',
     boxShadow: hovered ? '0 12px 32px rgba(0,0,0,0.12)' : '0 2px 8px rgba(0,0,0,0.05)',
@@ -42,7 +48,7 @@ function FeatureImg({ src, label, onClick }: { src: string; label: string; onCli
       onMouseLeave={() => setHovered(false)}
     >
       <img src={src} alt={label} onError={() => setFailed(true)}
-        style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', transition: 'transform 0.3s ease', transform: hovered ? 'scale(1.03)' : 'scale(1)' }}
+        style={{ width: '100%', height: 'auto', display: 'block', transition: 'transform 0.3s ease', transform: hovered ? 'scale(1.03)' : 'scale(1)' }}
       />
       <div style={{
         position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.3)',
@@ -58,14 +64,8 @@ function FeatureImg({ src, label, onClick }: { src: string; label: string; onCli
   )
 }
 
-type GiftData = {
-  overview: string
-  myRole: string
-  features: readonly { title: string; desc: string; image: string }[]
-}
-
 export default function GiftRouletteDetail({ project, mobile }: { project: Project; mobile: boolean }) {
-  const gr = project as unknown as Project & GiftData
+  const gr = projectsDetail['gift-roulette']
   const [modalImg, setModalImg] = useState<string | null>(null)
   const pad = mobile ? '0 1.5rem' : '0 clamp(2rem,5vw,4.5rem)'
   const sec: React.CSSProperties = { padding: '2.5rem 0', borderBottom: '1px solid var(--border)' }
