@@ -187,7 +187,7 @@ export const siteData = {
   certifications: [
     { name: 'AWS Academy Cloud Architecting', issuer: 'AWS', date: '2024.05', image: '/personal_web/skills/AWS.png', objectPosition: '10% 80%' },
     { name: 'AI 微學程', issuer: '輔仁大學', date: '2025', image: '/personal_web/skills/AI微學程.png', objectPosition: '10% 6%' },
-    { name: '雲端服務趨勢學程', issuer: '輔仁大學', date: '已結束', image: '/personal_web/skills/雲端學程.png', objectPosition: 'center' },
+    { name: '雲端服務趨勢學程', issuer: '輔仁大學', date: '已結束', image: '/personal_web/skills/雲端學程.png', objectPosition: '10% 6%' },
   ],
 
   languages: [
