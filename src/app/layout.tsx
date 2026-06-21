@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 import '../styles/globals.css'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
+import ScrollToTop from '@/components/ScrollToTop'
 import { siteData } from '@/data/portfolio'
 
 export const viewport = {
@@ -22,6 +23,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Navbar />
         <main style={{ minHeight: '100vh' }}>{children}</main>
         <Footer />
+        <ScrollToTop />
       </body>
     </html>
   )

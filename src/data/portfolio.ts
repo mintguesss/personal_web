@@ -72,6 +72,18 @@ export const siteData = {
 
   projects: [
     {
+      id: "task-crusher",
+      title: "AI 拖延症分析與任務粉碎機",
+      subtitle: "AI Procrastination Analyzer & Task Crusher — 團隊專題",
+      period: "2026",
+      type: "project" as const,
+      tags: ["生成式 AI", "Groq API (Llama 3)", "Python Flask", "Supabase", "HTML / CSS / JS", "3D / STL"],
+      description: "結合生成式 AI 與心理學理論的智慧任務輔助系統。它會分析使用者的拖延原因與心理防衛機制，把龐大任務粉碎成可立即執行的最小步驟，並以可組裝、可 3D 列印的模型收藏做為遊戲化獎勵。",
+      highlights: ["AI 分析拖延原因與心理防衛機制", "大型任務粉碎成低認知負荷的每日步驟", "完成任務解鎖可組裝的 3D 模型零件", "支援 STL 匯出做實體 3D 列印"],
+      image: "/personal_web/projects/task-crusher/cover.jpg",
+      link: "https://taica-llm.onrender.com/",
+    },
+    {
       id: "fraud-radar",
       title: "騙局雷達 Fraud Radar",
       subtitle: "詐騙辨識系統 — 畢業專題",
@@ -133,6 +145,36 @@ export const siteData = {
     },
   ],
 
+  builds: [
+    {
+      id: "personal-assistant",
+      title: "個人助理 Personal Assistant",
+      subtitle: "即時電腦視覺健康監測",
+      group: "Applied ML",
+      period: "2026",
+      tags: ["Python", "OpenCV", "MediaPipe", "YOLOv11", "ViT", "Computer Vision"],
+      description: "用電腦鏡頭幫你顧健康的小幫手：會提醒你坐正、起來休息、記得喝水，還能記錄你一天的情緒變化。打開後在背景默默執行，需要的時候才跳出提醒。",      image: "/personal_web/builds/personal-assistant.jpg",
+    },
+    {
+      id: "folio-manager",
+      title: "Folio Manager",
+      subtitle: "資產投資及帳務紀錄",
+      group: "Full-stack / 後端",
+      period: "2026",
+      tags: ["Next.js", "TypeScript", "Supabase", "Tailwind", "Recharts", "Vercel"],
+      description: "管理投資和記帳的 app。可以追蹤台股、美股的損益，記錄日常開銷、出國花費和朋友間的分帳，幫你把錢的流向看得清清楚楚。",      image: "/personal_web/builds/folio-manager.jpg",
+    },
+    {
+      id: "couple-app",
+      title: "小堡 CoupleApp",
+      subtitle: "即時同步情侶APP",
+      group: "Full-stack",
+      period: "2026",
+      tags: ["React Native", "Expo", "TypeScript", "Firebase", "PWA", "model-viewer"],
+      description: "為情侶打造的 app，把生活裡的大小事都收在一起：一起養成健康習慣、共用行事曆、收藏回憶照片，還能來幾盤五子棋或圍棋。兩個人的紀錄即時同步，隨時看到對方的更新。",      image: "/personal_web/builds/couple-app.jpg",
+    },
+  ],
+
   skills: {
     "程式語言": ["Python", "JavaScript", "TypeScript", "PHP", "Java", "SQL"],
     "前端框架": ["React", "Next.js", "HTML/CSS"],
@@ -145,7 +187,7 @@ export const siteData = {
   certifications: [
     { name: 'AWS Academy Cloud Architecting', issuer: 'AWS', date: '2024.05', image: '/personal_web/skills/AWS.png', objectPosition: '10% 80%' },
     { name: 'AI 微學程', issuer: '輔仁大學', date: '2025', image: '/personal_web/skills/AI微學程.png', objectPosition: '10% 6%' },
-    { name: '雲端服務趨勢學程', issuer: '輔仁大學', date: '已結束', image: '', objectPosition: 'center' },
+    { name: '雲端服務趨勢學程', issuer: '輔仁大學', date: '已結束', image: '/personal_web/skills/雲端學程.png', objectPosition: 'center' },
   ],
 
   languages: [

@@ -7,6 +7,7 @@ import FraudRadarDetail from './FraudRadarDetail'
 import WAFDetail from './WAFDetail'
 import GiftRouletteDetail from './GiftRouletteDetail'
 import LeaveSystemDetail from './LeaveSystemDetail'
+import TaskCrusherDetail from './TaskCrusherDetail'
 
 type Project = typeof siteData.projects[number]
 
@@ -127,6 +128,7 @@ export default function ProjectDetailClient({ id }: { id: string }) {
     </div>
   )
 
+  if (id === 'task-crusher') return <TaskCrusherDetail project={project} mobile={mobile} />
   if (id === 'nsc') return <NSCDetail project={project} mobile={mobile} />
   if (id === 'fraud-radar') return <FraudRadarDetail project={project} mobile={mobile} />
   if (id === 'waf') return <WAFDetail project={project} mobile={mobile} />
