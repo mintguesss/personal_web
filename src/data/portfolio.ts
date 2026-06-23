@@ -77,7 +77,7 @@ export const siteData = {
       subtitle: "AI Procrastination Analyzer & Task Crusher — 團隊專題",
       period: "2026",
       type: "project" as const,
-      tags: ["生成式 AI", "Groq API (Llama 3)", "Python Flask", "Supabase", "HTML / CSS / JS", "3D / STL"],
+      tags: ["生成式 AI", "Groq API", "Python Flask", "Supabase", "HTML / CSS / JS", "3D / STL"],
       description: "結合生成式 AI 與心理學理論的智慧任務輔助系統。它會分析使用者的拖延原因與心理防衛機制，把龐大任務粉碎成可立即執行的最小步驟，並以可組裝、可 3D 列印的模型收藏做為遊戲化獎勵。",
       highlights: ["AI 分析拖延原因與心理防衛機制", "大型任務粉碎成低認知負荷的每日步驟", "完成任務解鎖可組裝的 3D 模型零件", "支援 STL 匯出做實體 3D 列印"],
       image: "/personal_web/projects/task-crusher/cover.jpg",
@@ -187,7 +187,7 @@ export const siteData = {
   certifications: [
     { name: 'AWS Academy Cloud Architecting', issuer: 'AWS', date: '2024.05', image: '/personal_web/skills/AWS.png', objectPosition: '10% 80%' },
     { name: 'AI 微學程', issuer: '輔仁大學', date: '2025', image: '/personal_web/skills/AI微學程.png', objectPosition: '10% 6%' },
-    { name: '雲端服務趨勢學程', issuer: '輔仁大學', date: '已結束', image: '/personal_web/skills/雲端學程.png', objectPosition: '10% 6%' },
+    { name: '雲端服務趨勢學程', issuer: '輔仁大學', date: '已結束', image: '/personal_web/skills/雲端學程.png', objectPosition: '10% 4%' },
   ],
 
   languages: [

@@ -60,7 +60,7 @@ function BuildCard({ b, mobile, idx }: { b: typeof siteData.builds[number]; mobi
         </div>
 
         {/* 內容區 */}
-        <div style={{ padding: mobile ? '1.5rem' : '2.25rem 2.5rem', display: 'flex', flexDirection: 'column', gap: '1.25rem', justifyContent: 'center' }}>
+        <div style={{ padding: mobile ? '1.35rem' : '1.85rem 2.1rem', display: 'flex', flexDirection: 'column', gap: '1.1rem', justifyContent: 'center' }}>
           <div style={{ display: 'flex', alignItems: 'baseline', gap: '1.1rem' }}>
             <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.9rem', fontWeight: 700, color: 'var(--border-2)', lineHeight: 1, flexShrink: 0 }}>{String(idx + 1).padStart(2, '0')}</span>
             <div>
@@ -98,12 +98,12 @@ export default function BuildsPage() {
         <R>
           <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65rem', letterSpacing: '0.2em', color: 'var(--accent)', textTransform: 'uppercase', marginBottom: '0.75rem' }}>Builds</p>
           <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(1.8rem,3.5vw,2.8rem)', fontWeight: 300, lineHeight: 1.15, marginBottom: '0.5rem' }}>
-            作品 <em style={{ fontStyle: 'italic', color: 'var(--muted)' }}>& 實作</em>
+            Side <em style={{ fontStyle: 'italic', color: 'var(--muted)' }}>Projects</em>
           </h1>
           <p style={{ color: 'var(--muted)', marginBottom: '2.5rem', fontSize: '0.9rem' }}>個人開發 — 從零打造的全端應用</p>
         </R>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.85rem' }}>
           {builds.map((b, i) => (
             <R key={b.id} delay={100 + i * 70}>
               <BuildCard b={b} mobile={mobile} idx={i} />

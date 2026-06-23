@@ -37,7 +37,9 @@ export default function Home() {
   }, [])
 
   type P = typeof siteData.projects[number]
-  const featured = (siteData.projects as unknown as P[]).slice(0, 3)
+  const featuredOrder = ['nsc', 'fraud-radar', 'task-crusher']
+  const allProjects = siteData.projects as unknown as P[]
+  const featured = featuredOrder.map(id => allProjects.find(p => p.id === id)).filter((p): p is P => !!p)
 
   const fade = (delay: number): React.CSSProperties => ({
     opacity: visible ? 1 : 0,

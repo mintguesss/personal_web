@@ -105,7 +105,7 @@ const tech = [
   { label: '前端', value: 'HTML / CSS / JavaScript' },
   { label: '後端', value: 'Python（Flask）' },
   { label: '資料庫', value: 'Supabase（PostgreSQL）' },
-  { label: 'AI 模型', value: 'Groq API（Llama 3）' },
+  { label: 'AI 模型', value: 'Groq API' },
   { label: '3D 輸出', value: 'STL 匯出 → 3D 列印' },
   { label: '部署', value: 'Render（雲端部署）' },
 ]
