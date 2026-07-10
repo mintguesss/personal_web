@@ -6,6 +6,8 @@ import { projectsDetail } from '@/data/projectsDetail'
 
 type Project = typeof siteData.projects[number]
 
+const DEMO_URL = 'https://mintguess-fraud-radar.hf.space/'
+
 function R({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
   const [show, setShow] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
@@ -133,13 +135,13 @@ export default function FraudRadarDetail({ project, mobile }: { project: Project
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.35rem' }}>
               {(project.tags as readonly string[]).map(t => <span key={t} className="tag">{t}</span>)}
             </div>
-            {project.link && (
-              <a href={project.link} target="_blank" rel="noreferrer" style={{
+            <div style={{ display: 'flex', gap: '0.6rem', flexWrap: 'wrap', flexShrink: 0 }}>
+              <a href={DEMO_URL} target="_blank" rel="noreferrer" style={{
                 display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
                 fontFamily: 'var(--font-mono)', fontSize: '0.75rem', fontWeight: 500,
                 padding: '0.5em 1.1em 0.5em 0.85em', borderRadius: '7px',
                 textDecoration: 'none', color: 'var(--text-2)', background: 'var(--bg)',
-                border: '1px solid var(--border-2)', transition: 'all 0.18s', flexShrink: 0,
+                border: '1px solid var(--border-2)', transition: 'all 0.18s',
               }}
                 onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--accent)'; e.currentTarget.style.color = 'var(--accent)' }}
                 onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--border-2)'; e.currentTarget.style.color = 'var(--text-2)' }}
@@ -147,9 +149,26 @@ export default function FraudRadarDetail({ project, mobile }: { project: Project
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
                 </svg>
-                Google Drive ↗
+                線上 Demo
               </a>
-            )}
+              {project.link && (
+                <a href={project.link} target="_blank" rel="noreferrer" style={{
+                  display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
+                  fontFamily: 'var(--font-mono)', fontSize: '0.75rem', fontWeight: 500,
+                  padding: '0.5em 1.1em 0.5em 0.85em', borderRadius: '7px',
+                  textDecoration: 'none', color: 'var(--text-2)', background: 'var(--bg)',
+                  border: '1px solid var(--border-2)', transition: 'all 0.18s',
+                }}
+                  onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--accent)'; e.currentTarget.style.color = 'var(--accent)' }}
+                  onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--border-2)'; e.currentTarget.style.color = 'var(--text-2)' }}
+                >
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+                  </svg>
+                  Google Drive
+                </a>
+              )}
+            </div>
           </div>
         </R>
       </div>
@@ -285,11 +304,6 @@ export default function FraudRadarDetail({ project, mobile }: { project: Project
 
         <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' ,marginTop: '1.5rem'}}>
           <R><Link href="/projects" className="btn-outline" style={{ textDecoration: 'none' }}>← 回到專案列表</Link></R>
-          {project.link && (
-            <R delay={60}>
-              <a href={project.link} target="_blank" rel="noreferrer" className="btn-primary" style={{ textDecoration: 'none' }}>查看專案 ↗</a>
-            </R>
-          )}
         </div>
       </div>
 
