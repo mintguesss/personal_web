@@ -6,3 +6,4 @@ out/
 *.zip
 *.txt
 *.docx
+.claude/

@@ -1,7 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(grep -n \"查看\\\\|詳細\\\\|/projects/\\\\${p.id}\" src/app/projects/page.tsx)"
-    ]
-  }
-}
