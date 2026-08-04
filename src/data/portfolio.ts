@@ -165,13 +165,13 @@ export const siteData = {
       description: "管理投資和記帳的 app。可以追蹤台股、美股的損益，記錄日常開銷、出國花費和朋友間的分帳，幫你把錢的流向看得清清楚楚。",      image: "/personal_web/builds/folio-manager.jpg",
     },
     {
-      id: "couple-app",
-      title: "小堡 CoupleApp",
-      subtitle: "即時同步情侶APP",
+      id: "prompt-miser",
+      title: "PromptMiser",
+      subtitle: "Prompt 成本分析與壓縮",
       group: "Full-stack",
       period: "2026",
-      tags: ["React Native", "Expo", "TypeScript", "Firebase", "PWA", "model-viewer"],
-      description: "為情侶打造的 app，把生活裡的大小事都收在一起：一起養成健康習慣、共用行事曆、收藏回憶照片，還能來幾盤五子棋或圍棋。兩個人的紀錄即時同步，隨時看到對方的更新。",      image: "/personal_web/builds/couple-app.jpg",
+      tags: ["Vue 3", "TypeScript", "FastAPI", "Tailwind", "tiktoken", "Vercel"],
+      description: "貼上一段 prompt，即可看到它在各模型的預估花費、可壓縮的空間與能省下的成本。工具會一併比較多個模型的價格，將冗詞與重複指令壓縮為精簡版，並依任務類型提供省錢建議。",      image: "/personal_web/builds/prompt-miser.jpg",
     },
   ],
 
