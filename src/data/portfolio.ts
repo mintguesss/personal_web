@@ -1,8 +1,8 @@
 export const siteData = {
   name: "黃予岑",
   nameEn: "Ken",
-  title: "資訊管理學系 大四",
-  institution: "輔仁大學",
+  title: "資訊管理研究所 碩一",
+  institution: "國立中央大學",
   email: "a03111006@gmail.com",
   phone: "0939-160-311",
   location: "基隆市安樂區",
@@ -12,13 +12,13 @@ export const siteData = {
   taglines: [
     'ML & CV Researcher',
     'Full-Stack Developer',
-    'Incoming M.S. Student @ NCU (2026)',
+    'M.S. Student @ NCU',
   ],
 
   homeSkills: ['React', 'Next.js', 'Python', 'OCR', 'YOLO', 'BERT', 'NLP'],
 
   bio: [
-    "輔仁大學資訊管理系大四",
+    "輔仁大學資訊管理系畢業，2026 年秋季起就讀國立中央大學資訊管理研究所",
     "專注於機器學習、電腦視覺、NLP 與全端開發，熱衷於將技術應用於真實社會問題。目前進行國科會大專生研究計畫，研究以 AI 整合技術提升詐騙辨識精確度。",
     "喜歡從頭打造系統、訓練模型、解決複雜問題，在開發過程中培養了快速調適與持續學習的習慣。",
   ],
@@ -37,7 +37,7 @@ export const siteData = {
       dept: "資訊管理研究所",
       degree: "碩士",
       period: "2026 — 2028",
-      badge: "推甄錄取",
+      badge: "推甄錄取 / 在學中",
       highlights: [
         { label: "研究方向", items: ["電腦視覺", "機器學習應用", "情緒辨識"] },
       ],
@@ -47,7 +47,7 @@ export const siteData = {
       dept: "資訊管理學系",
       degree: "學士",
       period: "2022 — 2026",
-      badge: "班排前十 / 書卷獎",
+      badge: "已畢業 / 班排前十 / 書卷獎",
       highlights: [
         { label: "學術", items: ["管理學院學術獎章 ×2", "書卷獎 / 班排10%", "AI微學程 / 雲端學程"] },
         { label: "專題", items: ["騙局雷達 Fraud Radar", "第 22 屆育秀盃創意獎佳作", "第 42 屆專題發表優秀組別"] },
@@ -192,7 +192,7 @@ export const siteData = {
 
   languages: [
     { name: 'Mandarin', level: 'Native' },
-    { name: 'English',  level: 'TOEIC 750', scoreImage: '/personal_web/skills/toeic.jpg' },
+    { name: 'English',  level: 'TOEIC 810', scoreImage: '/personal_web/skills/toeic.jpg' },
   ],
 
   interests: [

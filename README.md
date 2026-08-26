@@ -8,7 +8,7 @@
 
 ## About
 
-輔仁大學資訊管理學系大四，2026 年秋季起就讀國立中央大學資訊管理研究所（推甄錄取）。
+輔仁大學資訊管理學系畢業（2022 — 2026，班排前十 / 書卷獎），2026 年秋季起就讀國立中央大學資訊管理研究所碩士班（推甄錄取），研究方向為電腦視覺、機器學習應用與情緒辨識。
 
 專注於機器學習、電腦視覺、自然語言處理（NLP）與全端開發，熱衷於把 AI 技術應用在真實問題上。喜歡從零打造系統、訓練模型、解決複雜問題——也喜歡把抽象的成果做成看得見、用得到的產品。
 
@@ -36,6 +36,7 @@
 - **Backend / Data**：Flask · Node.js · Supabase · Firebase · MySQL
 - **AI / ML**：PyTorch · BERT · YOLO · PaddleOCR · CLIP
 - **This site**：Next.js（App Router）· TypeScript · static export · GitHub Pages
+- **Languages**：中文（母語）· 英文（TOEIC 810）
 
 ---
 
