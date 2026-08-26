@@ -26,7 +26,7 @@
 - **個人助理 Personal Assistant** — 即時電腦視覺健康監測，整合 MediaPipe / YOLOv11 / ViT，背景常駐在對的時機提醒
 - **Folio Manager** — 投資與記帳全端系統，FIFO 成本計算與多幣別歷史匯率損益（Next.js / Supabase）
 - **PromptMiser** — Prompt 成本分析與壓縮工具，估算各模型花費、壓縮冗詞並給出省錢建議（Vue 3 / FastAPI / tiktoken）
-- **小堡 CoupleApp** — 即時同步情侶 app，自製完整棋類引擎與 3D 圖鑑（React Native / Firebase / PWA）
+- **ClaudeQuota** — Windows 系統列小工具，即時顯示 Claude 訂閱的 5 小時與每週用量（Python）
 
 ---
 
