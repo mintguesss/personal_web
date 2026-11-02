@@ -37,7 +37,7 @@ export default function Home() {
   }, [])
 
   type P = typeof siteData.projects[number]
-  const featuredOrder = ['nsc', 'fraud-radar', 'task-crusher']
+  const featuredOrder = ['nsc', 'fraud-radar', 'aidit']
   const allProjects = siteData.projects as unknown as P[]
   const featured = featuredOrder.map(id => allProjects.find(p => p.id === id)).filter((p): p is P => !!p)
 

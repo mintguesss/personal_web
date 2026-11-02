@@ -72,6 +72,18 @@ export const siteData = {
 
   projects: [
     {
+      id: "aidit",
+      title: "Aidit 修業規劃 Agent",
+      subtitle: "會查證、會說「不知道」的畢業審查與選課 Agent",
+      period: "2026",
+      type: "project" as const,
+      tags: ["LLM Agent", "Next.js", "TypeScript", "Supabase", "Claude API", "評測 / Eval"],
+      description: "畢業審查、選課建議、情境試算與修業問答的 Agent。學分由確定性引擎計算，模型只負責理解使用者意圖；規定沒寫清楚的地方不硬算，改列為待確認事項並告訴你該問哪個單位。每個結論都能回查到規定原文。",
+      highlights: ["算學分的那層完全不呼叫模型，CI 檢查相依關係強制隔離", "每條結論附原文引句，對不上就降級為待確認", "35 案 golden set 錯答 0；真實成績單 10/10（單次 LLM 僅 9/20）", "提示注入攔截率 100%、誤攔率 0%"],
+      image: "/personal_web/projects/aidit/home.png",
+      link: "https://aidit-weld.vercel.app",
+    },
+    {
       id: "task-crusher",
       title: "AI 拖延症分析與任務粉碎機",
       subtitle: "AI Procrastination Analyzer & Task Crusher — 團隊專題",
@@ -147,6 +159,33 @@ export const siteData = {
 
   builds: [
     {
+      id: "claude-quota",
+      title: "ClaudeQuota",
+      subtitle: "Claude 用量上限托盤小工具",
+      group: "桌面工具",
+      period: "2026",
+      tags: ["Python", "pystray", "Pillow", "GitHub Actions", "Windows"],
+      description: "Windows 系統匣小程式，隨時看到 Claude Pro / Max 的 5 小時與每週用量、以及什麼時候重置，不必在做到一半時才被「已達上限」嚇到。數字只取官方來源，拿不到就直說，不用猜的。",      image: "/personal_web/builds/claude-quota.png",
+    },
+    {
+      id: "nobook",
+      title: "nobook",
+      subtitle: "課堂即時轉錄與筆記",
+      group: "Applied ML",
+      period: "2026",
+      tags: ["Python", "FastAPI", "faster-whisper", "llama.cpp", "Qwen3", "Tailscale", "PWA"],
+      description: "上課要邊聽邊手寫筆記、下課就得交，所以做了這個：手機錄音，自己的筆電 GPU 即時轉逐字稿、整理段落，隨時產出一份能直接照抄的筆記。全部在本地跑，錄音不離開自己的機器。",      image: "/personal_web/builds/nobook.png",
+    },
+    {
+      id: "clean-contributors",
+      title: "Clean-Contributors",
+      subtitle: "Claude Code Plugin",
+      group: "開發者工具",
+      period: "2026",
+      tags: ["Claude Code Plugin", "Shell", "PowerShell", "GitHub API", "git-filter-repo"],
+      description: "把 Claude（或任何不想要的帳號）從 GitHub repo 的 Contributors 名單移除。先診斷原因，再視情況清掉 commit 裡的 Co-authored-by，最後強制 GitHub 重新計算快取。",      image: "/personal_web/builds/clean-contributors.png",
+    },
+    {
       id: "personal-assistant",
       title: "個人助理 Personal Assistant",
       subtitle: "即時電腦視覺健康監測",
@@ -177,11 +216,12 @@ export const siteData = {
 
   skills: {
     "程式語言": ["Python", "JavaScript", "TypeScript", "PHP", "Java", "SQL"],
-    "前端框架": ["React", "Next.js", "HTML/CSS"],
-    "AI / ML": ["BERT", "PaddleOCR", "YOLO", "Scikit-learn", "Pytorch"],
-    "後端": ["Flask", "Node.js", "Laravel"],
-    "雲端 / 工具": ["AWS Cloud Architecting", "Git", "Excel"],
-    "資料庫": ["MySQL", "Firebase"],
+    "前端框架": ["React", "Next.js", "Vue", "HTML/CSS"],
+    "AI / ML": ["BERT", "PaddleOCR", "YOLO", "MediaPipe", "OpenCV", "Scikit-learn", "Pytorch"],
+    "LLM / Agent": ["LLM Agent", "Claude API", "llama.cpp", "faster-whisper (ASR)", "Prompt Injection 防護", "LLM 評測"],
+    "後端": ["Flask", "FastAPI", "Node.js", "Laravel"],
+    "雲端 / 工具": ["AWS Cloud Architecting", "Git", "GitHub Actions", "Vercel", "Tailscale", "Excel"],
+    "資料庫": ["MySQL", "Firebase", "Supabase", "SQLite"],
   },
 
   certifications: [
