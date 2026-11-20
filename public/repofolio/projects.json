@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-20T12:56:22.555Z",
+  "generatedAt": "2026-11-20T17:24:08.469Z",
   "owner": "mintguesss",
   "profile": {
     "login": "mintguesss",
@@ -223,7 +223,7 @@
           "provider": "vercel",
           "url": "https://folio-manager-roan.vercel.app/",
           "ok": true,
-          "ms": 1308,
+          "ms": 1972,
           "status": 200
         }
       ]
@@ -264,8 +264,8 @@
       "forks": 0,
       "license": "MIT",
       "created": "2026-11-20T08:20:14Z",
-      "updated": "2026-11-20T12:55:44Z",
-      "release": "v0.4.0",
+      "updated": "2026-11-20T17:23:34Z",
+      "release": "v0.4.1",
       "featured": false,
       "private": false,
       "image": "https://raw.githubusercontent.com/mintguesss/repofolio/main/docs/screenshots/hero-simple.jpg",
@@ -334,7 +334,7 @@
           "name": "production",
           "url": "https://github.com/mintguesss/repofolio#readme",
           "ok": true,
-          "ms": 485,
+          "ms": 776,
           "status": 200
         }
       ]
@@ -357,15 +357,15 @@
       "languages": [
         {
           "name": "TypeScript",
-          "pct": 63.5
+          "pct": 60.7
         },
         {
           "name": "HTML",
-          "pct": 35.4
+          "pct": 38.2
         },
         {
           "name": "CSS",
-          "pct": 1.1
+          "pct": 1
         },
         {
           "name": "JavaScript",
@@ -378,7 +378,7 @@
       "stars": 0,
       "forks": 0,
       "created": "2026-08-26T15:08:43Z",
-      "updated": "2026-11-20T11:31:47Z",
+      "updated": "2026-11-20T12:57:02Z",
       "featured": false,
       "private": false,
       "image": "https://opengraph.githubassets.com/1/mintguesss/personal_web",
@@ -448,7 +448,7 @@
           "provider": "github-pages",
           "url": "https://mintguesss.github.io/personal_web/",
           "ok": true,
-          "ms": 92,
+          "ms": 125,
           "status": 200
         }
       ]
@@ -792,7 +792,7 @@
           "provider": "vercel",
           "url": "https://aidit-weld.vercel.app",
           "ok": true,
-          "ms": 1101,
+          "ms": 1218,
           "status": 200
         }
       ]
@@ -1306,7 +1306,7 @@
           "provider": "vercel",
           "url": "https://prompt-miser.vercel.app",
           "ok": true,
-          "ms": 195,
+          "ms": 377,
           "status": 200
         }
       ]
@@ -1411,19 +1411,19 @@
     },
     {
       "name": "Python",
-      "pct": 25.1
+      "pct": 24.9
     },
     {
       "name": "JavaScript",
-      "pct": 8.4
-    },
-    {
-      "name": "CSS",
-      "pct": 5.9
+      "pct": 8.3
     },
     {
       "name": "HTML",
-      "pct": 5.6
+      "pct": 6
+    },
+    {
+      "name": "CSS",
+      "pct": 5.8
     },
     {
       "name": "Vue",
