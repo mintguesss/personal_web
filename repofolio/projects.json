@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-20T08:45:23.937Z",
+  "generatedAt": "2026-11-20T09:07:49.400Z",
   "owner": "mintguesss",
   "profile": {
     "login": "mintguesss",
@@ -223,7 +223,7 @@
           "provider": "vercel",
           "url": "https://folio-manager-roan.vercel.app/",
           "ok": true,
-          "ms": 2289,
+          "ms": 1326,
           "status": 200
         }
       ]
@@ -264,11 +264,11 @@
       "forks": 0,
       "license": "MIT",
       "created": "2026-11-20T08:20:14Z",
-      "updated": "2026-11-20T08:38:20Z",
+      "updated": "2026-11-20T09:07:24Z",
       "release": "v0.2.0",
       "featured": false,
       "private": false,
-      "image": "https://raw.githubusercontent.com/mintguesss/repofolio/main/docs/screenshots/hero-paper.jpg",
+      "image": "https://raw.githubusercontent.com/mintguesss/repofolio/main/docs/screenshots/hero-simple.jpg",
       "activity": [
         0,
         0,
@@ -334,7 +334,117 @@
           "name": "production",
           "url": "https://github.com/mintguesss/repofolio#readme",
           "ok": true,
-          "ms": 565,
+          "ms": 724,
+          "status": 200
+        }
+      ]
+    },
+    {
+      "id": "mintguesss-personal-web",
+      "name": "personal_web",
+      "repo": "mintguesss/personal_web",
+      "codeUrl": "https://github.com/mintguesss/personal_web",
+      "summary": "我的個人網站",
+      "status": "active",
+      "stack": [
+        "Next.js",
+        "React",
+        "Tailwind CSS",
+        "Three.js",
+        "TypeScript",
+        "CSS"
+      ],
+      "languages": [
+        {
+          "name": "TypeScript",
+          "pct": 98.3
+        },
+        {
+          "name": "CSS",
+          "pct": 1.6
+        },
+        {
+          "name": "JavaScript",
+          "pct": 0.1
+        }
+      ],
+      "tags": [
+        "personal-website"
+      ],
+      "stars": 0,
+      "forks": 0,
+      "created": "2026-08-26T15:08:43Z",
+      "updated": "2026-11-20T08:46:51Z",
+      "featured": false,
+      "private": false,
+      "image": "https://opengraph.githubassets.com/1/mintguesss/personal_web",
+      "activity": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        20,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        2,
+        0,
+        0,
+        4,
+        0,
+        0,
+        2,
+        0,
+        0,
+        4,
+        0,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      "links": [
+        {
+          "label": "live",
+          "url": "https://mintguesss.github.io/personal_web/"
+        }
+      ],
+      "deployments": [
+        {
+          "name": "github-pages",
+          "provider": "github-pages",
+          "url": "https://mintguesss.github.io/personal_web/",
+          "ok": true,
+          "ms": 1225,
           "status": 200
         }
       ]
@@ -678,7 +788,7 @@
           "provider": "vercel",
           "url": "https://aidit-weld.vercel.app",
           "ok": true,
-          "ms": 1077,
+          "ms": 1068,
           "status": 200
         }
       ]
@@ -971,116 +1081,6 @@
       "deployments": []
     },
     {
-      "id": "mintguesss-personal-web",
-      "name": "personal_web",
-      "repo": "mintguesss/personal_web",
-      "codeUrl": "https://github.com/mintguesss/personal_web",
-      "summary": "我的個人網站",
-      "status": "active",
-      "stack": [
-        "Next.js",
-        "React",
-        "Tailwind CSS",
-        "Three.js",
-        "TypeScript",
-        "CSS"
-      ],
-      "languages": [
-        {
-          "name": "TypeScript",
-          "pct": 98.3
-        },
-        {
-          "name": "CSS",
-          "pct": 1.6
-        },
-        {
-          "name": "JavaScript",
-          "pct": 0.1
-        }
-      ],
-      "tags": [
-        "personal-website"
-      ],
-      "stars": 0,
-      "forks": 0,
-      "created": "2026-08-26T15:08:43Z",
-      "updated": "2026-11-02T19:11:14Z",
-      "featured": false,
-      "private": false,
-      "image": "https://opengraph.githubassets.com/1/mintguesss/personal_web",
-      "activity": [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        20,
-        0,
-        3,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        2,
-        0,
-        0,
-        4,
-        0,
-        0,
-        2,
-        0,
-        0,
-        4,
-        0,
-        0,
-        3,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        1,
-        0,
-        0
-      ],
-      "links": [
-        {
-          "label": "live",
-          "url": "https://mintguesss.github.io/personal_web/"
-        }
-      ],
-      "deployments": [
-        {
-          "name": "github-pages",
-          "provider": "github-pages",
-          "url": "https://mintguesss.github.io/personal_web/",
-          "ok": true,
-          "ms": 629,
-          "status": 200
-        }
-      ]
-    },
-    {
       "id": "mintguesss-taica-llm",
       "name": "TAICA_LLM",
       "repo": "mintguesss/TAICA_LLM",
@@ -1302,7 +1302,7 @@
           "provider": "vercel",
           "url": "https://prompt-miser.vercel.app",
           "ok": true,
-          "ms": 1216,
+          "ms": 565,
           "status": 200
         }
       ]
