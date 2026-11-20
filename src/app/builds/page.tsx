@@ -2,6 +2,7 @@
 import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { siteData } from '@/data/portfolio'
+import AutoBuilds from '@/components/AutoBuilds'
 
 function R({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
   const [show, setShow] = useState(false)
@@ -110,6 +111,8 @@ export default function BuildsPage() {
             </R>
           ))}
         </div>
+
+        <AutoBuilds mobile={mobile} />
       </div>
     </div>
   )
