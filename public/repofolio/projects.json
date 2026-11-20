@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-20T11:31:07.180Z",
+  "generatedAt": "2026-11-20T12:56:22.555Z",
   "owner": "mintguesss",
   "profile": {
     "login": "mintguesss",
@@ -54,7 +54,7 @@
       "updated": "2026-10-29T19:35:25Z",
       "featured": false,
       "private": false,
-      "image": "https://raw.githubusercontent.com/mintguesss/Clean-Contributors/main/docs/images/before.png",
+      "image": "https://mintguesss.github.io/personal_web/builds/clean-contributors.png",
       "activity": [
         0,
         0,
@@ -156,7 +156,7 @@
       "updated": "2026-11-06T13:15:58Z",
       "featured": false,
       "private": false,
-      "image": "https://opengraph.githubassets.com/1/mintguesss/Folio-manager",
+      "image": "https://mintguesss.github.io/personal_web/builds/folio-manager.jpg",
       "activity": [
         0,
         0,
@@ -223,7 +223,7 @@
           "provider": "vercel",
           "url": "https://folio-manager-roan.vercel.app/",
           "ok": true,
-          "ms": 2287,
+          "ms": 1308,
           "status": 200
         }
       ]
@@ -264,8 +264,8 @@
       "forks": 0,
       "license": "MIT",
       "created": "2026-11-20T08:20:14Z",
-      "updated": "2026-11-20T11:29:23Z",
-      "release": "v0.3.1",
+      "updated": "2026-11-20T12:55:44Z",
+      "release": "v0.4.0",
       "featured": false,
       "private": false,
       "image": "https://raw.githubusercontent.com/mintguesss/repofolio/main/docs/screenshots/hero-simple.jpg",
@@ -334,7 +334,7 @@
           "name": "production",
           "url": "https://github.com/mintguesss/repofolio#readme",
           "ok": true,
-          "ms": 1050,
+          "ms": 485,
           "status": 200
         }
       ]
@@ -357,11 +357,11 @@
       "languages": [
         {
           "name": "TypeScript",
-          "pct": 64.5
+          "pct": 63.5
         },
         {
           "name": "HTML",
-          "pct": 34.4
+          "pct": 35.4
         },
         {
           "name": "CSS",
@@ -378,7 +378,7 @@
       "stars": 0,
       "forks": 0,
       "created": "2026-08-26T15:08:43Z",
-      "updated": "2026-11-20T09:27:25Z",
+      "updated": "2026-11-20T11:31:47Z",
       "featured": false,
       "private": false,
       "image": "https://opengraph.githubassets.com/1/mintguesss/personal_web",
@@ -448,7 +448,7 @@
           "provider": "github-pages",
           "url": "https://mintguesss.github.io/personal_web/",
           "ok": true,
-          "ms": 122,
+          "ms": 92,
           "status": 200
         }
       ]
@@ -626,7 +626,7 @@
       "release": "v1.0.0",
       "featured": false,
       "private": false,
-      "image": "https://raw.githubusercontent.com/mintguesss/NightMarket/main/web/icons/icon-192.png",
+      "image": "https://raw.githubusercontent.com/mintguesss/NightMarket/main/docs/screenshots/chart-en.png",
       "activity": [
         0,
         0,
@@ -792,7 +792,7 @@
           "provider": "vercel",
           "url": "https://aidit-weld.vercel.app",
           "ok": true,
-          "ms": 1226,
+          "ms": 1101,
           "status": 200
         }
       ]
@@ -832,7 +832,7 @@
       "updated": "2026-11-06T09:53:54Z",
       "featured": false,
       "private": false,
-      "image": "https://opengraph.githubassets.com/1/mintguesss/minglu_kneopi",
+      "image": "https://raw.githubusercontent.com/mintguesss/minglu_kneopi/main/docs/screenshots.png",
       "activity": [
         0,
         0,
@@ -929,7 +929,7 @@
       "updated": "2026-11-04T08:59:33Z",
       "featured": false,
       "private": false,
-      "image": "https://opengraph.githubassets.com/1/mintguesss/nobook",
+      "image": "https://mintguesss.github.io/personal_web/builds/nobook.png",
       "activity": [
         0,
         0,
@@ -1026,7 +1026,7 @@
       "release": "v1.1.1",
       "featured": false,
       "private": false,
-      "image": "https://raw.githubusercontent.com/mintguesss/ClaudeQuota/main/docs/hero-en.png",
+      "image": "https://mintguesss.github.io/personal_web/builds/claude-quota.png",
       "activity": [
         0,
         0,
@@ -1239,7 +1239,7 @@
       "updated": "2026-11-02T03:09:47Z",
       "featured": false,
       "private": false,
-      "image": "https://opengraph.githubassets.com/1/mintguesss/PromptMiser",
+      "image": "https://mintguesss.github.io/personal_web/builds/prompt-miser.jpg",
       "activity": [
         0,
         0,
@@ -1306,7 +1306,7 @@
           "provider": "vercel",
           "url": "https://prompt-miser.vercel.app",
           "ok": true,
-          "ms": 252,
+          "ms": 195,
           "status": 200
         }
       ]
@@ -1337,7 +1337,7 @@
       "updated": "2026-08-30T15:26:00Z",
       "featured": false,
       "private": false,
-      "image": "https://opengraph.githubassets.com/1/mintguesss/personal-assistant",
+      "image": "https://mintguesss.github.io/personal_web/builds/personal-assistant.jpg",
       "activity": [
         0,
         0,
@@ -1407,11 +1407,11 @@
   "languages": [
     {
       "name": "TypeScript",
-      "pct": 48.8
+      "pct": 48.7
     },
     {
       "name": "Python",
-      "pct": 25.2
+      "pct": 25.1
     },
     {
       "name": "JavaScript",
@@ -1423,7 +1423,7 @@
     },
     {
       "name": "HTML",
-      "pct": 5.4
+      "pct": 5.6
     },
     {
       "name": "Vue",
