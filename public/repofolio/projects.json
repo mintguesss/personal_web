@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-20T18:03:33.240Z",
+  "generatedAt": "2026-11-20T18:17:23.885Z",
   "owner": "mintguesss",
   "profile": {
     "login": "mintguesss",
@@ -223,10 +223,241 @@
           "provider": "vercel",
           "url": "https://folio-manager-roan.vercel.app/",
           "ok": true,
-          "ms": 1223,
+          "ms": 891,
           "status": 200
         }
       ]
+    },
+    {
+      "id": "mintguesss-personal-web",
+      "name": "personal_web",
+      "repo": "mintguesss/personal_web",
+      "codeUrl": "https://github.com/mintguesss/personal_web",
+      "summary": "我的個人網站",
+      "status": "active",
+      "stack": [
+        "Next.js",
+        "React",
+        "Tailwind CSS",
+        "Three.js",
+        "TypeScript",
+        "HTML"
+      ],
+      "languages": [
+        {
+          "name": "TypeScript",
+          "pct": 60.7
+        },
+        {
+          "name": "HTML",
+          "pct": 38.2
+        },
+        {
+          "name": "CSS",
+          "pct": 1
+        },
+        {
+          "name": "JavaScript",
+          "pct": 0
+        }
+      ],
+      "tags": [
+        "personal-website"
+      ],
+      "stars": 0,
+      "forks": 0,
+      "created": "2026-08-26T15:08:43Z",
+      "updated": "2026-11-20T18:16:51Z",
+      "featured": false,
+      "private": false,
+      "image": "https://mintguesss.github.io/personal_web/builds/personal-web-site.png",
+      "activity": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        20,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        2,
+        0,
+        0,
+        4,
+        0,
+        0,
+        2,
+        0,
+        0,
+        4,
+        0,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      "links": [
+        {
+          "label": "live",
+          "url": "https://mintguesss.github.io/personal_web/"
+        }
+      ],
+      "deployments": [
+        {
+          "name": "github-pages",
+          "provider": "github-pages",
+          "url": "https://mintguesss.github.io/personal_web/",
+          "ok": true,
+          "ms": 149,
+          "status": 200
+        }
+      ]
+    },
+    {
+      "id": "mintguesss-nightmarket",
+      "name": "NightMarket",
+      "repo": "mintguesss/NightMarket",
+      "codeUrl": "https://github.com/mintguesss/NightMarket",
+      "summary": "Taiwan & US stock terminal in pure Python — real-time TWSE quotes, US pre/post market, backtesting, alerts, paper trading. Zero dependencies. 台美股看盤",
+      "status": "active",
+      "stack": [
+        "JavaScript",
+        "Python",
+        "CSS",
+        "HTML",
+        "Shell",
+        "Batchfile"
+      ],
+      "languages": [
+        {
+          "name": "JavaScript",
+          "pct": 45.8
+        },
+        {
+          "name": "Python",
+          "pct": 33.8
+        },
+        {
+          "name": "CSS",
+          "pct": 14.9
+        },
+        {
+          "name": "HTML",
+          "pct": 5.1
+        },
+        {
+          "name": "Shell",
+          "pct": 0.2
+        },
+        {
+          "name": "Batchfile",
+          "pct": 0.2
+        }
+      ],
+      "tags": [
+        "backtesting",
+        "lightweight-charts",
+        "paper-trading",
+        "pwa",
+        "python",
+        "stock-market",
+        "stock-screener",
+        "taiwan"
+      ],
+      "stars": 0,
+      "forks": 0,
+      "license": "MIT",
+      "created": "2026-11-13T14:46:52Z",
+      "updated": "2026-11-20T18:05:15Z",
+      "release": "v1.0.0",
+      "featured": false,
+      "private": false,
+      "image": "https://raw.githubusercontent.com/mintguesss/NightMarket/main/docs/screenshots/chart-en.png",
+      "activity": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "links": [],
+      "deployments": []
     },
     {
       "id": "mintguesss-repofolio",
@@ -334,238 +565,7 @@
           "name": "production",
           "url": "https://github.com/mintguesss/repofolio#readme",
           "ok": true,
-          "ms": 739,
-          "status": 200
-        }
-      ]
-    },
-    {
-      "id": "mintguesss-nightmarket",
-      "name": "NightMarket",
-      "repo": "mintguesss/NightMarket",
-      "codeUrl": "https://github.com/mintguesss/NightMarket",
-      "summary": "Taiwan & US stock terminal in pure Python — real-time TWSE quotes, US pre/post market, backtesting, alerts, paper trading. Zero dependencies. 台美股看盤",
-      "status": "active",
-      "stack": [
-        "JavaScript",
-        "Python",
-        "CSS",
-        "HTML",
-        "Shell",
-        "Batchfile"
-      ],
-      "languages": [
-        {
-          "name": "JavaScript",
-          "pct": 45.8
-        },
-        {
-          "name": "Python",
-          "pct": 33.8
-        },
-        {
-          "name": "CSS",
-          "pct": 14.9
-        },
-        {
-          "name": "HTML",
-          "pct": 5.1
-        },
-        {
-          "name": "Shell",
-          "pct": 0.2
-        },
-        {
-          "name": "Batchfile",
-          "pct": 0.2
-        }
-      ],
-      "tags": [
-        "backtesting",
-        "lightweight-charts",
-        "paper-trading",
-        "pwa",
-        "python",
-        "stock-market",
-        "stock-screener",
-        "taiwan"
-      ],
-      "stars": 0,
-      "forks": 0,
-      "license": "MIT",
-      "created": "2026-11-13T14:46:52Z",
-      "updated": "2026-11-20T17:49:08Z",
-      "release": "v1.0.0",
-      "featured": false,
-      "private": false,
-      "image": "https://raw.githubusercontent.com/mintguesss/NightMarket/main/docs/screenshots/chart-en.png",
-      "activity": [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0
-      ],
-      "links": [],
-      "deployments": []
-    },
-    {
-      "id": "mintguesss-personal-web",
-      "name": "personal_web",
-      "repo": "mintguesss/personal_web",
-      "codeUrl": "https://github.com/mintguesss/personal_web",
-      "summary": "我的個人網站",
-      "status": "active",
-      "stack": [
-        "Next.js",
-        "React",
-        "Tailwind CSS",
-        "Three.js",
-        "TypeScript",
-        "HTML"
-      ],
-      "languages": [
-        {
-          "name": "TypeScript",
-          "pct": 60.7
-        },
-        {
-          "name": "HTML",
-          "pct": 38.2
-        },
-        {
-          "name": "CSS",
-          "pct": 1
-        },
-        {
-          "name": "JavaScript",
-          "pct": 0
-        }
-      ],
-      "tags": [
-        "personal-website"
-      ],
-      "stars": 0,
-      "forks": 0,
-      "created": "2026-08-26T15:08:43Z",
-      "updated": "2026-11-20T17:24:44Z",
-      "featured": false,
-      "private": false,
-      "image": "https://opengraph.githubassets.com/1/mintguesss/personal_web",
-      "activity": [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        20,
-        0,
-        3,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        2,
-        0,
-        0,
-        4,
-        0,
-        0,
-        2,
-        0,
-        0,
-        4,
-        0,
-        0,
-        3,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        1,
-        0,
-        0
-      ],
-      "links": [
-        {
-          "label": "live",
-          "url": "https://mintguesss.github.io/personal_web/"
-        }
-      ],
-      "deployments": [
-        {
-          "name": "github-pages",
-          "provider": "github-pages",
-          "url": "https://mintguesss.github.io/personal_web/",
-          "ok": true,
-          "ms": 148,
+          "ms": 507,
           "status": 200
         }
       ]
@@ -792,7 +792,7 @@
           "provider": "vercel",
           "url": "https://aidit-weld.vercel.app",
           "ok": true,
-          "ms": 1283,
+          "ms": 1206,
           "status": 200
         }
       ]
@@ -1127,7 +1127,7 @@
       "updated": "2026-11-02T03:09:50Z",
       "featured": false,
       "private": false,
-      "image": "https://opengraph.githubassets.com/1/mintguesss/TAICA_LLM",
+      "image": "https://mintguesss.github.io/personal_web/builds/taica-llm.png",
       "activity": [
         0,
         0,
@@ -1306,7 +1306,7 @@
           "provider": "vercel",
           "url": "https://prompt-miser.vercel.app",
           "ok": true,
-          "ms": 282,
+          "ms": 291,
           "status": 200
         }
       ]
