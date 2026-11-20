@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-20T09:26:48.645Z",
+  "generatedAt": "2026-11-20T11:31:07.180Z",
   "owner": "mintguesss",
   "profile": {
     "login": "mintguesss",
@@ -223,7 +223,7 @@
           "provider": "vercel",
           "url": "https://folio-manager-roan.vercel.app/",
           "ok": true,
-          "ms": 1999,
+          "ms": 2287,
           "status": 200
         }
       ]
@@ -243,11 +243,11 @@
       "languages": [
         {
           "name": "TypeScript",
-          "pct": 99.1
+          "pct": 99.2
         },
         {
           "name": "JavaScript",
-          "pct": 0.9
+          "pct": 0.8
         }
       ],
       "tags": [
@@ -264,8 +264,8 @@
       "forks": 0,
       "license": "MIT",
       "created": "2026-11-20T08:20:14Z",
-      "updated": "2026-11-20T09:26:14Z",
-      "release": "v0.2.0",
+      "updated": "2026-11-20T11:29:23Z",
+      "release": "v0.3.1",
       "featured": false,
       "private": false,
       "image": "https://raw.githubusercontent.com/mintguesss/repofolio/main/docs/screenshots/hero-simple.jpg",
@@ -334,7 +334,7 @@
           "name": "production",
           "url": "https://github.com/mintguesss/repofolio#readme",
           "ok": true,
-          "ms": 557,
+          "ms": 1050,
           "status": 200
         }
       ]
@@ -352,20 +352,24 @@
         "Tailwind CSS",
         "Three.js",
         "TypeScript",
-        "CSS"
+        "HTML"
       ],
       "languages": [
         {
           "name": "TypeScript",
-          "pct": 98.3
+          "pct": 64.5
+        },
+        {
+          "name": "HTML",
+          "pct": 34.4
         },
         {
           "name": "CSS",
-          "pct": 1.6
+          "pct": 1.1
         },
         {
           "name": "JavaScript",
-          "pct": 0.1
+          "pct": 0
         }
       ],
       "tags": [
@@ -374,7 +378,7 @@
       "stars": 0,
       "forks": 0,
       "created": "2026-08-26T15:08:43Z",
-      "updated": "2026-11-20T09:08:37Z",
+      "updated": "2026-11-20T09:27:25Z",
       "featured": false,
       "private": false,
       "image": "https://opengraph.githubassets.com/1/mintguesss/personal_web",
@@ -444,7 +448,7 @@
           "provider": "github-pages",
           "url": "https://mintguesss.github.io/personal_web/",
           "ok": true,
-          "ms": 296,
+          "ms": 122,
           "status": 200
         }
       ]
@@ -788,7 +792,7 @@
           "provider": "vercel",
           "url": "https://aidit-weld.vercel.app",
           "ok": true,
-          "ms": 1336,
+          "ms": 1226,
           "status": 200
         }
       ]
@@ -1302,7 +1306,7 @@
           "provider": "vercel",
           "url": "https://prompt-miser.vercel.app",
           "ok": true,
-          "ms": 245,
+          "ms": 252,
           "status": 200
         }
       ]
@@ -1403,27 +1407,27 @@
   "languages": [
     {
       "name": "TypeScript",
-      "pct": 50.3
+      "pct": 48.8
     },
     {
       "name": "Python",
-      "pct": 26.3
+      "pct": 25.2
     },
     {
       "name": "JavaScript",
-      "pct": 8.8
+      "pct": 8.4
     },
     {
       "name": "CSS",
-      "pct": 6.1
-    },
-    {
-      "name": "Vue",
-      "pct": 4.2
+      "pct": 5.9
     },
     {
       "name": "HTML",
-      "pct": 1.9
+      "pct": 5.4
+    },
+    {
+      "name": "Vue",
+      "pct": 4
     },
     {
       "name": "Kotlin",
@@ -1431,7 +1435,7 @@
     },
     {
       "name": "PLpgSQL",
-      "pct": 0.4
+      "pct": 0.3
     },
     {
       "name": "PowerShell",
@@ -1502,15 +1506,15 @@
       "count": 10
     },
     {
+      "name": "HTML",
+      "count": 6
+    },
+    {
       "name": "JavaScript",
-      "count": 7
+      "count": 6
     },
     {
       "name": "CSS",
-      "count": 5
-    },
-    {
-      "name": "HTML",
       "count": 5
     },
     {
