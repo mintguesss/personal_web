@@ -285,121 +285,96 @@ main{max-width:1180px;margin:0 auto;padding:0 16px}
 .bad .sb-state{color:#ef4444}
 @media (max-width:760px){.status-board li{grid-template-columns:18px 1fr auto}.sb-prov,.sb-url,.sb-ms{display:none}}
 
-/* ── timeline player ── */
-.tlx{position:relative;border-radius:var(--radius);border:1px solid var(--line);background:var(--card);overflow:hidden;outline:none;box-shadow:var(--shadow)}
-.tlx:focus-visible{box-shadow:0 0 0 2px var(--accent)}
-.tlx-stage{position:relative;aspect-ratio:21/9;min-height:300px;overflow:hidden;touch-action:pan-y}
-.tlx-slide{position:absolute;inset:0;display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);opacity:0;visibility:hidden;transition:opacity .7s var(--ease),visibility 0s .7s}
-.tlx-slide.on{opacity:1;visibility:visible;transition:opacity .7s var(--ease),visibility 0s}
-.tlx-media{position:relative;display:block;overflow:hidden;background:var(--bg2)}
-.tlx-img{position:absolute;inset:0;background:linear-gradient(135deg,color-mix(in srgb,var(--accent) 30%,var(--bg2)),color-mix(in srgb,var(--accent2) 30%,var(--bg2)))}
-.tlx-img img{width:100%;height:100%;object-fit:cover;object-position:top center;transform:scale(1.08);transition:transform 6s linear}
-.tlx-slide.on .tlx-img img{transform:scale(1)}
-.tlx-img span{position:absolute;inset:0;display:none;place-items:center;font:800 6rem var(--display);color:color-mix(in srgb,var(--fg) 25%,transparent)}
-.tlx-img.noimg span{display:grid}
-.tlx-media::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent 70%,var(--card));pointer-events:none}
-.tlx-media::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(100deg,transparent 30%,color-mix(in srgb,var(--accent) 35%,transparent) 50%,transparent 70%);transform:translateX(-120%)}
-[data-anim="full"] .tlx-slide.on .tlx-media::before{animation:sweep 1.1s var(--ease) .1s}
+/* ── timeline: vertical, lit by scrolling ── */
 @keyframes sweep{to{transform:translateX(120%)}}
-.tlx-info{display:flex;flex-direction:column;justify-content:center;gap:10px;padding:28px 32px 36px 20px;min-width:0}
-.tlx-info>*{opacity:0;transform:translateX(18px);transition:opacity .5s var(--ease),transform .6s var(--ease)}
-.tlx-slide.on .tlx-info>*{opacity:1;transform:none}
-.tlx-slide.on .tlx-info>:nth-child(2){transition-delay:.08s}.tlx-slide.on .tlx-info>:nth-child(3){transition-delay:.16s}.tlx-slide.on .tlx-info>:nth-child(4){transition-delay:.24s}.tlx-slide.on .tlx-info>:nth-child(5){transition-delay:.32s}
-.tlx-date{display:flex;align-items:baseline;gap:10px;font-variant-numeric:tabular-nums}
-.tlx-date b{font:800 clamp(2.4rem,5vw,3.6rem)/1 var(--display);letter-spacing:-.04em;background:linear-gradient(120deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
-.tlx-date span{font:600 .9rem var(--mono);color:var(--muted)}
-.tlx-info h3{margin:0;font:700 clamp(1.3rem,2.4vw,1.75rem)/1.2 var(--display);display:flex;align-items:center;gap:10px;min-width:0;word-break:break-word}
-.tlx-info h3 .dot{flex:none}
-.tlx-info p{margin:0;color:var(--muted);font-size:.95rem;line-height:1.55;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.tlx-tags{display:flex;flex-wrap:wrap;gap:6px}
-.tlx-tags span{font-size:.75rem;padding:3px 9px;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
-.tlx-info .btn-mini{align-self:flex-start}
-.tlx-prog{position:absolute;left:0;right:0;bottom:0;height:3px;background:color-mix(in srgb,var(--fg) 8%,transparent);z-index:2}
-.tlx-prog i{display:block;height:100%;width:calc(var(--p,0) * 100%);background:linear-gradient(90deg,var(--accent),var(--accent2))}
-.tlx.paused .tlx-prog i{opacity:.35}
-.tlx-bar{display:flex;align-items:center;gap:18px;padding:10px 18px;border-top:1px solid var(--line)}
-.tlx-ctrl{display:flex;align-items:center;gap:6px;flex:none}
-.tlx-ctrl button{width:34px;height:34px;border-radius:10px;border:1px solid var(--line);background:transparent;color:var(--fg);cursor:pointer;font-size:1rem;display:grid;place-items:center;transition:border-color .2s,background .2s}
-.tlx-ctrl button:hover{border-color:var(--accent)}
-.tlx-ctrl [data-tlx="play"]{font-size:.7rem}
-.tlx-ctrl .i-play,.tlx.paused .i-pause{display:none}
-.tlx.paused .i-play{display:inline}
-.tlx-count{margin-left:6px;font:600 .8rem var(--mono);color:var(--muted);min-width:52px}
-.tlx-count b{color:var(--fg)}
-.tlx-track{position:relative;flex:1;min-width:0;overflow-x:auto;scrollbar-width:none;padding:22px 0 22px}
-.tlx-track::-webkit-scrollbar{display:none}
-.tlx-track ol{list-style:none;margin:0;padding:0;display:flex;position:relative;min-width:max(100%,calc(var(--n,12) * 44px))}
-.tlx-rail{position:absolute;left:14px;right:14px;top:14px;height:2px;background:var(--line);border-radius:2px}
-.tlx-fill{position:absolute;left:0;top:0;bottom:0;width:calc(var(--p,1) * 100%);background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:2px;transition:width .6s var(--ease)}
-.tlx-track li{position:relative;flex:1;display:flex;justify-content:center}
-.tlx-track li:first-child{justify-content:flex-start}
-.tlx-track li:last-child{justify-content:flex-end}
-.tlx-year{position:absolute;top:-20px;left:50%;transform:translateX(-50%);font:700 .7rem var(--mono);color:var(--muted);white-space:nowrap}
-.tlx-track li:first-child .tlx-year{left:14px}
-.tlx-track button{position:relative;width:28px;height:30px;border:0;background:none;cursor:pointer;display:grid;place-items:center;padding:0}
-.tlx-dot{width:10px;height:10px;border-radius:50%;box-shadow:0 0 0 3px var(--card);transition:transform .3s var(--ease),box-shadow .3s,opacity .3s;opacity:.5}
-.tlx-track button.past .tlx-dot{opacity:.9}
-.tlx-track button:hover .tlx-dot{transform:scale(1.4);opacity:1}
-.tlx-track button[aria-current] .tlx-dot{transform:scale(1.7);opacity:1;box-shadow:0 0 0 3px var(--card),0 0 0 4.5px color-mix(in srgb,var(--accent) 70%,transparent),0 0 16px var(--accent)}
-.tlx-track em{position:absolute;top:30px;left:50%;transform:translateX(-50%);font:600 .68rem var(--sans);font-style:normal;color:var(--fg);white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .2s}
-.tlx-track li:first-child em{left:0;transform:none}
-.tlx-track li:last-child em{left:auto;right:0;transform:none}
-.tlx-track button:hover em,.tlx-track button[aria-current] em{opacity:1}
-/* compact chronological list under the player */
-.tl-list{list-style:none;margin:22px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,250px),1fr));gap:10px}
-.tl-row a{display:flex;align-items:center;gap:12px;padding:8px 12px 8px 8px;border-radius:calc(var(--radius) * .7);border:1px solid var(--line);background:var(--card);color:var(--fg);text-decoration:none!important;transition:border-color .2s,transform .2s var(--ease)}
-.tl-row a:hover{border-color:var(--accent);transform:translateY(-2px)}
-.tl-row time{font:600 .7rem var(--mono);color:var(--muted);white-space:nowrap;order:3}
-.tl-row b{flex:1;min-width:0;font-size:.9rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.tl-row .dot{flex:none;order:2}
-.tl-thumb{position:relative;flex:none;width:52px;height:36px;border-radius:7px;overflow:hidden;background:linear-gradient(135deg,color-mix(in srgb,var(--accent) 25%,var(--bg2)),color-mix(in srgb,var(--accent2) 25%,var(--bg2)))}
-.tl-thumb img{width:100%;height:100%;object-fit:cover;object-position:top}
-.tl-thumb span{position:absolute;inset:0;display:none;place-items:center;font:800 1rem var(--display);color:color-mix(in srgb,var(--fg) 40%,transparent)}
-.tl-thumb.noimg span{display:grid}
+@keyframes vtflow{to{background-position:0 28px}}
+@keyframes vtping{from{transform:scale(1);opacity:.7}to{transform:scale(3.2);opacity:0}}
+.vt{position:relative;--sx:150px;padding:4px 0 10px}
+.vt-spine{position:absolute;left:var(--sx);top:0;bottom:0;width:2px;margin-left:-1px;background:var(--line);border-radius:2px}
+.vt-spine::before{content:"";position:absolute;inset:0;opacity:0;background:repeating-linear-gradient(180deg,color-mix(in srgb,var(--accent) 55%,transparent) 0 8px,transparent 8px 28px)}
+body[data-mode="tech"][data-anim="full"] .vt-spine::before{opacity:.6;animation:vtflow 1.4s linear infinite}
+.vt-fill{position:absolute;left:0;top:0;width:100%;height:calc(var(--p,0) * 100%);border-radius:2px;background:linear-gradient(180deg,var(--accent2),var(--accent));box-shadow:0 0 14px color-mix(in srgb,var(--accent) 70%,transparent)}
+.vt-fill::after{content:"";position:absolute;left:50%;bottom:-7px;width:14px;height:14px;margin-left:-7px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 5px color-mix(in srgb,var(--accent) 22%,transparent),0 0 26px 8px color-mix(in srgb,var(--accent) 60%,transparent)}
+.vt-grp{position:relative;display:grid;grid-template-columns:calc(var(--sx) - 30px) minmax(0,1fr);column-gap:60px;padding:6px 0 22px}
+.vt-yr{position:sticky;top:84px;align-self:start;text-align:right;padding-top:8px}
+.vt-yr b{display:block;font:800 clamp(1.9rem,3.6vw,2.7rem)/1 var(--display);letter-spacing:-.04em;font-variant-numeric:tabular-nums;color:color-mix(in srgb,var(--fg) 22%,transparent);transition:color .5s}
+.vt-grp.cur .vt-yr b{background:linear-gradient(160deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.vt-yr small{display:block;margin-top:6px;font:600 .72rem var(--mono);color:var(--muted)}
+.vt-grp ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:16px}
+.vt-item{position:relative}
+.vt-node{position:absolute;left:-30px;top:30px;z-index:1;width:14px;height:14px;margin:-7px 0 0 -7px;border-radius:50%;background:var(--bg);border:2px solid color-mix(in srgb,var(--fg) 25%,transparent);transition:background .4s,border-color .4s,box-shadow .4s,transform .4s var(--ease)}
+.vt-node::after{content:"";position:absolute;inset:-2px;border-radius:50%;border:2px solid var(--c);opacity:0}
+.vt-item.lit .vt-node{background:var(--c);border-color:var(--c);box-shadow:0 0 0 4px color-mix(in srgb,var(--c) 20%,transparent),0 0 16px var(--c)}
+[data-anim="full"] .vt-item.lit .vt-node::after{animation:vtping 1s var(--ease)}
+.vt-item.cur .vt-node{transform:scale(1.25)}
+.vt-item::before{content:"";position:absolute;left:-23px;top:29px;width:23px;height:2px;background:linear-gradient(90deg,var(--c),transparent);transform:scaleX(0);transform-origin:left;transition:transform .5s var(--ease) .1s}
+.vt-item.lit::before{transform:none}
+.vt-card{position:relative;display:grid;grid-template-columns:minmax(0,230px) minmax(0,1fr);gap:18px;align-items:center;padding:10px 18px 10px 10px;border-radius:var(--radius);border:1px solid var(--line);background:var(--card);color:var(--fg);text-decoration:none!important;overflow:hidden;transition:opacity .7s var(--ease),transform .9s var(--ease),border-color .35s,box-shadow .35s}
+.vt-card:hover{border-color:var(--accent)}
+.vt-item.cur .vt-card{border-color:color-mix(in srgb,var(--accent) 55%,var(--line));box-shadow:0 18px 50px -28px var(--accent)}
+.vt-card::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(100deg,transparent 35%,color-mix(in srgb,var(--accent) 16%,transparent) 50%,transparent 65%);transform:translateX(-120%)}
+body[data-mode="tech"][data-anim="full"] .vt-item.cur .vt-card::after{animation:sweep 1.2s var(--ease)}
+[data-anim="full"] .vt-item .vt-card{opacity:0;transform:perspective(1000px) translateX(56px) rotateY(-14deg);transform-origin:left center}
+[data-anim="subtle"] .vt-item .vt-card{opacity:0}
+[data-anim] .vt-item.in .vt-card{opacity:1;transform:none}
+.vt-img{position:relative;aspect-ratio:16/10;border-radius:calc(var(--radius) * .7);overflow:hidden;background:linear-gradient(135deg,color-mix(in srgb,var(--accent) 28%,var(--bg2)),color-mix(in srgb,var(--accent2) 28%,var(--bg2)))}
+.vt-img img{display:block;width:100%;height:118%;object-fit:cover;object-position:top;transform:translateY(var(--py,-7%));transition:scale .6s var(--ease)}
+.vt-card:hover .vt-img img{scale:1.04}
+.vt-img span{position:absolute;inset:0;display:none;place-items:center;font:800 2.6rem var(--display);color:color-mix(in srgb,var(--fg) 30%,transparent)}
+.vt-img.noimg span{display:grid}
+.vt-body{min-width:0}
+.vt-body time{font:600 .74rem var(--mono);color:var(--muted)}
+.vt-body h3{margin:3px 0 5px;font:700 1.12rem/1.25 var(--display);word-break:break-word}
+.vt-body p{margin:0 0 9px;color:var(--muted);font-size:.86rem;line-height:1.5;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden}
+.vt-tags{display:flex;flex-wrap:wrap;gap:5px}
+.vt-tags span{font-size:.7rem;padding:2px 8px;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
 @media (max-width:760px){
-.tlx-stage{aspect-ratio:auto;min-height:0;height:min(540px,135vw)}
-.tlx-slide{grid-template-columns:1fr;grid-template-rows:minmax(0,1fr) auto}
-.tlx-media::after{background:linear-gradient(180deg,transparent 60%,var(--card))}
-.tlx-info{padding:4px 18px 22px;gap:7px}
-.tlx-date b{font-size:2rem}
-.tlx-info h3{font-size:1.25rem}
-.tlx-info p{font-size:.88rem}
-.tlx-bar{flex-direction:column;align-items:stretch;gap:0;padding:8px 12px 4px}
-.tlx-ctrl{justify-content:center}
+.vt{--sx:9px}
+.vt-grp{grid-template-columns:minmax(0,1fr);column-gap:0;padding:0 0 14px 30px}
+.vt-yr{top:56px;z-index:2;display:flex;align-items:baseline;gap:10px;text-align:left;margin-left:-30px;padding:8px 0 10px 30px;background:linear-gradient(180deg,var(--bg) 72%,transparent)}
+.vt-yr b{font-size:1.7rem}
+.vt-yr small{margin:0}
+.vt-node{left:-21px;top:24px}
+.vt-item::before{left:-14px;top:23px;width:14px}
+.vt-card{grid-template-columns:118px minmax(0,1fr);gap:12px;padding:8px 12px 8px 8px}
+.vt-img{aspect-ratio:4/3}
+.vt-body h3{font-size:1rem}
+.vt-body p{display:none}
+[data-anim="full"] .vt-item .vt-card{transform:translateX(32px)}
 }
 
 /* ── stat cards ── */
 .stats-strip{padding-top:8px}
-.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr));gap:14px}
-.stat-grid.kpi6{grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));margin-bottom:8px}
-.stat{position:relative;display:flex;flex-direction:column;gap:10px;padding:18px 20px 16px;border-radius:var(--radius);border:1px solid var(--line);background:var(--card);color:var(--fg);text-decoration:none!important;overflow:hidden;isolation:isolate;transition:border-color .3s,transform .3s var(--ease),box-shadow .3s}
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr));gap:12px}
+.stat-grid.kpi6{grid-template-columns:repeat(auto-fit,minmax(min(100%,170px),1fr));margin-bottom:8px}
+.stat{position:relative;display:flex;flex-direction:column;gap:6px;padding:12px 14px 12px;border-radius:calc(var(--radius) * .8);border:1px solid var(--line);background:var(--card);color:var(--fg);text-decoration:none!important;overflow:hidden;isolation:isolate;transition:border-color .3s,transform .3s var(--ease),box-shadow .3s}
 .stat::before{content:"";position:absolute;inset:0;z-index:-1;opacity:0;background:radial-gradient(400px circle at var(--mx,50%) var(--my,0%),color-mix(in srgb,var(--accent) 16%,transparent),transparent 60%);transition:opacity .3s}
 a.stat:hover{transform:translateY(-3px);border-color:color-mix(in srgb,var(--accent) 60%,var(--line));box-shadow:0 16px 40px -24px var(--accent)}
 .stat:hover::before{opacity:1}
-.stat-head{display:flex;align-items:center;gap:9px;font-size:.82rem;color:var(--muted)}
-.stat-ic{width:28px;height:28px;border-radius:8px;display:grid;place-items:center;background:color-mix(in srgb,var(--accent) 14%,transparent);color:var(--accent);flex:none}
-.stat-ic svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.stat-head{display:flex;align-items:center;gap:8px;font-size:.76rem;color:var(--muted)}
+.stat-ic{width:22px;height:22px;border-radius:6px;display:grid;place-items:center;background:color-mix(in srgb,var(--accent) 14%,transparent);color:var(--accent);flex:none}
+.stat-ic svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .stat-go{margin-left:auto;font-size:.75rem;opacity:0;transform:translateX(-4px);transition:opacity .25s,transform .25s;color:var(--accent);white-space:nowrap}
 a.stat:hover .stat-go{opacity:1;transform:none}
 @media (hover:none){.stat-go{opacity:.8;transform:none}}
 .stat-main{display:flex;align-items:center;justify-content:space-between;gap:10px}
-.stat-n{font:800 2.5rem/1.05 var(--display);letter-spacing:-.03em;font-variant-numeric:tabular-nums;background:linear-gradient(180deg,var(--fg) 40%,color-mix(in srgb,var(--fg) 55%,var(--accent)));-webkit-background-clip:text;background-clip:text;color:transparent}
-.stat-viz{margin-top:auto;min-height:20px}
-.ring{width:52px;height:52px;flex:none}
+.stat-n{font:800 1.85rem/1.05 var(--display);letter-spacing:-.03em;font-variant-numeric:tabular-nums;background:linear-gradient(180deg,var(--fg) 40%,color-mix(in srgb,var(--fg) 55%,var(--accent)));-webkit-background-clip:text;background-clip:text;color:transparent}
+.stat-viz{margin-top:auto;min-height:14px}
+.ring{width:40px;height:40px;flex:none}
 .ring circle{fill:none;stroke-width:5}
 .ring-bg{stroke:var(--line)}
 .ring-fg{stroke:var(--accent);stroke-linecap:round;stroke-dasharray:0 var(--c);transition:stroke-dasharray 1.4s var(--ease) .2s}
 .stat.in .ring-fg,[data-anim="off"] .ring-fg{stroke-dasharray:var(--len) var(--c)}
 .ring text{font:700 10px var(--mono);fill:var(--muted)}
-.mspark{display:block;width:100%;height:38px;overflow:visible}
+.mspark{display:block;width:100%;height:24px;overflow:visible}
 .mspark-a{fill:color-mix(in srgb,var(--accent) 16%,transparent);opacity:0;transition:opacity 1s .6s}
 .mspark-l{fill:none;stroke:var(--accent);stroke-width:1.8;vector-effect:non-scaling-stroke;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1.6s var(--ease) .2s}
 .stat.in .mspark-a,[data-anim="off"] .mspark-a{opacity:1}
 .stat.in .mspark-l,[data-anim="off"] .mspark-l{stroke-dashoffset:0}
-.sbar{display:flex;gap:3px;height:8px;border-radius:99px;overflow:hidden}
+.sbar{display:flex;gap:3px;height:6px;border-radius:99px;overflow:hidden}
 .sbar i{display:block;height:100%;width:0;border-radius:99px;transition:width 1s var(--ease);transition-delay:calc(.15s + var(--i) * .08s)}
 .stat.in .sbar i,[data-anim="off"] .sbar i{width:var(--w)}
-.cols{display:flex;align-items:flex-end;gap:5px;height:38px;padding-top:14px;box-sizing:content-box}
+.cols{display:flex;align-items:flex-end;gap:4px;height:24px;padding-top:12px;box-sizing:content-box}
 .cols i{position:relative;flex:1;max-width:34px;height:var(--h);border-radius:5px 5px 2px 2px;background:linear-gradient(180deg,var(--accent),color-mix(in srgb,var(--accent) 35%,transparent));transform:scaleY(0);transform-origin:bottom;transition:transform .8s var(--ease);transition-delay:calc(.15s + var(--i) * .07s)}
 .stat.in .cols i,[data-anim="off"] .cols i{transform:none}
 .cols em{position:absolute;bottom:calc(100% + 3px);left:50%;transform:translateX(-50%);font:600 .62rem var(--mono);font-style:normal;color:var(--muted);white-space:nowrap;opacity:0;transition:opacity .2s}
@@ -416,6 +391,12 @@ a.stat:hover .stat-go{opacity:1;transform:none}
 .m-cover{aspect-ratio:2.2/1;background:linear-gradient(135deg,var(--accent),var(--accent2));position:relative;overflow:hidden}
 .m-cover img{width:100%;height:100%;object-fit:cover;display:block}
 .m-cover::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,var(--bg2))}
+.m-cover.has{aspect-ratio:auto;display:flex;justify-content:center;align-items:center;background:var(--bg);padding:22px 22px 0}
+.m-cover.has::after{display:none}
+.m-cover.has i{position:absolute;inset:-40px;background-size:cover;background-position:center;filter:blur(36px) saturate(1.3);opacity:.5}
+.m-cover.has img{position:relative;z-index:1;width:auto;max-width:100%;height:auto;max-height:min(480px,56vh);object-fit:contain;border-radius:10px;box-shadow:0 18px 50px -20px rgba(0,0,0,.6);border:1px solid color-mix(in srgb,var(--fg) 10%,transparent)}
+.m-cover.has+.m-content{padding-top:20px}
+@media (max-width:640px){.m-cover.has{padding:14px 14px 0}}
 .m-content{padding:4px 28px 28px}
 .m-content h2{font:800 2rem/1.15 var(--display);margin:0 0 6px;letter-spacing:-.02em}
 .m-sub{display:flex;flex-wrap:wrap;gap:8px 16px;color:var(--muted);font-size:.85rem;margin-bottom:16px;align-items:center}
@@ -712,12 +693,11 @@ body[data-mode="simple"] a.stat:hover{transform:none;border-color:color-mix(in s
 body[data-mode="simple"] .stat::before{display:none}
 body[data-mode="simple"] .stat-n{background:none;-webkit-text-fill-color:var(--fg);color:var(--fg);font-weight:700}
 body[data-mode="simple"] .stat-ic{background:var(--bg2);color:var(--fg)}
-body[data-mode="simple"] .tlx{box-shadow:none}
-body[data-mode="simple"] .tlx-date b{background:none;-webkit-text-fill-color:var(--fg);color:var(--fg)}
-body[data-mode="simple"] .tlx-media::before{display:none}
-body[data-mode="simple"] .tlx-track button[aria-current] .tlx-dot{box-shadow:0 0 0 3px var(--card),0 0 0 4.5px var(--fg)}
-body[data-mode="simple"] .tlx-fill,body[data-mode="simple"] .tlx-prog i{background:var(--fg)}
-body[data-mode="simple"] .tl-row a:hover{transform:none;border-color:color-mix(in srgb,var(--fg) 30%,var(--line))}
+body[data-mode="simple"] .vt-fill{background:var(--fg);box-shadow:none}
+body[data-mode="simple"] .vt-fill::after{background:var(--fg);box-shadow:0 0 0 4px color-mix(in srgb,var(--fg) 14%,transparent)}
+body[data-mode="simple"] .vt-grp.cur .vt-yr b{background:none;color:var(--fg)}
+body[data-mode="simple"] .vt-item.lit .vt-node{box-shadow:0 0 0 3px color-mix(in srgb,var(--c) 22%,transparent)}
+body[data-mode="simple"] .vt-item.cur .vt-card{border-color:color-mix(in srgb,var(--fg) 35%,var(--line));box-shadow:var(--shadow)}
 </style>
 </head>
 <body data-mode="tech" data-scheme="auto" data-preset="cyber" data-bg="particles" data-card="glass" data-layout="grid" data-font="sans" data-anim="full" data-fx="soft" data-covers="true" data-glow="true" data-tilt="true" data-multi="true" style="--accent:#22d3ee;--radius:16px;">
@@ -783,14 +763,14 @@ body[data-mode="simple"] .tl-row a:hover{transform:none;border-color:color-mix(i
 <div class="card-foot"><span class="when" data-time="2026-11-06T13:15:58Z">進行中</span><span class="acts"><a class="btn-mini primary" href="https://folio-manager-roan.vercel.app/" target="_blank" rel="noopener">前往 ↗</a><a class="btn-mini" href="https://github.com/mintguesss/Folio-manager" target="_blank" rel="noopener"><svg class="bi" style="color:currentColor" aria-hidden="true"><use href="#i-github"/></svg> 原始碼</a></span></div>
 </div>
 <span class="shine" aria-hidden="true"></span>
-</article><article class="card reveal big" tabindex="0" data-id="mintguesss-repofolio" data-status="active" data-tech="claude api|typescript|javascript" data-text="repofolio mintguesss/repofolio know, showcase and promote every github repo you own: inventory, deployments, live-url checks, and an animated, themeable portfolio site + profile card.  claude api typescript javascript cli deployments developer-portfolio developer-tools github-action github-pages github-profile inventory" data-stars="0" data-updated="2026-11-20T12:55:44Z" data-created="2026-11-20T08:20:14Z" data-name="repofolio" data-featured="0">
+</article><article class="card reveal big" tabindex="0" data-id="mintguesss-repofolio" data-status="active" data-tech="claude api|typescript|javascript" data-text="repofolio mintguesss/repofolio know, showcase and promote every github repo you own: inventory, deployments, live-url checks, and an animated, themeable portfolio site + profile card.  claude api typescript javascript cli deployments developer-portfolio developer-tools github-action github-pages github-profile inventory" data-stars="0" data-updated="2026-11-20T17:23:34Z" data-created="2026-11-20T08:20:14Z" data-name="repofolio" data-featured="0">
 <div class="cover"><img loading="lazy" decoding="async" src="https://raw.githubusercontent.com/mintguesss/repofolio/main/docs/screenshots/hero-simple.jpg" alt="" referrerpolicy="no-referrer" onerror="this.parentNode.classList.add('noimg');this.remove()"><div class="cover-fallback" aria-hidden="true"><span>R</span></div></div>
 <div class="card-body">
 <div class="card-top"><span class="dot st-active" title="進行中"></span><h3>repofolio</h3></div>
 <p class="sum">Know, showcase and promote every GitHub repo you own: inventory, deployments, live-URL checks, and an animated, themeable portfolio site + profile card.</p>
 <div class="techs"><span class="tech" title="Claude API"><svg class="ti" style="color:#D97757" aria-hidden="true"><use href="#i-claude_api"/></svg><em>Claude API</em></span><span class="tech" title="TypeScript"><svg class="ti" style="color:#3178C6" aria-hidden="true"><use href="#i-typescript"/></svg><em>TypeScript</em></span><span class="tech" title="JavaScript"><svg class="ti" style="color:#F7DF1E" aria-hidden="true"><use href="#i-javascript"/></svg><em>JavaScript</em></span></div>
 <svg class="spark" viewBox="0 0 120 28" preserveAspectRatio="none" aria-hidden="true"><polyline class="spark-area" points="0,28 0.0,26.0 4.8,26.0 9.6,26.0 14.4,26.0 19.2,26.0 24.0,26.0 28.8,26.0 33.6,26.0 38.4,26.0 43.2,26.0 48.0,26.0 52.8,26.0 57.6,26.0 62.4,26.0 67.2,26.0 72.0,26.0 76.8,26.0 81.6,26.0 86.4,26.0 91.2,26.0 96.0,26.0 100.8,26.0 105.6,26.0 110.4,26.0 115.2,26.0 120.0,2.0 120,28"/><polyline class="spark-line" points="0.0,26.0 4.8,26.0 9.6,26.0 14.4,26.0 19.2,26.0 24.0,26.0 28.8,26.0 33.6,26.0 38.4,26.0 43.2,26.0 48.0,26.0 52.8,26.0 57.6,26.0 62.4,26.0 67.2,26.0 72.0,26.0 76.8,26.0 81.6,26.0 86.4,26.0 91.2,26.0 96.0,26.0 100.8,26.0 105.6,26.0 110.4,26.0 115.2,26.0 120.0,2.0"/></svg>
-<div class="card-foot"><span class="when" data-time="2026-11-20T12:55:44Z">進行中 · v0.4.0</span><span class="acts"><a class="btn-mini primary" href="https://github.com/mintguesss/repofolio#readme" target="_blank" rel="noopener">前往 ↗</a><a class="btn-mini" href="https://github.com/mintguesss/repofolio" target="_blank" rel="noopener"><svg class="bi" style="color:currentColor" aria-hidden="true"><use href="#i-github"/></svg> 原始碼</a></span></div>
+<div class="card-foot"><span class="when" data-time="2026-11-20T17:23:34Z">進行中 · v0.4.1</span><span class="acts"><a class="btn-mini primary" href="https://github.com/mintguesss/repofolio#readme" target="_blank" rel="noopener">前往 ↗</a><a class="btn-mini" href="https://github.com/mintguesss/repofolio" target="_blank" rel="noopener"><svg class="bi" style="color:currentColor" aria-hidden="true"><use href="#i-github"/></svg> 原始碼</a></span></div>
 </div>
 <span class="shine" aria-hidden="true"></span>
 </article></div></section></div>
@@ -827,25 +807,25 @@ body[data-mode="simple"] .tl-row a:hover{transform:none;border-color:color-mix(i
 </div>
 <span class="shine" aria-hidden="true"></span>
 </article>
-<article class="card reveal" tabindex="0" data-id="mintguesss-repofolio" data-status="active" data-tech="claude api|typescript|javascript" data-text="repofolio mintguesss/repofolio know, showcase and promote every github repo you own: inventory, deployments, live-url checks, and an animated, themeable portfolio site + profile card.  claude api typescript javascript cli deployments developer-portfolio developer-tools github-action github-pages github-profile inventory" data-stars="0" data-updated="2026-11-20T12:55:44Z" data-created="2026-11-20T08:20:14Z" data-name="repofolio" data-featured="0">
+<article class="card reveal" tabindex="0" data-id="mintguesss-repofolio" data-status="active" data-tech="claude api|typescript|javascript" data-text="repofolio mintguesss/repofolio know, showcase and promote every github repo you own: inventory, deployments, live-url checks, and an animated, themeable portfolio site + profile card.  claude api typescript javascript cli deployments developer-portfolio developer-tools github-action github-pages github-profile inventory" data-stars="0" data-updated="2026-11-20T17:23:34Z" data-created="2026-11-20T08:20:14Z" data-name="repofolio" data-featured="0">
 <div class="cover"><img loading="lazy" decoding="async" src="https://raw.githubusercontent.com/mintguesss/repofolio/main/docs/screenshots/hero-simple.jpg" alt="" referrerpolicy="no-referrer" onerror="this.parentNode.classList.add('noimg');this.remove()"><div class="cover-fallback" aria-hidden="true"><span>R</span></div></div>
 <div class="card-body">
 <div class="card-top"><span class="dot st-active" title="進行中"></span><h3>repofolio</h3></div>
 <p class="sum">Know, showcase and promote every GitHub repo you own: inventory, deployments, live-URL checks, and an animated, themeable portfolio site + profile card.</p>
 <div class="techs"><span class="tech" title="Claude API"><svg class="ti" style="color:#D97757" aria-hidden="true"><use href="#i-claude_api"/></svg><em>Claude API</em></span><span class="tech" title="TypeScript"><svg class="ti" style="color:#3178C6" aria-hidden="true"><use href="#i-typescript"/></svg><em>TypeScript</em></span><span class="tech" title="JavaScript"><svg class="ti" style="color:#F7DF1E" aria-hidden="true"><use href="#i-javascript"/></svg><em>JavaScript</em></span></div>
 <svg class="spark" viewBox="0 0 120 28" preserveAspectRatio="none" aria-hidden="true"><polyline class="spark-area" points="0,28 0.0,26.0 4.8,26.0 9.6,26.0 14.4,26.0 19.2,26.0 24.0,26.0 28.8,26.0 33.6,26.0 38.4,26.0 43.2,26.0 48.0,26.0 52.8,26.0 57.6,26.0 62.4,26.0 67.2,26.0 72.0,26.0 76.8,26.0 81.6,26.0 86.4,26.0 91.2,26.0 96.0,26.0 100.8,26.0 105.6,26.0 110.4,26.0 115.2,26.0 120.0,2.0 120,28"/><polyline class="spark-line" points="0.0,26.0 4.8,26.0 9.6,26.0 14.4,26.0 19.2,26.0 24.0,26.0 28.8,26.0 33.6,26.0 38.4,26.0 43.2,26.0 48.0,26.0 52.8,26.0 57.6,26.0 62.4,26.0 67.2,26.0 72.0,26.0 76.8,26.0 81.6,26.0 86.4,26.0 91.2,26.0 96.0,26.0 100.8,26.0 105.6,26.0 110.4,26.0 115.2,26.0 120.0,2.0"/></svg>
-<div class="card-foot"><span class="when" data-time="2026-11-20T12:55:44Z">進行中 · v0.4.0</span><span class="acts"><a class="btn-mini primary" href="https://github.com/mintguesss/repofolio#readme" target="_blank" rel="noopener">前往 ↗</a><a class="btn-mini" href="https://github.com/mintguesss/repofolio" target="_blank" rel="noopener"><svg class="bi" style="color:currentColor" aria-hidden="true"><use href="#i-github"/></svg> 原始碼</a></span></div>
+<div class="card-foot"><span class="when" data-time="2026-11-20T17:23:34Z">進行中 · v0.4.1</span><span class="acts"><a class="btn-mini primary" href="https://github.com/mintguesss/repofolio#readme" target="_blank" rel="noopener">前往 ↗</a><a class="btn-mini" href="https://github.com/mintguesss/repofolio" target="_blank" rel="noopener"><svg class="bi" style="color:currentColor" aria-hidden="true"><use href="#i-github"/></svg> 原始碼</a></span></div>
 </div>
 <span class="shine" aria-hidden="true"></span>
 </article>
-<article class="card reveal" tabindex="0" data-id="mintguesss-personal-web" data-status="active" data-tech="next.js|react|tailwind css|three.js|typescript|html" data-text="personal_web mintguesss/personal_web 我的個人網站  next.js react tailwind css three.js typescript html personal-website" data-stars="0" data-updated="2026-11-20T11:31:47Z" data-created="2026-08-26T15:08:43Z" data-name="personal_web" data-featured="0">
+<article class="card reveal" tabindex="0" data-id="mintguesss-personal-web" data-status="active" data-tech="next.js|react|tailwind css|three.js|typescript|html" data-text="personal_web mintguesss/personal_web 我的個人網站  next.js react tailwind css three.js typescript html personal-website" data-stars="0" data-updated="2026-11-20T12:57:02Z" data-created="2026-08-26T15:08:43Z" data-name="personal_web" data-featured="0">
 <div class="cover"><img loading="lazy" decoding="async" src="https://opengraph.githubassets.com/1/mintguesss/personal_web" alt="" referrerpolicy="no-referrer" onerror="this.parentNode.classList.add('noimg');this.remove()"><div class="cover-fallback" aria-hidden="true"><span>P</span></div></div>
 <div class="card-body">
 <div class="card-top"><span class="dot st-active" title="進行中"></span><h3>personal_web</h3></div>
 <p class="sum">我的個人網站</p>
 <div class="techs"><span class="tech" title="Next.js"><svg class="ti" style="color:currentColor" aria-hidden="true"><use href="#i-next_js"/></svg><em>Next.js</em></span><span class="tech" title="React"><svg class="ti" style="color:#61DAFB" aria-hidden="true"><use href="#i-react"/></svg><em>React</em></span><span class="tech" title="Tailwind CSS"><svg class="ti" style="color:#06B6D4" aria-hidden="true"><use href="#i-tailwind_css"/></svg><em>Tailwind CSS</em></span><span class="tech" title="Three.js"><svg class="ti" style="color:currentColor" aria-hidden="true"><use href="#i-three_js"/></svg><em>Three.js</em></span><span class="tech" title="TypeScript"><svg class="ti" style="color:#3178C6" aria-hidden="true"><use href="#i-typescript"/></svg><em>TypeScript</em></span><span class="tech" title="HTML"><svg class="ti" style="color:#E34F26" aria-hidden="true"><use href="#i-html"/></svg><em>HTML</em></span></div>
 <svg class="spark" viewBox="0 0 120 28" preserveAspectRatio="none" aria-hidden="true"><polyline class="spark-area" points="0,28 0.0,26.0 4.8,14.0 9.6,26.0 14.4,26.0 19.2,2.0 24.0,26.0 28.8,26.0 33.6,14.0 38.4,26.0 43.2,26.0 48.0,2.0 52.8,26.0 57.6,26.0 62.4,8.0 67.2,26.0 72.0,26.0 76.8,26.0 81.6,26.0 86.4,26.0 91.2,26.0 96.0,26.0 100.8,26.0 105.6,26.0 110.4,20.0 115.2,26.0 120.0,26.0 120,28"/><polyline class="spark-line" points="0.0,26.0 4.8,14.0 9.6,26.0 14.4,26.0 19.2,2.0 24.0,26.0 28.8,26.0 33.6,14.0 38.4,26.0 43.2,26.0 48.0,2.0 52.8,26.0 57.6,26.0 62.4,8.0 67.2,26.0 72.0,26.0 76.8,26.0 81.6,26.0 86.4,26.0 91.2,26.0 96.0,26.0 100.8,26.0 105.6,26.0 110.4,20.0 115.2,26.0 120.0,26.0"/></svg>
-<div class="card-foot"><span class="when" data-time="2026-11-20T11:31:47Z">進行中</span><span class="acts"><a class="btn-mini primary" href="https://mintguesss.github.io/personal_web/" target="_blank" rel="noopener">前往 ↗</a><a class="btn-mini" href="https://github.com/mintguesss/personal_web" target="_blank" rel="noopener"><svg class="bi" style="color:currentColor" aria-hidden="true"><use href="#i-github"/></svg> 原始碼</a></span></div>
+<div class="card-foot"><span class="when" data-time="2026-11-20T12:57:02Z">進行中</span><span class="acts"><a class="btn-mini primary" href="https://mintguesss.github.io/personal_web/" target="_blank" rel="noopener">前往 ↗</a><a class="btn-mini" href="https://github.com/mintguesss/personal_web" target="_blank" rel="noopener"><svg class="bi" style="color:currentColor" aria-hidden="true"><use href="#i-github"/></svg> 原始碼</a></span></div>
 </div>
 <span class="shine" aria-hidden="true"></span>
 </article>
@@ -974,14 +954,14 @@ body[data-mode="simple"] .tl-row a:hover{transform:none;border-color:color-mix(i
 </div><div class="stat reveal stat-langs">
 <div class="stat-head"><span class="stat-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"/></svg></span><span class="stat-l">使用語言</span></div>
 <div class="stat-main"><span class="stat-n count" data-to="14">0</span></div>
-<div class="stat-viz"><div class="sbar" role="img" aria-label="TypeScript 48.7, Python 25.1, JavaScript 8.4, CSS 5.9, HTML 5.6, Vue 4, Kotlin 1.1, PLpgSQL 0.3"><i style="--w:49.1%;--i:0;background:#3178c6" title="TypeScript · 48.7"></i><i style="--w:25.3%;--i:1;background:#3572A5" title="Python · 25.1"></i><i style="--w:8.5%;--i:2;background:#f1e05a" title="JavaScript · 8.4"></i><i style="--w:6.0%;--i:3;background:#663399" title="CSS · 5.9"></i><i style="--w:5.7%;--i:4;background:#e34c26" title="HTML · 5.6"></i><i style="--w:4.0%;--i:5;background:#41b883" title="Vue · 4"></i><i style="--w:1.1%;--i:6;background:#A97BFF" title="Kotlin · 1.1"></i><i style="--w:0.3%;--i:7;background:hsl(228 65% 55%)" title="PLpgSQL · 0.3"></i></div></div>
+<div class="stat-viz"><div class="sbar" role="img" aria-label="TypeScript 48.7, Python 24.9, JavaScript 8.3, HTML 6, CSS 5.8, Vue 4, Kotlin 1.1, PLpgSQL 0.3"><i style="--w:49.1%;--i:0;background:#3178c6" title="TypeScript · 48.7"></i><i style="--w:25.1%;--i:1;background:#3572A5" title="Python · 24.9"></i><i style="--w:8.4%;--i:2;background:#f1e05a" title="JavaScript · 8.3"></i><i style="--w:6.1%;--i:3;background:#e34c26" title="HTML · 6"></i><i style="--w:5.9%;--i:4;background:#663399" title="CSS · 5.8"></i><i style="--w:4.0%;--i:5;background:#41b883" title="Vue · 4"></i><i style="--w:1.1%;--i:6;background:#A97BFF" title="Kotlin · 1.1"></i><i style="--w:0.3%;--i:7;background:hsl(228 65% 55%)" title="PLpgSQL · 0.3"></i></div></div>
 </div></div>
 <h3 class="sub-h">開發活動</h3>
 <div class="activity-grid"><div class="panel reveal chart-wrap"><svg class="chart" viewBox="0 0 624 140" role="img" aria-label="所有展示專案過去 12 個月的每週提交數。"><rect x="1" y="120" width="9" height="2" rx="2" style="--i:0" data-tip="11月28日: 0" class="zero"/><rect x="13" y="120" width="9" height="2" rx="2" style="--i:1" data-tip="12月5日: 0" class="zero"/><rect x="25" y="120" width="9" height="2" rx="2" style="--i:2" data-tip="12月12日: 0" class="zero"/><rect x="37" y="120" width="9" height="2" rx="2" style="--i:3" data-tip="12月19日: 0" class="zero"/><rect x="49" y="120" width="9" height="2" rx="2" style="--i:4" data-tip="12月26日: 0" class="zero"/><rect x="61" y="120" width="9" height="2" rx="2" style="--i:5" data-tip="1月2日: 0" class="zero"/><rect x="73" y="120" width="9" height="2" rx="2" style="--i:6" data-tip="1月9日: 0" class="zero"/><rect x="85" y="120" width="9" height="2" rx="2" style="--i:7" data-tip="1月16日: 0" class="zero"/><rect x="97" y="120" width="9" height="2" rx="2" style="--i:8" data-tip="1月23日: 0" class="zero"/><rect x="109" y="120" width="9" height="2" rx="2" style="--i:9" data-tip="1月30日: 0" class="zero"/><rect x="121" y="120" width="9" height="2" rx="2" style="--i:10" data-tip="2月6日: 0" class="zero"/><rect x="133" y="120" width="9" height="2" rx="2" style="--i:11" data-tip="2月13日: 0" class="zero"/><rect x="145" y="120" width="9" height="2" rx="2" style="--i:12" data-tip="2月20日: 0" class="zero"/><rect x="157" y="120" width="9" height="2" rx="2" style="--i:13" data-tip="2月27日: 0" class="zero"/><rect x="169" y="120" width="9" height="2" rx="2" style="--i:14" data-tip="3月6日: 0" class="zero"/><rect x="181" y="87.37313432835822" width="9" height="34.62686567164179" rx="2" style="--i:15" data-tip="3月13日: 20"/><rect x="193" y="120" width="9" height="2" rx="2" style="--i:16" data-tip="3月20日: 0" class="zero"/><rect x="205" y="116.80597014925374" width="9" height="5.1940298507462686" rx="2" style="--i:17" data-tip="3月27日: 3"/><rect x="217" y="120" width="9" height="2" rx="2" style="--i:18" data-tip="4月3日: 0" class="zero"/><rect x="229" y="120" width="9" height="2" rx="2" style="--i:19" data-tip="4月10日: 0" class="zero"/><rect x="241" y="120" width="9" height="2" rx="2" style="--i:20" data-tip="4月17日: 0" class="zero"/><rect x="253" y="120" width="9" height="2" rx="2" style="--i:21" data-tip="4月24日: 0" class="zero"/><rect x="265" y="120" width="9" height="2" rx="2" style="--i:22" data-tip="5月1日: 0" class="zero"/><rect x="277" y="120" width="9" height="2" rx="2" style="--i:23" data-tip="5月8日: 0" class="zero"/><rect x="289" y="109.88059701492537" width="9" height="12.119402985074627" rx="2" style="--i:24" data-tip="5月15日: 7"/><rect x="301" y="120" width="9" height="2" rx="2" style="--i:25" data-tip="5月22日: 0" class="zero"/><rect x="313" y="120" width="9" height="2" rx="2" style="--i:26" data-tip="5月29日: 0" class="zero"/><rect x="325" y="115.07462686567165" width="9" height="6.925373134328358" rx="2" style="--i:27" data-tip="6月5日: 4"/><rect x="337" y="115.07462686567165" width="9" height="6.925373134328358" rx="2" style="--i:28" data-tip="6月12日: 4"/><rect x="349" y="120" width="9" height="2" rx="2" style="--i:29" data-tip="6月19日: 0" class="zero"/><rect x="361" y="108.14925373134328" width="9" height="13.850746268656716" rx="2" style="--i:30" data-tip="6月26日: 8"/><rect x="373" y="120" width="9" height="2" rx="2" style="--i:31" data-tip="7月3日: 0" class="zero"/><rect x="385" y="120" width="9" height="2" rx="2" style="--i:32" data-tip="7月10日: 0" class="zero"/><rect x="397" y="115.07462686567165" width="9" height="6.925373134328358" rx="2" style="--i:33" data-tip="7月17日: 4"/><rect x="409" y="120" width="9" height="2" rx="2" style="--i:34" data-tip="7月24日: 0" class="zero"/><rect x="421" y="115.07462686567165" width="9" height="6.925373134328358" rx="2" style="--i:35" data-tip="7月31日: 4"/><rect x="433" y="104.68656716417911" width="9" height="17.313432835820894" rx="2" style="--i:36" data-tip="8月7日: 10"/><rect x="445" y="120" width="9" height="2" rx="2" style="--i:37" data-tip="8月14日: 1"/><rect x="457" y="116.80597014925374" width="9" height="5.1940298507462686" rx="2" style="--i:38" data-tip="8月21日: 3"/><rect x="469" y="113.34328358208955" width="9" height="8.656716417910447" rx="2" style="--i:39" data-tip="8月28日: 5"/><rect x="481" y="120" width="9" height="2" rx="2" style="--i:40" data-tip="9月4日: 0" class="zero"/><rect x="493" y="120" width="9" height="2" rx="2" style="--i:41" data-tip="9月11日: 0" class="zero"/><rect x="505" y="120" width="9" height="2" rx="2" style="--i:42" data-tip="9月18日: 0" class="zero"/><rect x="517" y="31.970149253731336" width="9" height="90.02985074626866" rx="2" style="--i:43" data-tip="9月25日: 52"/><rect x="529" y="64.86567164179104" width="9" height="57.134328358208954" rx="2" style="--i:44" data-tip="10月2日: 33"/><rect x="541" y="28.507462686567166" width="9" height="93.49253731343283" rx="2" style="--i:45" data-tip="10月9日: 54"/><rect x="553" y="40.62686567164178" width="9" height="81.37313432835822" rx="2" style="--i:46" data-tip="10月16日: 47"/><rect x="565" y="106.41791044776119" width="9" height="15.582089552238806" rx="2" style="--i:47" data-tip="10月23日: 9"/><rect x="577" y="106.41791044776119" width="9" height="15.582089552238806" rx="2" style="--i:48" data-tip="10月30日: 9"/><rect x="589" y="6" width="9" height="116" rx="2" style="--i:49" data-tip="11月6日: 67"/><rect x="601" y="92.56716417910448" width="9" height="29.432835820895523" rx="2" style="--i:50" data-tip="11月13日: 17"/><rect x="613" y="118.53731343283582" width="9" height="3.462686567164179" rx="2" style="--i:51" data-tip="11月20日: 2"/><text x="0" y="137">11月</text><text x="48" y="137">12月</text><text x="108" y="137">1月</text><text x="156" y="137">2月</text><text x="204" y="137">3月</text><text x="264" y="137">5月</text><text x="312" y="137">5月</text><text x="360" y="137">6月</text><text x="420" y="137">7月</text><text x="468" y="137">8月</text><text x="516" y="137">9月</text><text x="576" y="137">10月</text><text x="624" y="137">11月</text></svg><div class="tip" id="chart-tip" hidden></div></div>
 <div class="panel reveal act-side"><dl class="kpis"><div><dt class="count" data-to="2">0</dt><dd>本週</dd></div><div><dt class="count" data-to="67">0</dt><dd>最忙的一週</dd></div></dl>
 <h4>最活躍的專案</h4><ol class="top-repos"><li><a href="#/p/mintguesss-aidit" data-open="mintguesss-aidit">aidit</a><span class="bar"><i style="--w:100%"></i></span><b>179</b></li><li><a href="#/p/mintguesss-nobook" data-open="mintguesss-nobook">nobook</a><span class="bar"><i style="--w:25.69832402234637%"></i></span><b>46</b></li><li><a href="#/p/mintguesss-folio-manager" data-open="mintguesss-folio-manager">Folio-manager</a><span class="bar"><i style="--w:22.3463687150838%"></i></span><b>40</b></li><li><a href="#/p/mintguesss-personal-web" data-open="mintguesss-personal-web">personal_web</a><span class="bar"><i style="--w:21.787709497206702%"></i></span><b>39</b></li><li><a href="#/p/mintguesss-taica-llm" data-open="mintguesss-taica-llm">TAICA_LLM</a><span class="bar"><i style="--w:7.82122905027933%"></i></span><b>14</b></li></ol></div></div>
 <h3 class="sub-h">技術棧</h3>
-<div class="stack-grid"><ul class="langs panel reveal"><li><span class="lang-name"><svg class="ti" style="color:#3178C6" aria-hidden="true"><use href="#i-typescript"/></svg>TypeScript</span><span class="bar"><i style="--w:48.7%"></i></span><span class="pct">48.7%</span></li><li><span class="lang-name"><svg class="ti" style="color:#3776AB" aria-hidden="true"><use href="#i-python"/></svg>Python</span><span class="bar"><i style="--w:25.1%"></i></span><span class="pct">25.1%</span></li><li><span class="lang-name"><svg class="ti" style="color:#F7DF1E" aria-hidden="true"><use href="#i-javascript"/></svg>JavaScript</span><span class="bar"><i style="--w:8.4%"></i></span><span class="pct">8.4%</span></li><li><span class="lang-name"><svg class="ti" style="color:#663399" aria-hidden="true"><use href="#i-css"/></svg>CSS</span><span class="bar"><i style="--w:5.9%"></i></span><span class="pct">5.9%</span></li><li><span class="lang-name"><svg class="ti" style="color:#E34F26" aria-hidden="true"><use href="#i-html"/></svg>HTML</span><span class="bar"><i style="--w:5.6%"></i></span><span class="pct">5.6%</span></li><li><span class="lang-name"><svg class="ti" style="color:#4FC08D" aria-hidden="true"><use href="#i-vue"/></svg>Vue</span><span class="bar"><i style="--w:4%"></i></span><span class="pct">4%</span></li><li><span class="lang-name"><svg class="ti" style="color:#7F52FF" aria-hidden="true"><use href="#i-kotlin"/></svg>Kotlin</span><span class="bar"><i style="--w:1.1%"></i></span><span class="pct">1.1%</span></li><li><span class="lang-name"><svg class="ti" style="color:#4169E1" aria-hidden="true"><use href="#i-plpgsql"/></svg>PLpgSQL</span><span class="bar"><i style="--w:0.3%"></i></span><span class="pct">0.3%</span></li><li><span class="lang-name"><span class="ti mono" aria-hidden="true">Po</span>PowerShell</span><span class="bar"><i style="--w:0.3%"></i></span><span class="pct">0.3%</span></li><li><span class="lang-name"><svg class="ti" style="color:#4EAA25" aria-hidden="true"><use href="#i-shell"/></svg>Shell</span><span class="bar"><i style="--w:0.2%"></i></span><span class="pct">0.2%</span></li></ul><ul class="cloud panel reveal"><li class="orb" style="--n:10" title="Python · 用在 10" data-tech="python"><svg class="oi" style="color:#3776AB" aria-hidden="true"><use href="#i-python"/></svg><span>Python</span><b>10</b></li><li class="orb" style="--n:6" title="HTML · 用在 6" data-tech="html"><svg class="oi" style="color:#E34F26" aria-hidden="true"><use href="#i-html"/></svg><span>HTML</span><b>6</b></li><li class="orb" style="--n:6" title="JavaScript · 用在 6" data-tech="javascript"><svg class="oi" style="color:#F7DF1E" aria-hidden="true"><use href="#i-javascript"/></svg><span>JavaScript</span><b>6</b></li><li class="orb" style="--n:5" title="CSS · 用在 5" data-tech="css"><svg class="oi" style="color:#663399" aria-hidden="true"><use href="#i-css"/></svg><span>CSS</span><b>5</b></li><li class="orb" style="--n:5" title="TypeScript · 用在 5" data-tech="typescript"><svg class="oi" style="color:#3178C6" aria-hidden="true"><use href="#i-typescript"/></svg><span>TypeScript</span><b>5</b></li><li class="orb" style="--n:3" title="FastAPI · 用在 3" data-tech="fastapi"><svg class="oi" style="color:#009688" aria-hidden="true"><use href="#i-fastapi"/></svg><span>FastAPI</span><b>3</b></li><li class="orb" style="--n:3" title="Next.js · 用在 3" data-tech="next.js"><svg class="oi" style="color:currentColor" aria-hidden="true"><use href="#i-next_js"/></svg><span>Next.js</span><b>3</b></li><li class="orb" style="--n:3" title="PowerShell · 用在 3" data-tech="powershell"><span class="oi mono" aria-hidden="true">Po</span><span>PowerShell</span><b>3</b></li><li class="orb" style="--n:3" title="React · 用在 3" data-tech="react"><svg class="oi" style="color:#61DAFB" aria-hidden="true"><use href="#i-react"/></svg><span>React</span><b>3</b></li><li class="orb" style="--n:3" title="Shell · 用在 3" data-tech="shell"><svg class="oi" style="color:#4EAA25" aria-hidden="true"><use href="#i-shell"/></svg><span>Shell</span><b>3</b></li><li class="orb" style="--n:3" title="Tailwind CSS · 用在 3" data-tech="tailwind css"><svg class="oi" style="color:#06B6D4" aria-hidden="true"><use href="#i-tailwind_css"/></svg><span>Tailwind CSS</span><b>3</b></li><li class="orb" style="--n:2" title="Batchfile · 用在 2" data-tech="batchfile"><span class="oi mono" aria-hidden="true">Ba</span><span>Batchfile</span><b>2</b></li><li class="orb" style="--n:2" title="Claude API · 用在 2" data-tech="claude api"><svg class="oi" style="color:#D97757" aria-hidden="true"><use href="#i-claude_api"/></svg><span>Claude API</span><b>2</b></li><li class="orb" style="--n:2" title="Supabase · 用在 2" data-tech="supabase"><svg class="oi" style="color:#3FCF8E" aria-hidden="true"><use href="#i-supabase"/></svg><span>Supabase</span><b>2</b></li><li class="orb" style="--n:2" title="Transformers · 用在 2" data-tech="transformers"><svg class="oi" style="color:#FFD21E" aria-hidden="true"><use href="#i-transformers"/></svg><span>Transformers</span><b>2</b></li><li class="orb" style="--n:1" title="Java · 用在 1" data-tech="java"><svg class="oi" style="color:currentColor" aria-hidden="true"><use href="#i-java"/></svg><span>Java</span><b>1</b></li><li class="orb" style="--n:1" title="Kotlin · 用在 1" data-tech="kotlin"><svg class="oi" style="color:#7F52FF" aria-hidden="true"><use href="#i-kotlin"/></svg><span>Kotlin</span><b>1</b></li><li class="orb" style="--n:1" title="pandas · 用在 1" data-tech="pandas"><svg class="oi" style="color:currentColor" aria-hidden="true"><use href="#i-pandas"/></svg><span>pandas</span><b>1</b></li><li class="orb" style="--n:1" title="PLpgSQL · 用在 1" data-tech="plpgsql"><svg class="oi" style="color:#4169E1" aria-hidden="true"><use href="#i-plpgsql"/></svg><span>PLpgSQL</span><b>1</b></li><li class="orb" style="--n:1" title="PyTorch · 用在 1" data-tech="pytorch"><svg class="oi" style="color:#EE4C2C" aria-hidden="true"><use href="#i-pytorch"/></svg><span>PyTorch</span><b>1</b></li><li class="orb" style="--n:1" title="Three.js · 用在 1" data-tech="three.js"><svg class="oi" style="color:currentColor" aria-hidden="true"><use href="#i-three_js"/></svg><span>Three.js</span><b>1</b></li><li class="orb" style="--n:1" title="VBScript · 用在 1" data-tech="vbscript"><span class="oi mono" aria-hidden="true">VB</span><span>VBScript</span><b>1</b></li><li class="orb" style="--n:1" title="Vue · 用在 1" data-tech="vue"><svg class="oi" style="color:#4FC08D" aria-hidden="true"><use href="#i-vue"/></svg><span>Vue</span><b>1</b></li></ul></div>
+<div class="stack-grid"><ul class="langs panel reveal"><li><span class="lang-name"><svg class="ti" style="color:#3178C6" aria-hidden="true"><use href="#i-typescript"/></svg>TypeScript</span><span class="bar"><i style="--w:48.7%"></i></span><span class="pct">48.7%</span></li><li><span class="lang-name"><svg class="ti" style="color:#3776AB" aria-hidden="true"><use href="#i-python"/></svg>Python</span><span class="bar"><i style="--w:24.9%"></i></span><span class="pct">24.9%</span></li><li><span class="lang-name"><svg class="ti" style="color:#F7DF1E" aria-hidden="true"><use href="#i-javascript"/></svg>JavaScript</span><span class="bar"><i style="--w:8.3%"></i></span><span class="pct">8.3%</span></li><li><span class="lang-name"><svg class="ti" style="color:#E34F26" aria-hidden="true"><use href="#i-html"/></svg>HTML</span><span class="bar"><i style="--w:6%"></i></span><span class="pct">6%</span></li><li><span class="lang-name"><svg class="ti" style="color:#663399" aria-hidden="true"><use href="#i-css"/></svg>CSS</span><span class="bar"><i style="--w:5.8%"></i></span><span class="pct">5.8%</span></li><li><span class="lang-name"><svg class="ti" style="color:#4FC08D" aria-hidden="true"><use href="#i-vue"/></svg>Vue</span><span class="bar"><i style="--w:4%"></i></span><span class="pct">4%</span></li><li><span class="lang-name"><svg class="ti" style="color:#7F52FF" aria-hidden="true"><use href="#i-kotlin"/></svg>Kotlin</span><span class="bar"><i style="--w:1.1%"></i></span><span class="pct">1.1%</span></li><li><span class="lang-name"><svg class="ti" style="color:#4169E1" aria-hidden="true"><use href="#i-plpgsql"/></svg>PLpgSQL</span><span class="bar"><i style="--w:0.3%"></i></span><span class="pct">0.3%</span></li><li><span class="lang-name"><span class="ti mono" aria-hidden="true">Po</span>PowerShell</span><span class="bar"><i style="--w:0.3%"></i></span><span class="pct">0.3%</span></li><li><span class="lang-name"><svg class="ti" style="color:#4EAA25" aria-hidden="true"><use href="#i-shell"/></svg>Shell</span><span class="bar"><i style="--w:0.2%"></i></span><span class="pct">0.2%</span></li></ul><ul class="cloud panel reveal"><li class="orb" style="--n:10" title="Python · 用在 10" data-tech="python"><svg class="oi" style="color:#3776AB" aria-hidden="true"><use href="#i-python"/></svg><span>Python</span><b>10</b></li><li class="orb" style="--n:6" title="HTML · 用在 6" data-tech="html"><svg class="oi" style="color:#E34F26" aria-hidden="true"><use href="#i-html"/></svg><span>HTML</span><b>6</b></li><li class="orb" style="--n:6" title="JavaScript · 用在 6" data-tech="javascript"><svg class="oi" style="color:#F7DF1E" aria-hidden="true"><use href="#i-javascript"/></svg><span>JavaScript</span><b>6</b></li><li class="orb" style="--n:5" title="CSS · 用在 5" data-tech="css"><svg class="oi" style="color:#663399" aria-hidden="true"><use href="#i-css"/></svg><span>CSS</span><b>5</b></li><li class="orb" style="--n:5" title="TypeScript · 用在 5" data-tech="typescript"><svg class="oi" style="color:#3178C6" aria-hidden="true"><use href="#i-typescript"/></svg><span>TypeScript</span><b>5</b></li><li class="orb" style="--n:3" title="FastAPI · 用在 3" data-tech="fastapi"><svg class="oi" style="color:#009688" aria-hidden="true"><use href="#i-fastapi"/></svg><span>FastAPI</span><b>3</b></li><li class="orb" style="--n:3" title="Next.js · 用在 3" data-tech="next.js"><svg class="oi" style="color:currentColor" aria-hidden="true"><use href="#i-next_js"/></svg><span>Next.js</span><b>3</b></li><li class="orb" style="--n:3" title="PowerShell · 用在 3" data-tech="powershell"><span class="oi mono" aria-hidden="true">Po</span><span>PowerShell</span><b>3</b></li><li class="orb" style="--n:3" title="React · 用在 3" data-tech="react"><svg class="oi" style="color:#61DAFB" aria-hidden="true"><use href="#i-react"/></svg><span>React</span><b>3</b></li><li class="orb" style="--n:3" title="Shell · 用在 3" data-tech="shell"><svg class="oi" style="color:#4EAA25" aria-hidden="true"><use href="#i-shell"/></svg><span>Shell</span><b>3</b></li><li class="orb" style="--n:3" title="Tailwind CSS · 用在 3" data-tech="tailwind css"><svg class="oi" style="color:#06B6D4" aria-hidden="true"><use href="#i-tailwind_css"/></svg><span>Tailwind CSS</span><b>3</b></li><li class="orb" style="--n:2" title="Batchfile · 用在 2" data-tech="batchfile"><span class="oi mono" aria-hidden="true">Ba</span><span>Batchfile</span><b>2</b></li><li class="orb" style="--n:2" title="Claude API · 用在 2" data-tech="claude api"><svg class="oi" style="color:#D97757" aria-hidden="true"><use href="#i-claude_api"/></svg><span>Claude API</span><b>2</b></li><li class="orb" style="--n:2" title="Supabase · 用在 2" data-tech="supabase"><svg class="oi" style="color:#3FCF8E" aria-hidden="true"><use href="#i-supabase"/></svg><span>Supabase</span><b>2</b></li><li class="orb" style="--n:2" title="Transformers · 用在 2" data-tech="transformers"><svg class="oi" style="color:#FFD21E" aria-hidden="true"><use href="#i-transformers"/></svg><span>Transformers</span><b>2</b></li><li class="orb" style="--n:1" title="Java · 用在 1" data-tech="java"><svg class="oi" style="color:currentColor" aria-hidden="true"><use href="#i-java"/></svg><span>Java</span><b>1</b></li><li class="orb" style="--n:1" title="Kotlin · 用在 1" data-tech="kotlin"><svg class="oi" style="color:#7F52FF" aria-hidden="true"><use href="#i-kotlin"/></svg><span>Kotlin</span><b>1</b></li><li class="orb" style="--n:1" title="pandas · 用在 1" data-tech="pandas"><svg class="oi" style="color:currentColor" aria-hidden="true"><use href="#i-pandas"/></svg><span>pandas</span><b>1</b></li><li class="orb" style="--n:1" title="PLpgSQL · 用在 1" data-tech="plpgsql"><svg class="oi" style="color:#4169E1" aria-hidden="true"><use href="#i-plpgsql"/></svg><span>PLpgSQL</span><b>1</b></li><li class="orb" style="--n:1" title="PyTorch · 用在 1" data-tech="pytorch"><svg class="oi" style="color:#EE4C2C" aria-hidden="true"><use href="#i-pytorch"/></svg><span>PyTorch</span><b>1</b></li><li class="orb" style="--n:1" title="Three.js · 用在 1" data-tech="three.js"><svg class="oi" style="color:currentColor" aria-hidden="true"><use href="#i-three_js"/></svg><span>Three.js</span><b>1</b></li><li class="orb" style="--n:1" title="VBScript · 用在 1" data-tech="vbscript"><span class="oi mono" aria-hidden="true">VB</span><span>VBScript</span><b>1</b></li><li class="orb" style="--n:1" title="Vue · 用在 1" data-tech="vue"><svg class="oi" style="color:#4FC08D" aria-hidden="true"><use href="#i-vue"/></svg><span>Vue</span><b>1</b></li></ul></div>
 <h3 class="sub-h">分布</h3>
 <div class="breakdown">
 <div class="panel reveal"><h4>專案狀態</h4><div class="donut-wrap"><svg class="donut" viewBox="0 0 120 120" aria-hidden="true"><g transform="rotate(-90 60 60)"><circle r="42" cx="60" cy="60" fill="none" stroke="var(--line)" stroke-width="14"/><circle r="42" cx="60" cy="60" fill="none" stroke="#22c55e" stroke-width="14" stroke-dasharray="243.59 20.30" stroke-dashoffset="0.00"><title>進行中: 12</title></circle><circle r="42" cx="60" cy="60" fill="none" stroke="#eab308" stroke-width="14" stroke-dasharray="20.30 243.59" stroke-dashoffset="-243.59"><title>維護中: 1</title></circle></g><text x="60" y="58" text-anchor="middle" class="donut-n">13</text></svg><ul class="legend"><li><i style="background:#22c55e"></i>進行中<b>12</b></li><li><i style="background:#eab308"></i>維護中<b>1</b></li></ul></div></div>
@@ -990,117 +970,71 @@ body[data-mode="simple"] .tl-row a:hover{transform:none;border-color:color-mix(i
 </div>
 </section>
 <section id="status" class="sec"><div class="sec-head reveal"><span class="sec-idx">04</span><div><h2 data-scramble>上線狀態</h2><p>每個公開部署，每次建置時都會實際檢查。</p></div></div>
-<div class="panel status-board reveal"><div class="status-sum"><span class="big-dot ok"></span><b>5/5</b> 正常 · 檢查於 <span data-time="2026-11-20T12:56:22.555Z"></span></div>
-<ul><li class="ok"><span class="pulse"></span><span class="sb-name"><a href="#p/mintguesss-folio-manager" data-open="mintguesss-folio-manager">Folio-manager</a><small>production</small></span><span class="sb-prov"><svg class="ti" style="color:currentColor" aria-hidden="true"><use href="#i-vercel"/></svg>vercel</span><a class="sb-url" href="https://folio-manager-roan.vercel.app/" target="_blank" rel="noopener">folio-manager-roan.vercel.app</a><span class="sb-ms">1308 ms</span><span class="sb-state">正常</span></li><li class="ok"><span class="pulse"></span><span class="sb-name"><a href="#p/mintguesss-repofolio" data-open="mintguesss-repofolio">repofolio</a><small>production</small></span><span class="sb-prov"></span><a class="sb-url" href="https://github.com/mintguesss/repofolio#readme" target="_blank" rel="noopener">github.com/mintguesss/repofolio#readme</a><span class="sb-ms">485 ms</span><span class="sb-state">正常</span></li><li class="ok"><span class="pulse"></span><span class="sb-name"><a href="#p/mintguesss-personal-web" data-open="mintguesss-personal-web">personal_web</a><small>github-pages</small></span><span class="sb-prov"><svg class="ti" style="color:currentColor" aria-hidden="true"><use href="#i-github_pages"/></svg>github-pages</span><a class="sb-url" href="https://mintguesss.github.io/personal_web/" target="_blank" rel="noopener">mintguesss.github.io/personal_web</a><span class="sb-ms">92 ms</span><span class="sb-state">正常</span></li><li class="ok"><span class="pulse"></span><span class="sb-name"><a href="#p/mintguesss-aidit" data-open="mintguesss-aidit">aidit</a><small>production</small></span><span class="sb-prov"><svg class="ti" style="color:currentColor" aria-hidden="true"><use href="#i-vercel"/></svg>vercel</span><a class="sb-url" href="https://aidit-weld.vercel.app" target="_blank" rel="noopener">aidit-weld.vercel.app</a><span class="sb-ms">1101 ms</span><span class="sb-state">正常</span></li><li class="ok"><span class="pulse"></span><span class="sb-name"><a href="#p/mintguesss-promptmiser" data-open="mintguesss-promptmiser">PromptMiser</a><small>production</small></span><span class="sb-prov"><svg class="ti" style="color:currentColor" aria-hidden="true"><use href="#i-vercel"/></svg>vercel</span><a class="sb-url" href="https://prompt-miser.vercel.app" target="_blank" rel="noopener">prompt-miser.vercel.app</a><span class="sb-ms">195 ms</span><span class="sb-state">正常</span></li></ul></div></section></div>
+<div class="panel status-board reveal"><div class="status-sum"><span class="big-dot ok"></span><b>5/5</b> 正常 · 檢查於 <span data-time="2026-11-20T17:24:08.469Z"></span></div>
+<ul><li class="ok"><span class="pulse"></span><span class="sb-name"><a href="#p/mintguesss-folio-manager" data-open="mintguesss-folio-manager">Folio-manager</a><small>production</small></span><span class="sb-prov"><svg class="ti" style="color:currentColor" aria-hidden="true"><use href="#i-vercel"/></svg>vercel</span><a class="sb-url" href="https://folio-manager-roan.vercel.app/" target="_blank" rel="noopener">folio-manager-roan.vercel.app</a><span class="sb-ms">1972 ms</span><span class="sb-state">正常</span></li><li class="ok"><span class="pulse"></span><span class="sb-name"><a href="#p/mintguesss-repofolio" data-open="mintguesss-repofolio">repofolio</a><small>production</small></span><span class="sb-prov"></span><a class="sb-url" href="https://github.com/mintguesss/repofolio#readme" target="_blank" rel="noopener">github.com/mintguesss/repofolio#readme</a><span class="sb-ms">776 ms</span><span class="sb-state">正常</span></li><li class="ok"><span class="pulse"></span><span class="sb-name"><a href="#p/mintguesss-personal-web" data-open="mintguesss-personal-web">personal_web</a><small>github-pages</small></span><span class="sb-prov"><svg class="ti" style="color:currentColor" aria-hidden="true"><use href="#i-github_pages"/></svg>github-pages</span><a class="sb-url" href="https://mintguesss.github.io/personal_web/" target="_blank" rel="noopener">mintguesss.github.io/personal_web</a><span class="sb-ms">125 ms</span><span class="sb-state">正常</span></li><li class="ok"><span class="pulse"></span><span class="sb-name"><a href="#p/mintguesss-aidit" data-open="mintguesss-aidit">aidit</a><small>production</small></span><span class="sb-prov"><svg class="ti" style="color:currentColor" aria-hidden="true"><use href="#i-vercel"/></svg>vercel</span><a class="sb-url" href="https://aidit-weld.vercel.app" target="_blank" rel="noopener">aidit-weld.vercel.app</a><span class="sb-ms">1218 ms</span><span class="sb-state">正常</span></li><li class="ok"><span class="pulse"></span><span class="sb-name"><a href="#p/mintguesss-promptmiser" data-open="mintguesss-promptmiser">PromptMiser</a><small>production</small></span><span class="sb-prov"><svg class="ti" style="color:currentColor" aria-hidden="true"><use href="#i-vercel"/></svg>vercel</span><a class="sb-url" href="https://prompt-miser.vercel.app" target="_blank" rel="noopener">prompt-miser.vercel.app</a><span class="sb-ms">377 ms</span><span class="sb-state">正常</span></li></ul></div></section></div>
 <div class="page" data-page="timeline"><section id="timeline" class="sec"><div class="sec-head reveal"><span class="sec-idx">05</span><div><h2 data-scramble>時間軸</h2><p>每個專案從什麼時候開始。</p></div></div>
-<div class="tlx reveal" id="tlx" data-n="13" tabindex="0" aria-roledescription="carousel" aria-label="時間軸">
-<div class="tlx-stage"><article class="tlx-slide" data-i="0" aria-hidden="true">
-<a class="tlx-media" href="#/p/mintguesss-taica-llm" data-open="mintguesss-taica-llm" tabindex="-1"><div class="tlx-img"><img loading="lazy" decoding="async" src="https://opengraph.githubassets.com/1/mintguesss/TAICA_LLM" alt="" referrerpolicy="no-referrer" onerror="this.parentNode.classList.add('noimg');this.remove()"><span aria-hidden="true">T</span></div></a>
-<div class="tlx-info"><time class="tlx-date" datetime="2026-05-06"><b>2026</b><span>5月6日</span></time>
-<h3><span class="dot st-active"></span>TAICA_LLM</h3>
-<p>透過 LLM 分析拖延原因、智能拆解任務、遊戲化收集角色，讓你告別拖延、每天前進一小步！</p>
-<div class="tlx-tags"><span>JavaScript</span><span>CSS</span><span>Python</span></div>
-<a class="btn-mini primary" href="#/p/mintguesss-taica-llm" data-open="mintguesss-taica-llm">詳細 →</a></div>
-</article><article class="tlx-slide" data-i="1" aria-hidden="true">
-<a class="tlx-media" href="#/p/mintguesss-personal-assistant" data-open="mintguesss-personal-assistant" tabindex="-1"><div class="tlx-img"><img loading="lazy" decoding="async" src="https://mintguesss.github.io/personal_web/builds/personal-assistant.jpg" alt="" referrerpolicy="no-referrer" onerror="this.parentNode.classList.add('noimg');this.remove()"><span aria-hidden="true">P</span></div></a>
-<div class="tlx-info"><time class="tlx-date" datetime="2026-06-19"><b>2026</b><span>6月19日</span></time>
-<h3><span class="dot st-maintenance"></span>personal-assistant</h3>
-<p>個人助理 (Personal Assistant) - 用電腦鏡頭即時監測坐姿、專注、情緒與飲水，透過 Windows 桌面通知提醒你照顧好自己。</p>
-<div class="tlx-tags"><span>PyTorch</span><span>pandas</span><span>Transformers</span></div>
-<a class="btn-mini primary" href="#/p/mintguesss-personal-assistant" data-open="mintguesss-personal-assistant">詳細 →</a></div>
-</article><article class="tlx-slide" data-i="2" aria-hidden="true">
-<a class="tlx-media" href="#/p/mintguesss-folio-manager" data-open="mintguesss-folio-manager" tabindex="-1"><div class="tlx-img"><img loading="lazy" decoding="async" src="https://mintguesss.github.io/personal_web/builds/folio-manager.jpg" alt="" referrerpolicy="no-referrer" onerror="this.parentNode.classList.add('noimg');this.remove()"><span aria-hidden="true">F</span></div></a>
-<div class="tlx-info"><time class="tlx-date" datetime="2026-06-19"><b>2026</b><span>6月19日</span></time>
-<h3><span class="dot st-active"></span>Folio-manager</h3>
-<p>個人財務 + 投資全方位管理 Web App，免費部署、可安裝為 PWA</p>
-<div class="tlx-tags"><span>Next.js</span><span>React</span><span>Tailwind CSS</span></div>
-<a class="btn-mini primary" href="#/p/mintguesss-folio-manager" data-open="mintguesss-folio-manager">詳細 →</a></div>
-</article><article class="tlx-slide" data-i="3" aria-hidden="true">
-<a class="tlx-media" href="#/p/mintguesss-promptmiser" data-open="mintguesss-promptmiser" tabindex="-1"><div class="tlx-img"><img loading="lazy" decoding="async" src="https://mintguesss.github.io/personal_web/builds/prompt-miser.jpg" alt="" referrerpolicy="no-referrer" onerror="this.parentNode.classList.add('noimg');this.remove()"><span aria-hidden="true">P</span></div></a>
-<div class="tlx-info"><time class="tlx-date" datetime="2026-07-15"><b>2026</b><span>7月15日</span></time>
-<h3><span class="dot st-active"></span>PromptMiser</h3>
-<p>即時計算一段文字在各家 AI 模型會用掉多少 token、花多少錢</p>
-<div class="tlx-tags"><span>FastAPI</span><span>Vue</span><span>TypeScript</span></div>
-<a class="btn-mini primary" href="#/p/mintguesss-promptmiser" data-open="mintguesss-promptmiser">詳細 →</a></div>
-</article><article class="tlx-slide" data-i="4" aria-hidden="true">
-<a class="tlx-media" href="#/p/mintguesss-claudequota" data-open="mintguesss-claudequota" tabindex="-1"><div class="tlx-img"><img loading="lazy" decoding="async" src="https://mintguesss.github.io/personal_web/builds/claude-quota.png" alt="" referrerpolicy="no-referrer" onerror="this.parentNode.classList.add('noimg');this.remove()"><span aria-hidden="true">C</span></div></a>
-<div class="tlx-info"><time class="tlx-date" datetime="2026-08-03"><b>2026</b><span>8月3日</span></time>
-<h3><span class="dot st-active"></span>ClaudeQuota</h3>
-<p>Windows tray app that shows your Claude Pro/Max 5-hour and weekly usage limits, live from the official numbers</p>
-<div class="tlx-tags"><span>Python</span><span>VBScript</span></div>
-<a class="btn-mini primary" href="#/p/mintguesss-claudequota" data-open="mintguesss-claudequota">詳細 →</a></div>
-</article><article class="tlx-slide" data-i="5" aria-hidden="true">
-<a class="tlx-media" href="#/p/mintguesss-personal-web" data-open="mintguesss-personal-web" tabindex="-1"><div class="tlx-img"><img loading="lazy" decoding="async" src="https://opengraph.githubassets.com/1/mintguesss/personal_web" alt="" referrerpolicy="no-referrer" onerror="this.parentNode.classList.add('noimg');this.remove()"><span aria-hidden="true">P</span></div></a>
-<div class="tlx-info"><time class="tlx-date" datetime="2026-08-26"><b>2026</b><span>8月26日</span></time>
-<h3><span class="dot st-active"></span>personal_web</h3>
-<p>我的個人網站</p>
-<div class="tlx-tags"><span>Next.js</span><span>React</span><span>Tailwind CSS</span></div>
-<a class="btn-mini primary" href="#/p/mintguesss-personal-web" data-open="mintguesss-personal-web">詳細 →</a></div>
-</article><article class="tlx-slide" data-i="6" aria-hidden="true">
-<a class="tlx-media" href="#/p/mintguesss-nobook" data-open="mintguesss-nobook" tabindex="-1"><div class="tlx-img"><img loading="lazy" decoding="async" src="https://mintguesss.github.io/personal_web/builds/nobook.png" alt="" referrerpolicy="no-referrer" onerror="this.parentNode.classList.add('noimg');this.remove()"><span aria-hidden="true">N</span></div></a>
-<div class="tlx-info"><time class="tlx-date" datetime="2026-09-21"><b>2026</b><span>9月21日</span></time>
-<h3><span class="dot st-active"></span>nobook</h3>
-<p>手機或平板當錄音端，自己的筆電當推論伺服器，兩邊用 Tailscale 連。 逐字稿、段落摘要、下課要交的手抄筆記全部在本地 GPU 上算完， 不呼叫任何雲端 API，錄音與逐字稿不離開自己的機器。</p>
-<div class="tlx-tags"><span>FastAPI</span><span>Python</span><span>JavaScript</span></div>
-<a class="btn-mini primary" href="#/p/mintguesss-nobook" data-open="mintguesss-nobook">詳細 →</a></div>
-</article><article class="tlx-slide" data-i="7" aria-hidden="true">
-<a class="tlx-media" href="#/p/mintguesss-aidit" data-open="mintguesss-aidit" tabindex="-1"><div class="tlx-img"><img loading="lazy" decoding="async" src="https://raw.githubusercontent.com/mintguesss/aidit/main/.github/assets/home.png" alt="" referrerpolicy="no-referrer" onerror="this.parentNode.classList.add('noimg');this.remove()"><span aria-hidden="true">A</span></div></a>
-<div class="tlx-info"><time class="tlx-date" datetime="2026-09-22"><b>2026</b><span>9月22日</span></time>
-<h3><span class="dot st-active"></span>aidit</h3>
-<p>會查證、會說「不知道」的修業規劃 Agent</p>
-<div class="tlx-tags"><span>Next.js</span><span>React</span><span>Tailwind CSS</span></div>
-<a class="btn-mini primary" href="#/p/mintguesss-aidit" data-open="mintguesss-aidit">詳細 →</a></div>
-</article><article class="tlx-slide" data-i="8" aria-hidden="true">
-<a class="tlx-media" href="#/p/mintguesss-clean-contributors" data-open="mintguesss-clean-contributors" tabindex="-1"><div class="tlx-img"><img loading="lazy" decoding="async" src="https://mintguesss.github.io/personal_web/builds/clean-contributors.png" alt="" referrerpolicy="no-referrer" onerror="this.parentNode.classList.add('noimg');this.remove()"><span aria-hidden="true">C</span></div></a>
-<div class="tlx-info"><time class="tlx-date" datetime="2026-10-29"><b>2026</b><span>10月29日</span></time>
-<h3><span class="dot st-active"></span>Clean-Contributors</h3>
-<p>Claude Code plugin + scripts to remove Claude (or any unwanted account) from a GitHub repo&#39;s Contributors list</p>
-<div class="tlx-tags"><span>Shell</span><span>PowerShell</span><span>Python</span></div>
-<a class="btn-mini primary" href="#/p/mintguesss-clean-contributors" data-open="mintguesss-clean-contributors">詳細 →</a></div>
-</article><article class="tlx-slide" data-i="9" aria-hidden="true">
-<a class="tlx-media" href="#/p/mintguesss-minglu-kneopi" data-open="mintguesss-minglu-kneopi" tabindex="-1"><div class="tlx-img"><img loading="lazy" decoding="async" src="https://raw.githubusercontent.com/mintguesss/minglu_kneopi/main/docs/screenshots.png" alt="" referrerpolicy="no-referrer" onerror="this.parentNode.classList.add('noimg');this.remove()"><span aria-hidden="true">M</span></div></a>
-<div class="tlx-info"><time class="tlx-date" datetime="2026-11-05"><b>2026</b><span>11月5日</span></time>
-<h3><span class="dot st-active"></span>minglu_kneopi</h3>
-<p>MingLu on KNEO Pi：視障者的繁中隨身視覺助理，不用電腦，手機連一塊開發板就能用</p>
-<div class="tlx-tags"><span>Transformers</span><span>Python</span><span>Shell</span></div>
-<a class="btn-mini primary" href="#/p/mintguesss-minglu-kneopi" data-open="mintguesss-minglu-kneopi">詳細 →</a></div>
-</article><article class="tlx-slide" data-i="10" aria-hidden="true">
-<a class="tlx-media" href="#/p/mintguesss-nightmarket" data-open="mintguesss-nightmarket" tabindex="-1"><div class="tlx-img"><img loading="lazy" decoding="async" src="https://raw.githubusercontent.com/mintguesss/NightMarket/main/docs/screenshots/chart-en.png" alt="" referrerpolicy="no-referrer" onerror="this.parentNode.classList.add('noimg');this.remove()"><span aria-hidden="true">N</span></div></a>
-<div class="tlx-info"><time class="tlx-date" datetime="2026-11-13"><b>2026</b><span>11月13日</span></time>
-<h3><span class="dot st-active"></span>NightMarket</h3>
-<p>Taiwan &amp; US stock terminal in pure Python — real-time TWSE quotes, US pre/post market, backtesting, alerts, paper trading. Zero dependencies. 台美股看盤</p>
-<div class="tlx-tags"><span>JavaScript</span><span>Python</span><span>CSS</span></div>
-<a class="btn-mini primary" href="#/p/mintguesss-nightmarket" data-open="mintguesss-nightmarket">詳細 →</a></div>
-</article><article class="tlx-slide" data-i="11" aria-hidden="true">
-<a class="tlx-media" href="#/p/mintguesss-asa" data-open="mintguesss-asa" tabindex="-1"><div class="tlx-img"><img decoding="async" src="https://raw.githubusercontent.com/mintguesss/asa/main/docs/day-dark.png" alt="" referrerpolicy="no-referrer" onerror="this.parentNode.classList.add('noimg');this.remove()"><span aria-hidden="true">A</span></div></a>
-<div class="tlx-info"><time class="tlx-date" datetime="2026-11-13"><b>2026</b><span>11月13日</span></time>
-<h3><span class="dot st-active"></span>asa</h3>
-<p>Self-hosted alarms that plan themselves: a batch of wake-up alarms set from tomorrow&#39;s schedule, with calendar, to-dos and an Android app.</p>
-<div class="tlx-tags"><span>FastAPI</span><span>Python</span><span>JavaScript</span></div>
-<a class="btn-mini primary" href="#/p/mintguesss-asa" data-open="mintguesss-asa">詳細 →</a></div>
-</article><article class="tlx-slide on" data-i="12" aria-hidden="false">
-<a class="tlx-media" href="#/p/mintguesss-repofolio" data-open="mintguesss-repofolio" tabindex="-1"><div class="tlx-img"><img decoding="async" src="https://raw.githubusercontent.com/mintguesss/repofolio/main/docs/screenshots/hero-simple.jpg" alt="" referrerpolicy="no-referrer" onerror="this.parentNode.classList.add('noimg');this.remove()"><span aria-hidden="true">R</span></div></a>
-<div class="tlx-info"><time class="tlx-date" datetime="2026-11-20"><b>2026</b><span>11月20日</span></time>
-<h3><span class="dot st-active"></span>repofolio</h3>
-<p>Know, showcase and promote every GitHub repo you own: inventory, deployments, live-URL checks, and an animated, themeable portfolio site + profile card.</p>
-<div class="tlx-tags"><span>Claude API</span><span>TypeScript</span><span>JavaScript</span></div>
-<a class="btn-mini primary" href="#/p/mintguesss-repofolio" data-open="mintguesss-repofolio">詳細 →</a></div>
-</article><div class="tlx-prog" aria-hidden="true"><i></i></div></div>
-<div class="tlx-bar">
-<div class="tlx-ctrl"><button type="button" data-tlx="prev" aria-label="prev">‹</button><button type="button" data-tlx="play" aria-label="play/pause" aria-pressed="true"><span class="i-pause">❚❚</span><span class="i-play">▶</span></button><button type="button" data-tlx="next" aria-label="next">›</button><span class="tlx-count"><b>13</b> / 13</span></div>
-<div class="tlx-track"><ol style="--n:13"><div class="tlx-rail" aria-hidden="true"><i class="tlx-fill"></i></div><li><span class="tlx-year">2026</span><button type="button" data-i="0" aria-label="TAICA_LLM" title="TAICA_LLM"><span class="tlx-dot st-active"></span><em>TAICA_LLM</em></button></li><li><button type="button" data-i="1" aria-label="personal-assistant" title="personal-assistant"><span class="tlx-dot st-maintenance"></span><em>personal-assistant</em></button></li><li><button type="button" data-i="2" aria-label="Folio-manager" title="Folio-manager"><span class="tlx-dot st-active"></span><em>Folio-manager</em></button></li><li><button type="button" data-i="3" aria-label="PromptMiser" title="PromptMiser"><span class="tlx-dot st-active"></span><em>PromptMiser</em></button></li><li><button type="button" data-i="4" aria-label="ClaudeQuota" title="ClaudeQuota"><span class="tlx-dot st-active"></span><em>ClaudeQuota</em></button></li><li><button type="button" data-i="5" aria-label="personal_web" title="personal_web"><span class="tlx-dot st-active"></span><em>personal_web</em></button></li><li><button type="button" data-i="6" aria-label="nobook" title="nobook"><span class="tlx-dot st-active"></span><em>nobook</em></button></li><li><button type="button" data-i="7" aria-label="aidit" title="aidit"><span class="tlx-dot st-active"></span><em>aidit</em></button></li><li><button type="button" data-i="8" aria-label="Clean-Contributors" title="Clean-Contributors"><span class="tlx-dot st-active"></span><em>Clean-Contributors</em></button></li><li><button type="button" data-i="9" aria-label="minglu_kneopi" title="minglu_kneopi"><span class="tlx-dot st-active"></span><em>minglu_kneopi</em></button></li><li><button type="button" data-i="10" aria-label="NightMarket" title="NightMarket"><span class="tlx-dot st-active"></span><em>NightMarket</em></button></li><li><button type="button" data-i="11" aria-label="asa" title="asa"><span class="tlx-dot st-active"></span><em>asa</em></button></li><li><button type="button" data-i="12" aria-label="repofolio" title="repofolio" aria-current="true"><span class="tlx-dot st-active"></span><em>repofolio</em></button></li></ol></div>
-</div>
-</div>
-<ol class="tl-list"><li class="tl-row reveal"><a href="#/p/mintguesss-repofolio" data-open="mintguesss-repofolio"><div class="tl-thumb"><img loading="lazy" decoding="async" src="https://raw.githubusercontent.com/mintguesss/repofolio/main/docs/screenshots/hero-simple.jpg" alt="" referrerpolicy="no-referrer" onerror="this.parentNode.classList.add('noimg');this.remove()"><span aria-hidden="true">R</span></div><time>2026年11月</time><b>repofolio</b><span class="dot st-active"></span></a></li><li class="tl-row reveal"><a href="#/p/mintguesss-asa" data-open="mintguesss-asa"><div class="tl-thumb"><img loading="lazy" decoding="async" src="https://raw.githubusercontent.com/mintguesss/asa/main/docs/day-dark.png" alt="" referrerpolicy="no-referrer" onerror="this.parentNode.classList.add('noimg');this.remove()"><span aria-hidden="true">A</span></div><time>2026年11月</time><b>asa</b><span class="dot st-active"></span></a></li><li class="tl-row reveal"><a href="#/p/mintguesss-nightmarket" data-open="mintguesss-nightmarket"><div class="tl-thumb"><img loading="lazy" decoding="async" src="https://raw.githubusercontent.com/mintguesss/NightMarket/main/docs/screenshots/chart-en.png" alt="" referrerpolicy="no-referrer" onerror="this.parentNode.classList.add('noimg');this.remove()"><span aria-hidden="true">N</span></div><time>2026年11月</time><b>NightMarket</b><span class="dot st-active"></span></a></li><li class="tl-row reveal"><a href="#/p/mintguesss-minglu-kneopi" data-open="mintguesss-minglu-kneopi"><div class="tl-thumb"><img loading="lazy" decoding="async" src="https://raw.githubusercontent.com/mintguesss/minglu_kneopi/main/docs/screenshots.png" alt="" referrerpolicy="no-referrer" onerror="this.parentNode.classList.add('noimg');this.remove()"><span aria-hidden="true">M</span></div><time>2026年11月</time><b>minglu_kneopi</b><span class="dot st-active"></span></a></li><li class="tl-row reveal"><a href="#/p/mintguesss-clean-contributors" data-open="mintguesss-clean-contributors"><div class="tl-thumb"><img loading="lazy" decoding="async" src="https://mintguesss.github.io/personal_web/builds/clean-contributors.png" alt="" referrerpolicy="no-referrer" onerror="this.parentNode.classList.add('noimg');this.remove()"><span aria-hidden="true">C</span></div><time>2026年10月</time><b>Clean-Contributors</b><span class="dot st-active"></span></a></li><li class="tl-row reveal"><a href="#/p/mintguesss-aidit" data-open="mintguesss-aidit"><div class="tl-thumb"><img loading="lazy" decoding="async" src="https://raw.githubusercontent.com/mintguesss/aidit/main/.github/assets/home.png" alt="" referrerpolicy="no-referrer" onerror="this.parentNode.classList.add('noimg');this.remove()"><span aria-hidden="true">A</span></div><time>2026年9月</time><b>aidit</b><span class="dot st-active"></span></a></li><li class="tl-row reveal"><a href="#/p/mintguesss-nobook" data-open="mintguesss-nobook"><div class="tl-thumb"><img loading="lazy" decoding="async" src="https://mintguesss.github.io/personal_web/builds/nobook.png" alt="" referrerpolicy="no-referrer" onerror="this.parentNode.classList.add('noimg');this.remove()"><span aria-hidden="true">N</span></div><time>2026年9月</time><b>nobook</b><span class="dot st-active"></span></a></li><li class="tl-row reveal"><a href="#/p/mintguesss-personal-web" data-open="mintguesss-personal-web"><div class="tl-thumb"><img loading="lazy" decoding="async" src="https://opengraph.githubassets.com/1/mintguesss/personal_web" alt="" referrerpolicy="no-referrer" onerror="this.parentNode.classList.add('noimg');this.remove()"><span aria-hidden="true">P</span></div><time>2026年8月</time><b>personal_web</b><span class="dot st-active"></span></a></li><li class="tl-row reveal"><a href="#/p/mintguesss-claudequota" data-open="mintguesss-claudequota"><div class="tl-thumb"><img loading="lazy" decoding="async" src="https://mintguesss.github.io/personal_web/builds/claude-quota.png" alt="" referrerpolicy="no-referrer" onerror="this.parentNode.classList.add('noimg');this.remove()"><span aria-hidden="true">C</span></div><time>2026年8月</time><b>ClaudeQuota</b><span class="dot st-active"></span></a></li><li class="tl-row reveal"><a href="#/p/mintguesss-promptmiser" data-open="mintguesss-promptmiser"><div class="tl-thumb"><img loading="lazy" decoding="async" src="https://mintguesss.github.io/personal_web/builds/prompt-miser.jpg" alt="" referrerpolicy="no-referrer" onerror="this.parentNode.classList.add('noimg');this.remove()"><span aria-hidden="true">P</span></div><time>2026年7月</time><b>PromptMiser</b><span class="dot st-active"></span></a></li><li class="tl-row reveal"><a href="#/p/mintguesss-folio-manager" data-open="mintguesss-folio-manager"><div class="tl-thumb"><img loading="lazy" decoding="async" src="https://mintguesss.github.io/personal_web/builds/folio-manager.jpg" alt="" referrerpolicy="no-referrer" onerror="this.parentNode.classList.add('noimg');this.remove()"><span aria-hidden="true">F</span></div><time>2026年6月</time><b>Folio-manager</b><span class="dot st-active"></span></a></li><li class="tl-row reveal"><a href="#/p/mintguesss-personal-assistant" data-open="mintguesss-personal-assistant"><div class="tl-thumb"><img loading="lazy" decoding="async" src="https://mintguesss.github.io/personal_web/builds/personal-assistant.jpg" alt="" referrerpolicy="no-referrer" onerror="this.parentNode.classList.add('noimg');this.remove()"><span aria-hidden="true">P</span></div><time>2026年6月</time><b>personal-assistant</b><span class="dot st-maintenance"></span></a></li><li class="tl-row reveal"><a href="#/p/mintguesss-taica-llm" data-open="mintguesss-taica-llm"><div class="tl-thumb"><img loading="lazy" decoding="async" src="https://opengraph.githubassets.com/1/mintguesss/TAICA_LLM" alt="" referrerpolicy="no-referrer" onerror="this.parentNode.classList.add('noimg');this.remove()"><span aria-hidden="true">T</span></div><time>2026年5月</time><b>TAICA_LLM</b><span class="dot st-active"></span></a></li></ol>
+<div class="vt" id="vt"><div class="vt-spine" aria-hidden="true"><i class="vt-fill"></i></div><div class="vt-grp"><div class="vt-yr"><b>11月</b><small>2026 · 4 專案</small></div><ol><li class="vt-item" style="--c:#22c55e"><span class="vt-node" aria-hidden="true"></span>
+<a class="vt-card" href="#/p/mintguesss-repofolio" data-open="mintguesss-repofolio"><div class="vt-img"><img loading="lazy" decoding="async" src="https://raw.githubusercontent.com/mintguesss/repofolio/main/docs/screenshots/hero-simple.jpg" alt="" referrerpolicy="no-referrer" onerror="this.parentNode.classList.add('noimg');this.remove()"><span aria-hidden="true">R</span></div>
+<div class="vt-body"><time datetime="2026-11-20">11月20日</time>
+<h3>repofolio</h3><p>Know, showcase and promote every GitHub repo you own: inventory, deployments, live-URL checks, and an animated, themeable portfolio site + profile card.</p>
+<div class="vt-tags"><span>Claude API</span><span>TypeScript</span><span>JavaScript</span></div></div></a></li><li class="vt-item" style="--c:#22c55e"><span class="vt-node" aria-hidden="true"></span>
+<a class="vt-card" href="#/p/mintguesss-asa" data-open="mintguesss-asa"><div class="vt-img"><img loading="lazy" decoding="async" src="https://raw.githubusercontent.com/mintguesss/asa/main/docs/day-dark.png" alt="" referrerpolicy="no-referrer" onerror="this.parentNode.classList.add('noimg');this.remove()"><span aria-hidden="true">A</span></div>
+<div class="vt-body"><time datetime="2026-11-13">11月13日</time>
+<h3>asa</h3><p>Self-hosted alarms that plan themselves: a batch of wake-up alarms set from tomorrow&#39;s schedule, with calendar, to-dos and an Android app.</p>
+<div class="vt-tags"><span>FastAPI</span><span>Python</span><span>JavaScript</span></div></div></a></li><li class="vt-item" style="--c:#22c55e"><span class="vt-node" aria-hidden="true"></span>
+<a class="vt-card" href="#/p/mintguesss-nightmarket" data-open="mintguesss-nightmarket"><div class="vt-img"><img loading="lazy" decoding="async" src="https://raw.githubusercontent.com/mintguesss/NightMarket/main/docs/screenshots/chart-en.png" alt="" referrerpolicy="no-referrer" onerror="this.parentNode.classList.add('noimg');this.remove()"><span aria-hidden="true">N</span></div>
+<div class="vt-body"><time datetime="2026-11-13">11月13日</time>
+<h3>NightMarket</h3><p>Taiwan &amp; US stock terminal in pure Python — real-time TWSE quotes, US pre/post market, backtesting, alerts, paper trading. Zero dependencies. 台美股看盤</p>
+<div class="vt-tags"><span>JavaScript</span><span>Python</span><span>CSS</span></div></div></a></li><li class="vt-item" style="--c:#22c55e"><span class="vt-node" aria-hidden="true"></span>
+<a class="vt-card" href="#/p/mintguesss-minglu-kneopi" data-open="mintguesss-minglu-kneopi"><div class="vt-img"><img loading="lazy" decoding="async" src="https://raw.githubusercontent.com/mintguesss/minglu_kneopi/main/docs/screenshots.png" alt="" referrerpolicy="no-referrer" onerror="this.parentNode.classList.add('noimg');this.remove()"><span aria-hidden="true">M</span></div>
+<div class="vt-body"><time datetime="2026-11-05">11月5日</time>
+<h3>minglu_kneopi</h3><p>MingLu on KNEO Pi：視障者的繁中隨身視覺助理，不用電腦，手機連一塊開發板就能用</p>
+<div class="vt-tags"><span>Transformers</span><span>Python</span><span>Shell</span></div></div></a></li></ol></div><div class="vt-grp"><div class="vt-yr"><b>10月</b><small>2026 · 1 專案</small></div><ol><li class="vt-item" style="--c:#22c55e"><span class="vt-node" aria-hidden="true"></span>
+<a class="vt-card" href="#/p/mintguesss-clean-contributors" data-open="mintguesss-clean-contributors"><div class="vt-img"><img loading="lazy" decoding="async" src="https://mintguesss.github.io/personal_web/builds/clean-contributors.png" alt="" referrerpolicy="no-referrer" onerror="this.parentNode.classList.add('noimg');this.remove()"><span aria-hidden="true">C</span></div>
+<div class="vt-body"><time datetime="2026-10-29">10月29日</time>
+<h3>Clean-Contributors</h3><p>Claude Code plugin + scripts to remove Claude (or any unwanted account) from a GitHub repo&#39;s Contributors list</p>
+<div class="vt-tags"><span>Shell</span><span>PowerShell</span><span>Python</span></div></div></a></li></ol></div><div class="vt-grp"><div class="vt-yr"><b>9月</b><small>2026 · 2 專案</small></div><ol><li class="vt-item" style="--c:#22c55e"><span class="vt-node" aria-hidden="true"></span>
+<a class="vt-card" href="#/p/mintguesss-aidit" data-open="mintguesss-aidit"><div class="vt-img"><img loading="lazy" decoding="async" src="https://raw.githubusercontent.com/mintguesss/aidit/main/.github/assets/home.png" alt="" referrerpolicy="no-referrer" onerror="this.parentNode.classList.add('noimg');this.remove()"><span aria-hidden="true">A</span></div>
+<div class="vt-body"><time datetime="2026-09-22">9月22日</time>
+<h3>aidit</h3><p>會查證、會說「不知道」的修業規劃 Agent</p>
+<div class="vt-tags"><span>Next.js</span><span>React</span><span>Tailwind CSS</span></div></div></a></li><li class="vt-item" style="--c:#22c55e"><span class="vt-node" aria-hidden="true"></span>
+<a class="vt-card" href="#/p/mintguesss-nobook" data-open="mintguesss-nobook"><div class="vt-img"><img loading="lazy" decoding="async" src="https://mintguesss.github.io/personal_web/builds/nobook.png" alt="" referrerpolicy="no-referrer" onerror="this.parentNode.classList.add('noimg');this.remove()"><span aria-hidden="true">N</span></div>
+<div class="vt-body"><time datetime="2026-09-21">9月21日</time>
+<h3>nobook</h3><p>手機或平板當錄音端，自己的筆電當推論伺服器，兩邊用 Tailscale 連。 逐字稿、段落摘要、下課要交的手抄筆記全部在本地 GPU 上算完， 不呼叫任何雲端 API，錄音與逐字稿不離開自己的機器。</p>
+<div class="vt-tags"><span>FastAPI</span><span>Python</span><span>JavaScript</span></div></div></a></li></ol></div><div class="vt-grp"><div class="vt-yr"><b>8月</b><small>2026 · 2 專案</small></div><ol><li class="vt-item" style="--c:#22c55e"><span class="vt-node" aria-hidden="true"></span>
+<a class="vt-card" href="#/p/mintguesss-personal-web" data-open="mintguesss-personal-web"><div class="vt-img"><img loading="lazy" decoding="async" src="https://opengraph.githubassets.com/1/mintguesss/personal_web" alt="" referrerpolicy="no-referrer" onerror="this.parentNode.classList.add('noimg');this.remove()"><span aria-hidden="true">P</span></div>
+<div class="vt-body"><time datetime="2026-08-26">8月26日</time>
+<h3>personal_web</h3><p>我的個人網站</p>
+<div class="vt-tags"><span>Next.js</span><span>React</span><span>Tailwind CSS</span></div></div></a></li><li class="vt-item" style="--c:#22c55e"><span class="vt-node" aria-hidden="true"></span>
+<a class="vt-card" href="#/p/mintguesss-claudequota" data-open="mintguesss-claudequota"><div class="vt-img"><img loading="lazy" decoding="async" src="https://mintguesss.github.io/personal_web/builds/claude-quota.png" alt="" referrerpolicy="no-referrer" onerror="this.parentNode.classList.add('noimg');this.remove()"><span aria-hidden="true">C</span></div>
+<div class="vt-body"><time datetime="2026-08-03">8月3日</time>
+<h3>ClaudeQuota</h3><p>Windows tray app that shows your Claude Pro/Max 5-hour and weekly usage limits, live from the official numbers</p>
+<div class="vt-tags"><span>Python</span><span>VBScript</span></div></div></a></li></ol></div><div class="vt-grp"><div class="vt-yr"><b>7月</b><small>2026 · 1 專案</small></div><ol><li class="vt-item" style="--c:#22c55e"><span class="vt-node" aria-hidden="true"></span>
+<a class="vt-card" href="#/p/mintguesss-promptmiser" data-open="mintguesss-promptmiser"><div class="vt-img"><img loading="lazy" decoding="async" src="https://mintguesss.github.io/personal_web/builds/prompt-miser.jpg" alt="" referrerpolicy="no-referrer" onerror="this.parentNode.classList.add('noimg');this.remove()"><span aria-hidden="true">P</span></div>
+<div class="vt-body"><time datetime="2026-07-15">7月15日</time>
+<h3>PromptMiser</h3><p>即時計算一段文字在各家 AI 模型會用掉多少 token、花多少錢</p>
+<div class="vt-tags"><span>FastAPI</span><span>Vue</span><span>TypeScript</span></div></div></a></li></ol></div><div class="vt-grp"><div class="vt-yr"><b>6月</b><small>2026 · 2 專案</small></div><ol><li class="vt-item" style="--c:#22c55e"><span class="vt-node" aria-hidden="true"></span>
+<a class="vt-card" href="#/p/mintguesss-folio-manager" data-open="mintguesss-folio-manager"><div class="vt-img"><img loading="lazy" decoding="async" src="https://mintguesss.github.io/personal_web/builds/folio-manager.jpg" alt="" referrerpolicy="no-referrer" onerror="this.parentNode.classList.add('noimg');this.remove()"><span aria-hidden="true">F</span></div>
+<div class="vt-body"><time datetime="2026-06-19">6月19日</time>
+<h3>Folio-manager</h3><p>個人財務 + 投資全方位管理 Web App，免費部署、可安裝為 PWA</p>
+<div class="vt-tags"><span>Next.js</span><span>React</span><span>Tailwind CSS</span></div></div></a></li><li class="vt-item" style="--c:#eab308"><span class="vt-node" aria-hidden="true"></span>
+<a class="vt-card" href="#/p/mintguesss-personal-assistant" data-open="mintguesss-personal-assistant"><div class="vt-img"><img loading="lazy" decoding="async" src="https://mintguesss.github.io/personal_web/builds/personal-assistant.jpg" alt="" referrerpolicy="no-referrer" onerror="this.parentNode.classList.add('noimg');this.remove()"><span aria-hidden="true">P</span></div>
+<div class="vt-body"><time datetime="2026-06-19">6月19日</time>
+<h3>personal-assistant</h3><p>個人助理 (Personal Assistant) - 用電腦鏡頭即時監測坐姿、專注、情緒與飲水，透過 Windows 桌面通知提醒你照顧好自己。</p>
+<div class="vt-tags"><span>PyTorch</span><span>pandas</span><span>Transformers</span></div></div></a></li></ol></div><div class="vt-grp"><div class="vt-yr"><b>5月</b><small>2026 · 1 專案</small></div><ol><li class="vt-item" style="--c:#22c55e"><span class="vt-node" aria-hidden="true"></span>
+<a class="vt-card" href="#/p/mintguesss-taica-llm" data-open="mintguesss-taica-llm"><div class="vt-img"><img loading="lazy" decoding="async" src="https://opengraph.githubassets.com/1/mintguesss/TAICA_LLM" alt="" referrerpolicy="no-referrer" onerror="this.parentNode.classList.add('noimg');this.remove()"><span aria-hidden="true">T</span></div>
+<div class="vt-body"><time datetime="2026-05-06">5月6日</time>
+<h3>TAICA_LLM</h3><p>透過 LLM 分析拖延原因、智能拆解任務、遊戲化收集角色，讓你告別拖延、每天前進一小步！</p>
+<div class="vt-tags"><span>JavaScript</span><span>CSS</span><span>Python</span></div></div></a></li></ol></div></div>
 </section></div>
 </main>
-<footer class="foot"><p>產生於 <span data-time="2026-11-20T12:56:22.555Z">2026-11-20</span> · 使用 <a href="https://github.com/mintguesss/repofolio" target="_blank" rel="noopener">repofolio</a> · <button type="button" class="linklike" id="open-help">?</button></p></footer>
+<footer class="foot"><p>產生於 <span data-time="2026-11-20T17:24:08.469Z">2026-11-20</span> · 使用 <a href="https://github.com/mintguesss/repofolio" target="_blank" rel="noopener">repofolio</a> · <button type="button" class="linklike" id="open-help">?</button></p></footer>
 <div class="overlay" id="modal" hidden><div class="modal" role="dialog" aria-modal="true" aria-labelledby="m-title"><button type="button" class="x" data-close aria-label="關閉">✕</button><div id="m-body"></div></div></div>
 <div class="overlay" id="palette" hidden><div class="palette" role="dialog" aria-modal="true" aria-label="輸入指令或專案名稱…"><input id="pal-q" placeholder="輸入指令或專案名稱…" autocomplete="off"><ul id="pal-list" role="listbox"></ul></div></div>
 <div class="overlay" id="help" hidden><div class="modal small" role="dialog" aria-modal="true"><button type="button" class="x" data-close aria-label="關閉">✕</button><h3>鍵盤快捷鍵</h3><dl class="keys"><dt><kbd>⌘/Ctrl K</kbd></dt><dd>指令面板</dd><dt><kbd>/</kbd></dt><dd>搜尋專案</dd><dt><kbd>T</kbd></dt><dd>切換主題</dd><dt><kbd>B</kbd></dt><dd>切換背景</dd><dt><kbd>,</kbd></dt><dd>自訂外觀</dd><dt><kbd>G</kbd></dt><dd>回到頂端</dd><dt><kbd>?</kbd></dt><dd>顯示說明</dd><dt><kbd>Esc</kbd></dt><dd>關閉</dd></dl></div></div>
 <aside class="custom" id="custom" aria-label="自訂外觀" hidden></aside>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
-<script type="application/json" id="rf-data">{"config":{"lang":"zh-TW","strings":{"nav":{"home":"首頁","featured":"精選","projects":"專案","stats":"統計","stack":"技術","activity":"活動","status":"狀態","timeline":"時間軸"},"hello":"hello, world","viewProjects":"瀏覽專案","projectsCount":"個專案","liveCount":"個上線","stars":"顆星","languages":"種語言","commitsYear":"次提交 / 年","featured":"精選作品","featuredSub":"最想先給你看的幾個。","projects":"所有專案","projectsSub":"可以搜尋、篩選，每天自動更新。","search":"搜尋專案、技術、標籤…","all":"全部","sort":"排序","sortFeatured":"精選優先","sortStars":"星星數","sortUpdated":"最近更新","sortName":"名稱","sortCreated":"最新建立","layout":"版面","noResults":"沒有符合的專案，試試減少篩選條件。","clear":"清除篩選","recent":"最近更新","stats":"統計","statsSub":"一頁看完：開發活動、技術組成、部署在哪。","activeCount":"個進行中","mostActive":"最活躍的專案","breakdown":"分布","byStatus":"專案狀態","byHost":"部署平台","byYear":"每年新開專案","techFilter":"技術","mode":"風格","modes":{"simple":"簡潔","tech":"科技"},"scheme":"淺色 / 深色","schemes":{"auto":"跟隨系統","light":"淺色","dark":"深色"},"effects":"特效","statusHelp":{"idea":"還只是想法","wip":"正在開發","active":"30 天內有更新","maintenance":"31–90 天內有更新，還在維護","paused":"超過 90 天沒更新","done":"已完成","archived":"已在 GitHub 封存"},"stack":"技術棧","stackSub":"這些專案是用什麼做的。","usedIn":"用在","activity":"開發活動","activitySub":"所有展示專案過去 12 個月的每週提交數。","thisWeek":"本週","busiest":"最忙的一週","status":"上線狀態","statusSub":"每個公開部署，每次建置時都會實際檢查。","up":"正常","down":"異常","checked":"檢查於","timeline":"時間軸","timelineSub":"每個專案從什麼時候開始。","visit":"前往","code":"原始碼","details":"詳細","updated":"更新於","created":"開始於","license":"授權","deployments":"部署","links":"連結","commits52":"過去 52 週的提交","close":"關閉","palette":"輸入指令或專案名稱…","paletteProjects":"專案","paletteActions":"動作","customize":"自訂外觀","theme":"主題","accent":"強調色","bgColor":"背景顏色","glow":"光暈強度","presetBg":"主題預設","since":"第一個專案","stat":{"projects":"專案","live":"上線中","active":"進行中","stars":"星星","commits":"今年提交","since":"開始做專案","langs":"使用語言"},"background":"背景特效","cardStyle":"卡片樣式","font":"字型","animation":"動畫","radius":"圓角","covers":"封面圖片","cursorGlow":"游標光暈","tilt":"3D 傾斜","reset":"重設","copyConfig":"複製成設定檔","copied":"已複製！","shortcuts":"鍵盤快捷鍵","scShortcuts":[["⌘/Ctrl K","指令面板"],["/","搜尋專案"],["T","切換主題"],["B","切換背景"],[",","自訂外觀"],["G","回到頂端"],["?","顯示說明"],["Esc","關閉"]],"builtWith":"使用","generated":"產生於","ago":{"s":"剛剛","m":" 分鐘前","h":" 小時前","d":" 天前","mo":" 個月前","y":" 年前"},"statusLabels":{"idea":"構想","wip":"開發中","active":"進行中","maintenance":"維護中","paused":"暫停","done":"完成","archived":"已封存"},"terminalDone":"完成","copyLink":"複製這頁的連結","openGithub":"開啟 GitHub 個人頁","toggleMotion":"開關動畫","private":"私有"},"defaults":{"mode":"tech","scheme":"auto","preset":"cyber","background":"particles","cardStyle":"glass","layout":"grid","font":"sans","animation":"full","glow":"soft","radius":16,"covers":true,"cursorGlow":true,"tilt":true,"webFonts":true,"accent":"#22d3ee"},"customizer":true,"multi":true,"options":{"mode":["simple","tech"],"scheme":["auto","light","dark"],"preset":["cyber","midnight","matrix","synthwave","ocean","ember","aurora","mono","paper","daylight"],"background":["particles","grid","matrix","aurora","stars","circuit","none"],"cardStyle":["glass","solid","neon","outline","terminal"],"layout":["grid","list"],"font":["sans","mono","display","system"],"animation":["full","subtle","off"],"glow":["none","soft","strong"]},"presetBgs":{"cyber":"#05060f","midnight":"#0b1020","matrix":"#020a04","synthwave":"#13002b","ocean":"#03141f","ember":"#120806","aurora":"#06101a","mono":"#0a0a0a","paper":"#f7f6f3","daylight":"#f5f7fb"},"simpleAccent":"#2563eb","presetAccents":{"cyber":"#22d3ee","midnight":"#6366f1","matrix":"#22c55e","synthwave":"#f472b6","ocean":"#38bdf8","ember":"#fb923c","aurora":"#2dd4bf","mono":"#fafafa","paper":"#0f766e","daylight":"#2563eb"},"terminal":{"owner":"mintguesss","shown":13,"live":5,"down":0,"langs":["TypeScript","Python","JavaScript","CSS"],"name":"mintguesss","roles":[],"projects":["repofolio","personal_web","asa","NightMarket","aidit","Folio-manager","minglu_kneopi","nobook","ClaudeQuota","TAICA_LLM","PromptMiser","Clean-Contributors","personal-assistant"],"commits":363,"stars":3}},"projects":[{"id":"mintguesss-clean-contributors","name":"Clean-Contributors","repo":"mintguesss/Clean-Contributors","codeUrl":"https://github.com/mintguesss/Clean-Contributors","summary":"Claude Code plugin + scripts to remove Claude (or any unwanted account) from a GitHub repo's Contributors list","status":"active","stack":["Shell","PowerShell","Python"],"languages":[{"name":"Shell","pct":56.5},{"name":"PowerShell","pct":30},{"name":"Python","pct":13.5}],"tags":["claude","claude-code","co-authored-by","contributors","git","github","plugin"],"stars":2,"forks":0,"license":"MIT","created":"2026-10-29T18:32:15Z","updated":"2026-10-29T19:35:25Z","featured":false,"private":false,"image":"https://mintguesss.github.io/personal_web/builds/clean-contributors.png","activity":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,0,0],"links":[],"deployments":[]},{"id":"mintguesss-folio-manager","name":"Folio-manager","repo":"mintguesss/Folio-manager","codeUrl":"https://github.com/mintguesss/Folio-manager","summary":"個人財務 + 投資全方位管理 Web App，免費部署、可安裝為 PWA","status":"active","stack":["Next.js","React","Tailwind CSS","Supabase","TypeScript","PLpgSQL"],"languages":[{"name":"TypeScript","pct":92.3},{"name":"PLpgSQL","pct":3.9},{"name":"Java","pct":2.5},{"name":"CSS","pct":1.1},{"name":"JavaScript","pct":0.2}],"tags":[],"stars":1,"forks":0,"created":"2026-06-19T18:45:42Z","updated":"2026-11-06T13:15:58Z","featured":false,"private":false,"image":"https://mintguesss.github.io/personal_web/builds/folio-manager.jpg","activity":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,4,24,1,0],"links":[{"label":"live","url":"https://folio-manager-roan.vercel.app/"}],"deployments":[{"name":"production","provider":"vercel","url":"https://folio-manager-roan.vercel.app/","ok":true,"ms":1308,"status":200}]},{"id":"mintguesss-repofolio","name":"repofolio","repo":"mintguesss/repofolio","codeUrl":"https://github.com/mintguesss/repofolio","summary":"Know, showcase and promote every GitHub repo you own: inventory, deployments, live-URL checks, and an animated, themeable portfolio site + profile card.","status":"active","stack":["Claude API","TypeScript","JavaScript"],"languages":[{"name":"TypeScript","pct":99.2},{"name":"JavaScript","pct":0.8}],"tags":["cli","deployments","developer-portfolio","developer-tools","github-action","github-pages","github-profile","inventory"],"stars":0,"forks":0,"license":"MIT","created":"2026-11-20T08:20:14Z","updated":"2026-11-20T12:55:44Z","release":"v0.4.0","featured":false,"private":false,"image":"https://raw.githubusercontent.com/mintguesss/repofolio/main/docs/screenshots/hero-simple.jpg","activity":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2],"links":[{"label":"live","url":"https://github.com/mintguesss/repofolio#readme"}],"deployments":[{"name":"production","url":"https://github.com/mintguesss/repofolio#readme","ok":true,"ms":485,"status":200}]},{"id":"mintguesss-personal-web","name":"personal_web","repo":"mintguesss/personal_web","codeUrl":"https://github.com/mintguesss/personal_web","summary":"我的個人網站","status":"active","stack":["Next.js","React","Tailwind CSS","Three.js","TypeScript","HTML"],"languages":[{"name":"TypeScript","pct":63.5},{"name":"HTML","pct":35.4},{"name":"CSS","pct":1.1},{"name":"JavaScript","pct":0}],"tags":["personal-website"],"stars":0,"forks":0,"created":"2026-08-26T15:08:43Z","updated":"2026-11-20T11:31:47Z","featured":false,"private":false,"image":"https://opengraph.githubassets.com/1/mintguesss/personal_web","activity":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,20,0,3,0,0,0,0,0,0,0,0,0,2,0,0,4,0,0,2,0,0,4,0,0,3,0,0,0,0,0,0,0,0,0,1,0,0],"links":[{"label":"live","url":"https://mintguesss.github.io/personal_web/"}],"deployments":[{"name":"github-pages","provider":"github-pages","url":"https://mintguesss.github.io/personal_web/","ok":true,"ms":92,"status":200}]},{"id":"mintguesss-asa","name":"asa","repo":"mintguesss/asa","codeUrl":"https://github.com/mintguesss/asa","summary":"Self-hosted alarms that plan themselves: a batch of wake-up alarms set from tomorrow's schedule, with calendar, to-dos and an Android app.","status":"active","stack":["FastAPI","Python","JavaScript","CSS","Kotlin","HTML"],"languages":[{"name":"Python","pct":30.8},{"name":"JavaScript","pct":29.4},{"name":"CSS","pct":18.1},{"name":"Kotlin","pct":15.2},{"name":"HTML","pct":4.9},{"name":"PowerShell","pct":1.4}],"tags":["alarm-clock","android","calendar","fastapi","productivity","self-hosted","todo"],"stars":0,"forks":0,"created":"2026-11-13T14:48:43Z","updated":"2026-11-18T20:16:56Z","featured":false,"private":false,"image":"https://raw.githubusercontent.com/mintguesss/asa/main/docs/day-dark.png","activity":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"links":[],"deployments":[]},{"id":"mintguesss-nightmarket","name":"NightMarket","repo":"mintguesss/NightMarket","codeUrl":"https://github.com/mintguesss/NightMarket","summary":"Taiwan & US stock terminal in pure Python — real-time TWSE quotes, US pre/post market, backtesting, alerts, paper trading. Zero dependencies. 台美股看盤","status":"active","stack":["JavaScript","Python","CSS","HTML","Shell","Batchfile"],"languages":[{"name":"JavaScript","pct":45.8},{"name":"Python","pct":33.8},{"name":"CSS","pct":14.9},{"name":"HTML","pct":5.1},{"name":"Shell","pct":0.2},{"name":"Batchfile","pct":0.2}],"tags":["backtesting","lightweight-charts","paper-trading","pwa","python","stock-market","stock-screener","taiwan"],"stars":0,"forks":0,"license":"MIT","created":"2026-11-13T14:46:52Z","updated":"2026-11-16T07:45:00Z","release":"v1.0.0","featured":false,"private":false,"image":"https://raw.githubusercontent.com/mintguesss/NightMarket/main/docs/screenshots/chart-en.png","activity":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"links":[],"deployments":[]},{"id":"mintguesss-aidit","name":"aidit","repo":"mintguesss/aidit","codeUrl":"https://github.com/mintguesss/aidit","summary":"會查證、會說「不知道」的修業規劃 Agent","status":"active","stack":["Next.js","React","Tailwind CSS","Supabase","Claude API","TypeScript"],"languages":[{"name":"TypeScript","pct":90.3},{"name":"CSS","pct":8.4},{"name":"Python","pct":1},{"name":"JavaScript","pct":0.2}],"tags":[],"stars":0,"forks":0,"license":"MIT","created":"2026-09-22T07:45:56Z","updated":"2026-11-15T14:25:38Z","featured":false,"private":false,"image":"https://raw.githubusercontent.com/mintguesss/aidit/main/.github/assets/home.png","activity":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,22,28,53,44,0,0,22,10,0],"links":[{"label":"live","url":"https://aidit-weld.vercel.app"}],"deployments":[{"name":"production","provider":"vercel","url":"https://aidit-weld.vercel.app","ok":true,"ms":1101,"status":200}]},{"id":"mintguesss-minglu-kneopi","name":"minglu_kneopi","repo":"mintguesss/minglu_kneopi","codeUrl":"https://github.com/mintguesss/minglu_kneopi","summary":"MingLu on KNEO Pi：視障者的繁中隨身視覺助理，不用電腦，手機連一塊開發板就能用","status":"active","stack":["Transformers","Python","Shell","Batchfile"],"languages":[{"name":"Python","pct":98.4},{"name":"Shell","pct":0.9},{"name":"Batchfile","pct":0.8}],"tags":[],"stars":0,"forks":0,"license":"AGPL-3.0","created":"2026-11-05T19:07:41Z","updated":"2026-11-06T09:53:54Z","featured":false,"private":false,"image":"https://raw.githubusercontent.com/mintguesss/minglu_kneopi/main/docs/screenshots.png","activity":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,6,0],"links":[],"deployments":[]},{"id":"mintguesss-nobook","name":"nobook","repo":"mintguesss/nobook","codeUrl":"https://github.com/mintguesss/nobook","summary":"手機或平板當錄音端，自己的筆電當推論伺服器，兩邊用 Tailscale 連。 逐字稿、段落摘要、下課要交的手抄筆記全部在本地 GPU 上算完， 不呼叫任何雲端 API，錄音與逐字稿不離開自己的機器。","status":"active","stack":["FastAPI","Python","JavaScript","HTML","PowerShell"],"languages":[{"name":"Python","pct":78},{"name":"JavaScript","pct":14.6},{"name":"HTML","pct":6.6},{"name":"PowerShell","pct":0.9}],"tags":[],"stars":0,"forks":0,"created":"2026-09-21T04:11:49Z","updated":"2026-11-04T08:59:33Z","featured":false,"private":false,"image":"https://mintguesss.github.io/personal_web/builds/nobook.png","activity":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,30,5,1,2,0,0,8,0,0],"links":[],"deployments":[]},{"id":"mintguesss-claudequota","name":"ClaudeQuota","repo":"mintguesss/ClaudeQuota","codeUrl":"https://github.com/mintguesss/ClaudeQuota","summary":"Windows tray app that shows your Claude Pro/Max 5-hour and weekly usage limits, live from the official numbers","status":"active","stack":["Python","VBScript"],"languages":[{"name":"Python","pct":99.5},{"name":"VBScript","pct":0.5}],"tags":["anthropic","claude","claude-code","desktop-utility","python","rate-limit","system-tray","tray-app"],"stars":0,"forks":0,"license":"MIT","created":"2026-08-03T13:22:51Z","updated":"2026-11-03T17:37:29Z","release":"v1.1.1","featured":false,"private":false,"image":"https://mintguesss.github.io/personal_web/builds/claude-quota.png","activity":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,3,1,0,0,0,0,0,0,1,0,0,5,0,0],"links":[],"deployments":[]},{"id":"mintguesss-taica-llm","name":"TAICA_LLM","repo":"mintguesss/TAICA_LLM","codeUrl":"https://github.com/mintguesss/TAICA_LLM","summary":"透過 LLM 分析拖延原因、智能拆解任務、遊戲化收集角色，讓你告別拖延、每天前進一小步！","status":"active","stack":["JavaScript","CSS","Python","HTML","PowerShell"],"languages":[{"name":"JavaScript","pct":38.3},{"name":"CSS","pct":26.4},{"name":"Python","pct":21.6},{"name":"HTML","pct":13.5},{"name":"PowerShell","pct":0.2}],"tags":[],"stars":0,"forks":0,"created":"2026-05-06T12:20:54Z","updated":"2026-11-02T03:09:50Z","featured":false,"private":false,"image":"https://opengraph.githubassets.com/1/mintguesss/TAICA_LLM","activity":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,0,0,2,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0],"links":[],"deployments":[]},{"id":"mintguesss-promptmiser","name":"PromptMiser","repo":"mintguesss/PromptMiser","codeUrl":"https://github.com/mintguesss/PromptMiser","summary":"即時計算一段文字在各家 AI 模型會用掉多少 token、花多少錢","status":"active","stack":["FastAPI","Vue","TypeScript","JavaScript","Python","HTML"],"languages":[{"name":"Vue","pct":77.1},{"name":"TypeScript","pct":9.6},{"name":"JavaScript","pct":6.4},{"name":"Python","pct":5.2},{"name":"HTML","pct":1.2},{"name":"CSS","pct":0.5}],"tags":["cost-optimization","llm","prompt-engineering","tokenizer"],"stars":0,"forks":0,"license":"MIT","created":"2026-07-15T17:45:42Z","updated":"2026-11-02T03:09:47Z","featured":false,"private":false,"image":"https://mintguesss.github.io/personal_web/builds/prompt-miser.jpg","activity":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,4,4,1,0,1,0,0,0,0,0,0,0,0,0,1,0,0],"links":[{"label":"live","url":"https://prompt-miser.vercel.app"}],"deployments":[{"name":"production","provider":"vercel","url":"https://prompt-miser.vercel.app","ok":true,"ms":195,"status":200}]},{"id":"mintguesss-personal-assistant","name":"personal-assistant","repo":"mintguesss/personal-assistant","codeUrl":"https://github.com/mintguesss/personal-assistant","summary":"個人助理 (Personal Assistant) - 用電腦鏡頭即時監測坐姿、專注、情緒與飲水，透過 Windows 桌面通知提醒你照顧好自己。","status":"maintenance","stack":["PyTorch","pandas","Transformers","Python"],"languages":[{"name":"Python","pct":100}],"tags":[],"stars":0,"forks":0,"created":"2026-06-19T14:34:00Z","updated":"2026-08-30T15:26:00Z","featured":false,"private":false,"image":"https://mintguesss.github.io/personal_web/builds/personal-assistant.jpg","activity":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"links":[],"deployments":[]}]}</script>
+<script type="application/json" id="rf-data">{"config":{"lang":"zh-TW","strings":{"nav":{"home":"首頁","featured":"精選","projects":"專案","stats":"統計","stack":"技術","activity":"活動","status":"狀態","timeline":"時間軸"},"hello":"hello, world","viewProjects":"瀏覽專案","projectsCount":"個專案","liveCount":"個上線","stars":"顆星","languages":"種語言","commitsYear":"次提交 / 年","featured":"精選作品","featuredSub":"最想先給你看的幾個。","projects":"所有專案","projectsSub":"可以搜尋、篩選，每天自動更新。","search":"搜尋專案、技術、標籤…","all":"全部","sort":"排序","sortFeatured":"精選優先","sortStars":"星星數","sortUpdated":"最近更新","sortName":"名稱","sortCreated":"最新建立","layout":"版面","noResults":"沒有符合的專案，試試減少篩選條件。","clear":"清除篩選","recent":"最近更新","stats":"統計","statsSub":"一頁看完：開發活動、技術組成、部署在哪。","activeCount":"個進行中","mostActive":"最活躍的專案","breakdown":"分布","byStatus":"專案狀態","byHost":"部署平台","byYear":"每年新開專案","techFilter":"技術","mode":"風格","modes":{"simple":"簡潔","tech":"科技"},"scheme":"淺色 / 深色","schemes":{"auto":"跟隨系統","light":"淺色","dark":"深色"},"effects":"特效","statusHelp":{"idea":"還只是想法","wip":"正在開發","active":"30 天內有更新","maintenance":"31–90 天內有更新，還在維護","paused":"超過 90 天沒更新","done":"已完成","archived":"已在 GitHub 封存"},"stack":"技術棧","stackSub":"這些專案是用什麼做的。","usedIn":"用在","activity":"開發活動","activitySub":"所有展示專案過去 12 個月的每週提交數。","thisWeek":"本週","busiest":"最忙的一週","status":"上線狀態","statusSub":"每個公開部署，每次建置時都會實際檢查。","up":"正常","down":"異常","checked":"檢查於","timeline":"時間軸","timelineSub":"每個專案從什麼時候開始。","visit":"前往","code":"原始碼","details":"詳細","updated":"更新於","created":"開始於","license":"授權","deployments":"部署","links":"連結","commits52":"過去 52 週的提交","close":"關閉","palette":"輸入指令或專案名稱…","paletteProjects":"專案","paletteActions":"動作","customize":"自訂外觀","theme":"主題","accent":"強調色","bgColor":"背景顏色","glow":"光暈強度","presetBg":"主題預設","since":"第一個專案","stat":{"projects":"專案","live":"上線中","active":"進行中","stars":"星星","commits":"今年提交","since":"開始做專案","langs":"使用語言"},"background":"背景特效","cardStyle":"卡片樣式","font":"字型","animation":"動畫","radius":"圓角","covers":"封面圖片","cursorGlow":"游標光暈","tilt":"3D 傾斜","reset":"重設","copyConfig":"複製成設定檔","copied":"已複製！","shortcuts":"鍵盤快捷鍵","scShortcuts":[["⌘/Ctrl K","指令面板"],["/","搜尋專案"],["T","切換主題"],["B","切換背景"],[",","自訂外觀"],["G","回到頂端"],["?","顯示說明"],["Esc","關閉"]],"builtWith":"使用","generated":"產生於","ago":{"s":"剛剛","m":" 分鐘前","h":" 小時前","d":" 天前","mo":" 個月前","y":" 年前"},"statusLabels":{"idea":"構想","wip":"開發中","active":"進行中","maintenance":"維護中","paused":"暫停","done":"完成","archived":"已封存"},"terminalDone":"完成","copyLink":"複製這頁的連結","openGithub":"開啟 GitHub 個人頁","toggleMotion":"開關動畫","private":"私有"},"defaults":{"mode":"tech","scheme":"auto","preset":"cyber","background":"particles","cardStyle":"glass","layout":"grid","font":"sans","animation":"full","glow":"soft","radius":16,"covers":true,"cursorGlow":true,"tilt":true,"webFonts":true,"accent":"#22d3ee"},"customizer":true,"multi":true,"options":{"mode":["simple","tech"],"scheme":["auto","light","dark"],"preset":["cyber","midnight","matrix","synthwave","ocean","ember","aurora","mono","paper","daylight"],"background":["particles","grid","matrix","aurora","stars","circuit","none"],"cardStyle":["glass","solid","neon","outline","terminal"],"layout":["grid","list"],"font":["sans","mono","display","system"],"animation":["full","subtle","off"],"glow":["none","soft","strong"]},"presetBgs":{"cyber":"#05060f","midnight":"#0b1020","matrix":"#020a04","synthwave":"#13002b","ocean":"#03141f","ember":"#120806","aurora":"#06101a","mono":"#0a0a0a","paper":"#f7f6f3","daylight":"#f5f7fb"},"simpleAccent":"#2563eb","presetAccents":{"cyber":"#22d3ee","midnight":"#6366f1","matrix":"#22c55e","synthwave":"#f472b6","ocean":"#38bdf8","ember":"#fb923c","aurora":"#2dd4bf","mono":"#fafafa","paper":"#0f766e","daylight":"#2563eb"},"terminal":{"owner":"mintguesss","shown":13,"live":5,"down":0,"langs":["TypeScript","Python","JavaScript","HTML"],"name":"mintguesss","roles":[],"projects":["repofolio","personal_web","asa","NightMarket","aidit","Folio-manager","minglu_kneopi","nobook","ClaudeQuota","TAICA_LLM","PromptMiser","Clean-Contributors","personal-assistant"],"commits":363,"stars":3}},"projects":[{"id":"mintguesss-clean-contributors","name":"Clean-Contributors","repo":"mintguesss/Clean-Contributors","codeUrl":"https://github.com/mintguesss/Clean-Contributors","summary":"Claude Code plugin + scripts to remove Claude (or any unwanted account) from a GitHub repo's Contributors list","status":"active","stack":["Shell","PowerShell","Python"],"languages":[{"name":"Shell","pct":56.5},{"name":"PowerShell","pct":30},{"name":"Python","pct":13.5}],"tags":["claude","claude-code","co-authored-by","contributors","git","github","plugin"],"stars":2,"forks":0,"license":"MIT","created":"2026-10-29T18:32:15Z","updated":"2026-10-29T19:35:25Z","featured":false,"private":false,"image":"https://mintguesss.github.io/personal_web/builds/clean-contributors.png","activity":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,0,0],"links":[],"deployments":[]},{"id":"mintguesss-folio-manager","name":"Folio-manager","repo":"mintguesss/Folio-manager","codeUrl":"https://github.com/mintguesss/Folio-manager","summary":"個人財務 + 投資全方位管理 Web App，免費部署、可安裝為 PWA","status":"active","stack":["Next.js","React","Tailwind CSS","Supabase","TypeScript","PLpgSQL"],"languages":[{"name":"TypeScript","pct":92.3},{"name":"PLpgSQL","pct":3.9},{"name":"Java","pct":2.5},{"name":"CSS","pct":1.1},{"name":"JavaScript","pct":0.2}],"tags":[],"stars":1,"forks":0,"created":"2026-06-19T18:45:42Z","updated":"2026-11-06T13:15:58Z","featured":false,"private":false,"image":"https://mintguesss.github.io/personal_web/builds/folio-manager.jpg","activity":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,4,24,1,0],"links":[{"label":"live","url":"https://folio-manager-roan.vercel.app/"}],"deployments":[{"name":"production","provider":"vercel","url":"https://folio-manager-roan.vercel.app/","ok":true,"ms":1972,"status":200}]},{"id":"mintguesss-repofolio","name":"repofolio","repo":"mintguesss/repofolio","codeUrl":"https://github.com/mintguesss/repofolio","summary":"Know, showcase and promote every GitHub repo you own: inventory, deployments, live-URL checks, and an animated, themeable portfolio site + profile card.","status":"active","stack":["Claude API","TypeScript","JavaScript"],"languages":[{"name":"TypeScript","pct":99.2},{"name":"JavaScript","pct":0.8}],"tags":["cli","deployments","developer-portfolio","developer-tools","github-action","github-pages","github-profile","inventory"],"stars":0,"forks":0,"license":"MIT","created":"2026-11-20T08:20:14Z","updated":"2026-11-20T17:23:34Z","release":"v0.4.1","featured":false,"private":false,"image":"https://raw.githubusercontent.com/mintguesss/repofolio/main/docs/screenshots/hero-simple.jpg","activity":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2],"links":[{"label":"live","url":"https://github.com/mintguesss/repofolio#readme"}],"deployments":[{"name":"production","url":"https://github.com/mintguesss/repofolio#readme","ok":true,"ms":776,"status":200}]},{"id":"mintguesss-personal-web","name":"personal_web","repo":"mintguesss/personal_web","codeUrl":"https://github.com/mintguesss/personal_web","summary":"我的個人網站","status":"active","stack":["Next.js","React","Tailwind CSS","Three.js","TypeScript","HTML"],"languages":[{"name":"TypeScript","pct":60.7},{"name":"HTML","pct":38.2},{"name":"CSS","pct":1},{"name":"JavaScript","pct":0}],"tags":["personal-website"],"stars":0,"forks":0,"created":"2026-08-26T15:08:43Z","updated":"2026-11-20T12:57:02Z","featured":false,"private":false,"image":"https://opengraph.githubassets.com/1/mintguesss/personal_web","activity":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,20,0,3,0,0,0,0,0,0,0,0,0,2,0,0,4,0,0,2,0,0,4,0,0,3,0,0,0,0,0,0,0,0,0,1,0,0],"links":[{"label":"live","url":"https://mintguesss.github.io/personal_web/"}],"deployments":[{"name":"github-pages","provider":"github-pages","url":"https://mintguesss.github.io/personal_web/","ok":true,"ms":125,"status":200}]},{"id":"mintguesss-asa","name":"asa","repo":"mintguesss/asa","codeUrl":"https://github.com/mintguesss/asa","summary":"Self-hosted alarms that plan themselves: a batch of wake-up alarms set from tomorrow's schedule, with calendar, to-dos and an Android app.","status":"active","stack":["FastAPI","Python","JavaScript","CSS","Kotlin","HTML"],"languages":[{"name":"Python","pct":30.8},{"name":"JavaScript","pct":29.4},{"name":"CSS","pct":18.1},{"name":"Kotlin","pct":15.2},{"name":"HTML","pct":4.9},{"name":"PowerShell","pct":1.4}],"tags":["alarm-clock","android","calendar","fastapi","productivity","self-hosted","todo"],"stars":0,"forks":0,"created":"2026-11-13T14:48:43Z","updated":"2026-11-18T20:16:56Z","featured":false,"private":false,"image":"https://raw.githubusercontent.com/mintguesss/asa/main/docs/day-dark.png","activity":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"links":[],"deployments":[]},{"id":"mintguesss-nightmarket","name":"NightMarket","repo":"mintguesss/NightMarket","codeUrl":"https://github.com/mintguesss/NightMarket","summary":"Taiwan & US stock terminal in pure Python — real-time TWSE quotes, US pre/post market, backtesting, alerts, paper trading. Zero dependencies. 台美股看盤","status":"active","stack":["JavaScript","Python","CSS","HTML","Shell","Batchfile"],"languages":[{"name":"JavaScript","pct":45.8},{"name":"Python","pct":33.8},{"name":"CSS","pct":14.9},{"name":"HTML","pct":5.1},{"name":"Shell","pct":0.2},{"name":"Batchfile","pct":0.2}],"tags":["backtesting","lightweight-charts","paper-trading","pwa","python","stock-market","stock-screener","taiwan"],"stars":0,"forks":0,"license":"MIT","created":"2026-11-13T14:46:52Z","updated":"2026-11-16T07:45:00Z","release":"v1.0.0","featured":false,"private":false,"image":"https://raw.githubusercontent.com/mintguesss/NightMarket/main/docs/screenshots/chart-en.png","activity":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"links":[],"deployments":[]},{"id":"mintguesss-aidit","name":"aidit","repo":"mintguesss/aidit","codeUrl":"https://github.com/mintguesss/aidit","summary":"會查證、會說「不知道」的修業規劃 Agent","status":"active","stack":["Next.js","React","Tailwind CSS","Supabase","Claude API","TypeScript"],"languages":[{"name":"TypeScript","pct":90.3},{"name":"CSS","pct":8.4},{"name":"Python","pct":1},{"name":"JavaScript","pct":0.2}],"tags":[],"stars":0,"forks":0,"license":"MIT","created":"2026-09-22T07:45:56Z","updated":"2026-11-15T14:25:38Z","featured":false,"private":false,"image":"https://raw.githubusercontent.com/mintguesss/aidit/main/.github/assets/home.png","activity":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,22,28,53,44,0,0,22,10,0],"links":[{"label":"live","url":"https://aidit-weld.vercel.app"}],"deployments":[{"name":"production","provider":"vercel","url":"https://aidit-weld.vercel.app","ok":true,"ms":1218,"status":200}]},{"id":"mintguesss-minglu-kneopi","name":"minglu_kneopi","repo":"mintguesss/minglu_kneopi","codeUrl":"https://github.com/mintguesss/minglu_kneopi","summary":"MingLu on KNEO Pi：視障者的繁中隨身視覺助理，不用電腦，手機連一塊開發板就能用","status":"active","stack":["Transformers","Python","Shell","Batchfile"],"languages":[{"name":"Python","pct":98.4},{"name":"Shell","pct":0.9},{"name":"Batchfile","pct":0.8}],"tags":[],"stars":0,"forks":0,"license":"AGPL-3.0","created":"2026-11-05T19:07:41Z","updated":"2026-11-06T09:53:54Z","featured":false,"private":false,"image":"https://raw.githubusercontent.com/mintguesss/minglu_kneopi/main/docs/screenshots.png","activity":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,6,0],"links":[],"deployments":[]},{"id":"mintguesss-nobook","name":"nobook","repo":"mintguesss/nobook","codeUrl":"https://github.com/mintguesss/nobook","summary":"手機或平板當錄音端，自己的筆電當推論伺服器，兩邊用 Tailscale 連。 逐字稿、段落摘要、下課要交的手抄筆記全部在本地 GPU 上算完， 不呼叫任何雲端 API，錄音與逐字稿不離開自己的機器。","status":"active","stack":["FastAPI","Python","JavaScript","HTML","PowerShell"],"languages":[{"name":"Python","pct":78},{"name":"JavaScript","pct":14.6},{"name":"HTML","pct":6.6},{"name":"PowerShell","pct":0.9}],"tags":[],"stars":0,"forks":0,"created":"2026-09-21T04:11:49Z","updated":"2026-11-04T08:59:33Z","featured":false,"private":false,"image":"https://mintguesss.github.io/personal_web/builds/nobook.png","activity":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,30,5,1,2,0,0,8,0,0],"links":[],"deployments":[]},{"id":"mintguesss-claudequota","name":"ClaudeQuota","repo":"mintguesss/ClaudeQuota","codeUrl":"https://github.com/mintguesss/ClaudeQuota","summary":"Windows tray app that shows your Claude Pro/Max 5-hour and weekly usage limits, live from the official numbers","status":"active","stack":["Python","VBScript"],"languages":[{"name":"Python","pct":99.5},{"name":"VBScript","pct":0.5}],"tags":["anthropic","claude","claude-code","desktop-utility","python","rate-limit","system-tray","tray-app"],"stars":0,"forks":0,"license":"MIT","created":"2026-08-03T13:22:51Z","updated":"2026-11-03T17:37:29Z","release":"v1.1.1","featured":false,"private":false,"image":"https://mintguesss.github.io/personal_web/builds/claude-quota.png","activity":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,3,1,0,0,0,0,0,0,1,0,0,5,0,0],"links":[],"deployments":[]},{"id":"mintguesss-taica-llm","name":"TAICA_LLM","repo":"mintguesss/TAICA_LLM","codeUrl":"https://github.com/mintguesss/TAICA_LLM","summary":"透過 LLM 分析拖延原因、智能拆解任務、遊戲化收集角色，讓你告別拖延、每天前進一小步！","status":"active","stack":["JavaScript","CSS","Python","HTML","PowerShell"],"languages":[{"name":"JavaScript","pct":38.3},{"name":"CSS","pct":26.4},{"name":"Python","pct":21.6},{"name":"HTML","pct":13.5},{"name":"PowerShell","pct":0.2}],"tags":[],"stars":0,"forks":0,"created":"2026-05-06T12:20:54Z","updated":"2026-11-02T03:09:50Z","featured":false,"private":false,"image":"https://opengraph.githubassets.com/1/mintguesss/TAICA_LLM","activity":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,0,0,2,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0],"links":[],"deployments":[]},{"id":"mintguesss-promptmiser","name":"PromptMiser","repo":"mintguesss/PromptMiser","codeUrl":"https://github.com/mintguesss/PromptMiser","summary":"即時計算一段文字在各家 AI 模型會用掉多少 token、花多少錢","status":"active","stack":["FastAPI","Vue","TypeScript","JavaScript","Python","HTML"],"languages":[{"name":"Vue","pct":77.1},{"name":"TypeScript","pct":9.6},{"name":"JavaScript","pct":6.4},{"name":"Python","pct":5.2},{"name":"HTML","pct":1.2},{"name":"CSS","pct":0.5}],"tags":["cost-optimization","llm","prompt-engineering","tokenizer"],"stars":0,"forks":0,"license":"MIT","created":"2026-07-15T17:45:42Z","updated":"2026-11-02T03:09:47Z","featured":false,"private":false,"image":"https://mintguesss.github.io/personal_web/builds/prompt-miser.jpg","activity":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,4,4,1,0,1,0,0,0,0,0,0,0,0,0,1,0,0],"links":[{"label":"live","url":"https://prompt-miser.vercel.app"}],"deployments":[{"name":"production","provider":"vercel","url":"https://prompt-miser.vercel.app","ok":true,"ms":377,"status":200}]},{"id":"mintguesss-personal-assistant","name":"personal-assistant","repo":"mintguesss/personal-assistant","codeUrl":"https://github.com/mintguesss/personal-assistant","summary":"個人助理 (Personal Assistant) - 用電腦鏡頭即時監測坐姿、專注、情緒與飲水，透過 Windows 桌面通知提醒你照顧好自己。","status":"maintenance","stack":["PyTorch","pandas","Transformers","Python"],"languages":[{"name":"Python","pct":100}],"tags":[],"stars":0,"forks":0,"created":"2026-06-19T14:34:00Z","updated":"2026-08-30T15:26:00Z","featured":false,"private":false,"image":"https://mintguesss.github.io/personal_web/builds/personal-assistant.jpg","activity":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"links":[],"deployments":[]}]}</script>
 <script>(function clientMain() {
   const D = JSON.parse(document.getElementById("rf-data").textContent);
   const C2 = D.config;
@@ -1414,11 +1348,11 @@ body[data-mode="simple"] .tl-row a:hover{transform:none;border-color:color-mix(i
     function colors() {
       return { a: css("--accent") || "#22d3ee", b: css("--accent2") || "#a855f7", bg: css("--bg") || "#000000", fg: css("--fg") || "#ffffff" };
     }
-    function loop2(t2) {
+    function loop(t2) {
       const dt = Math.min(64, t2 - (last || t2));
       last = t2;
       if (state && effects[mode]) effects[mode].frame(state, colorsCache, dt);
-      raf = requestAnimationFrame(loop2);
+      raf = requestAnimationFrame(loop);
     }
     let colorsCache = null;
     function start(m) {
@@ -1435,14 +1369,14 @@ body[data-mode="simple"] .tl-row a:hover{transform:none;border-color:color-mix(i
           for (let i = 0; i < 40; i++) effects[mode].frame(state, colorsCache, 60);
           return;
         }
-        raf = requestAnimationFrame(loop2);
+        raf = requestAnimationFrame(loop);
       });
     }
     document.addEventListener("visibilitychange", () => {
       if (document.hidden) cancelAnimationFrame(raf);
       else if (mode && motion() !== "off") {
         last = 0;
-        raf = requestAnimationFrame(loop2);
+        raf = requestAnimationFrame(loop);
       }
     });
     addEventListener("resize", () => {
@@ -1490,7 +1424,7 @@ body[data-mode="simple"] .tl-row a:hover{transform:none;border-color:color-mix(i
     if (!C2.multi || !pages.length) return;
     if (!pages.some((p) => p.dataset.page === name)) name = pages[0].dataset.page;
     if (name === currentPage) return;
-    const go2 = () => {
+    const go = () => {
       pages.forEach((p) => p.hidden = p.dataset.page !== name);
       navLinks.forEach((a) => a.classList.toggle("on", a.dataset.nav === name));
       body.dataset.page = name;
@@ -1498,8 +1432,8 @@ body[data-mode="simple"] .tl-row a:hover{transform:none;border-color:color-mix(i
       currentPage = name;
       dispatchEvent(new CustomEvent("rf:page", { detail: name }));
     };
-    if (currentPage && document.startViewTransition && motion() === "full") document.startViewTransition(go2);
-    else go2();
+    if (currentPage && document.startViewTransition && motion() === "full") document.startViewTransition(go);
+    else go();
   }
   const goPage = (name) => {
     if (C2.multi) location.hash = "#/" + (name === "home" ? "" : name);
@@ -1649,126 +1583,49 @@ body[data-mode="simple"] .tl-row a:hover{transform:none;border-color:color-mix(i
     el.style.setProperty("--mx", e.clientX - r.left + "px");
     el.style.setProperty("--my", e.clientY - r.top + "px");
   }));
-  const tlx = $("#tlx");
-  if (tlx) {
-    let go2 = function(i) {
-      cur = (i + n) % n;
-      slides.forEach((s, k) => {
-        s.classList.toggle("on", k === cur);
-        s.setAttribute("aria-hidden", String(k !== cur));
-      });
-      dots.forEach((d2, k) => {
-        if (k === cur) d2.setAttribute("aria-current", "true");
-        else d2.removeAttribute("aria-current");
-        d2.classList.toggle("past", k < cur);
-      });
-      fill.style.setProperty("--p", n > 1 ? String(cur / (n - 1)) : "1");
-      count2.textContent = String(cur + 1);
-      const d = dots[cur];
-      if (d && track.scrollWidth > track.clientWidth) track.scrollTo({ left: d.offsetLeft - track.clientWidth / 2, behavior: motion() === "off" ? "auto" : "smooth" });
-      const nx = slides[(cur + 1) % n] && $("img", slides[(cur + 1) % n]);
-      if (nx) nx.loading = "eager";
-      elapsed = 0;
-      prog.style.setProperty("--p", "0");
-    }, loop2 = function(t2) {
-      raf = 0;
-      if (!playing || motion() === "off" || !visible()) {
-        last = 0;
-        return;
+  const vt = $("#vt");
+  if (vt) {
+    const items = $$(".vt-item", vt);
+    const grps = $$(".vt-grp", vt);
+    let ticking = false;
+    const upd = () => {
+      ticking = false;
+      if (C2.multi && currentPage !== "timeline") return;
+      const r = vt.getBoundingClientRect();
+      if (!r.height || r.bottom < 0 || r.top > innerHeight) return;
+      const H = innerHeight, mid = H * 0.55;
+      const p = Math.max(0, Math.min(1, (mid - r.top) / r.height));
+      vt.style.setProperty("--p", p.toFixed(4));
+      const tip2 = r.top + p * r.height;
+      const full = motion() === "full";
+      let best = null, bd = Infinity;
+      for (const it of items) {
+        const b = it.getBoundingClientRect();
+        if (b.top < H * 0.92) it.classList.add("in");
+        it.classList.toggle("lit", b.top + 24 <= tip2 + 1);
+        const dd = Math.abs(b.top + b.height / 2 - mid);
+        if (dd < bd) {
+          bd = dd;
+          best = it;
+        }
+        if (full && b.bottom > 0 && b.top < H) {
+          const img = it.querySelector(".vt-img img");
+          if (img) img.style.setProperty("--py", (-15 * Math.max(0, Math.min(1, (H - b.top) / (H + b.height)))).toFixed(2) + "%");
+        }
       }
-      if (last && !hover) elapsed += t2 - last;
-      last = t2;
-      prog.style.setProperty("--p", String(Math.min(1, elapsed / DUR)));
-      if (elapsed >= DUR) go2(cur + 1);
-      raf = requestAnimationFrame(loop2);
+      for (const it of items) it.classList.toggle("cur", it === best);
+      for (const g of grps) g.classList.toggle("cur", !!best && g.contains(best));
     };
-    var go = go2, loop = loop2;
-    const slides = $$(".tlx-slide", tlx);
-    const dots = $$(".tlx-track button", tlx);
-    const fill = $(".tlx-fill", tlx);
-    const prog = $(".tlx-prog i", tlx);
-    const count2 = $(".tlx-count b", tlx);
-    const track = $(".tlx-track", tlx);
-    const playBtn = $('[data-tlx="play"]', tlx);
-    const n = slides.length;
-    const DUR = 5200;
-    let cur = n - 1, elapsed = 0, last = 0, raf = 0, hover = false, playing = true;
-    const visible = () => (!C2.multi || currentPage === "timeline") && !document.hidden;
-    const kick = () => {
-      if (!raf) {
-        last = 0;
-        raf = requestAnimationFrame(loop2);
+    const req = () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(upd);
       }
     };
-    const setPlaying = (v) => {
-      playing = v;
-      playBtn.setAttribute("aria-pressed", String(v));
-      tlx.classList.toggle("paused", !v);
-      if (v) kick();
-    };
-    dots.forEach((d) => d.addEventListener("click", () => {
-      go2(Number(d.dataset.i));
-      kick();
-    }));
-    $('[data-tlx="prev"]', tlx).addEventListener("click", () => {
-      go2(cur - 1);
-      kick();
-    });
-    $('[data-tlx="next"]', tlx).addEventListener("click", () => {
-      go2(cur + 1);
-      kick();
-    });
-    playBtn.addEventListener("click", () => setPlaying(!playing));
-    const stage = $(".tlx-stage", tlx);
-    stage.addEventListener("pointerenter", (e) => {
-      if (e.pointerType === "mouse") hover = true;
-    });
-    stage.addEventListener("pointerleave", () => {
-      hover = false;
-    });
-    let sx = null;
-    stage.addEventListener("pointerdown", (e) => {
-      sx = e.clientX;
-    });
-    let swiped = false;
-    stage.addEventListener("pointerup", (e) => {
-      swiped = sx != null && Math.abs(e.clientX - sx) > 40;
-      if (swiped) {
-        go2(cur + (e.clientX < sx ? 1 : -1));
-        kick();
-      }
-      sx = null;
-    });
-    stage.addEventListener("click", (e) => {
-      if (swiped) {
-        e.preventDefault();
-        e.stopPropagation();
-        swiped = false;
-      }
-    }, true);
-    tlx.addEventListener("keydown", (e) => {
-      if (e.key === "ArrowRight") {
-        go2(cur + 1);
-        kick();
-        e.preventDefault();
-      } else if (e.key === "ArrowLeft") {
-        go2(cur - 1);
-        kick();
-        e.preventDefault();
-      }
-    });
-    addEventListener("rf:page", kick);
-    document.addEventListener("visibilitychange", kick);
-    let started = false;
-    const startObs = new IntersectionObserver((e) => {
-      if (!e[0].isIntersecting || started) return;
-      started = true;
-      startObs.disconnect();
-      if (n > 1 && motion() !== "off") go2(0);
-      kick();
-    }, { threshold: 0.3 });
-    startObs.observe(tlx);
-    go2(cur);
+    addEventListener("scroll", req, { passive: true });
+    addEventListener("resize", req);
+    addEventListener("rf:page", () => setTimeout(req, 50));
+    req();
   }
   function bindCard(card2) {
     card2.addEventListener("pointermove", (e) => {
@@ -1882,9 +1739,9 @@ body[data-mode="simple"] .tl-row a:hover{transform:none;border-color:color-mix(i
     runFilter();
   });
   $$("#layout-switch button").forEach((b) => b.addEventListener("click", () => {
-    const go2 = () => set2({ layout: b.dataset.layout });
-    if (document.startViewTransition && motion() === "full") document.startViewTransition(go2);
-    else go2();
+    const go = () => set2({ layout: b.dataset.layout });
+    if (document.startViewTransition && motion() === "full") document.startViewTransition(go);
+    else go();
   }));
   const clear = $("#clear");
   if (clear) clear.addEventListener("click", () => {
@@ -1952,7 +1809,7 @@ body[data-mode="simple"] .tl-row a:hover{transform:none;border-color:color-mix(i
       return isNaN(d) ? esc3(iso) : d.toLocaleDateString(C2.lang === "zh-TW" ? "zh-TW" : "en-US", { year: "numeric", month: "short", day: "numeric" });
     };
     $("#m-body").innerHTML = `
-      <div class="m-cover">${p.image && (simple() || st.covers) ? `<img src="${esc3(p.image)}" alt="" referrerpolicy="no-referrer" onerror="this.remove()">` : ""}</div>
+      ${p.image && (simple() || st.covers) ? `<div class="m-cover has"><i style="background-image:url('${esc3(p.image)}')"></i><img src="${esc3(p.image)}" alt="" referrerpolicy="no-referrer" onerror="this.parentNode.classList.remove('has');this.remove()"></div>` : `<div class="m-cover"></div>`}
       <div class="m-content">
         <h2 id="m-title">${esc3(p.name)}</h2>
         <div class="m-sub"><span><span class="dot st-${p.status}" style="display:inline-block;margin-right:6px"></span>${esc3(S.statusLabels[p.status])}</span>${p.stars ? `<span>\u2605 ${p.stars}</span>` : ""}${p.forks ? `<span>\u2442 ${p.forks}</span>` : ""}${p.release ? `<span>\u2B22 ${esc3(p.release)}</span>` : ""}${p.license ? `<span>\u2696 ${esc3(p.license)}</span>` : ""}<span>${esc3(S.created)} ${fmt2(p.created)}</span><span>${esc3(S.updated)} ${esc3(ago(p.updated))}</span></div>
@@ -2068,9 +1925,9 @@ body[data-mode="simple"] .tl-row a:hover{transform:none;border-color:color-mix(i
     panel.addEventListener("click", (e) => {
       const b = e.target.closest("button[data-k]");
       if (b) {
-        const go2 = () => set2({ [b.dataset.k]: b.dataset.v });
-        if (document.startViewTransition && motion() === "full" && b.dataset.k === "layout") document.startViewTransition(go2);
-        else go2();
+        const go = () => set2({ [b.dataset.k]: b.dataset.v });
+        if (document.startViewTransition && motion() === "full" && b.dataset.k === "layout") document.startViewTransition(go);
+        else go();
       }
       if (e.target.closest("[data-close-panel]")) panel.hidden = true;
     });
