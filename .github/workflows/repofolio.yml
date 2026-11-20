@@ -1,0 +1,49 @@
+# repofolio, single-repo setup: runs inside your (public) site repo, no hub repo needed.
+#
+#   1. Secret REPOFOLIO_TOKEN: fine-grained PAT, Repository access = All repositories,
+#      permissions (read-only): Contents, Metadata, Deployments, Pages.
+#   2. Secret REPOFOLIO_ADMIN_PASSWORD: a long passphrase (5+ random words). The admin page
+#      (private repos included) is published encrypted with it; only the password opens it.
+#   3. Put your config at .github/repofolio.config.yml with
+#        publish: { repo: <this repo>, path: public/projects }
+#        admin:   { page: some-name-only-you-know.html }
+#
+# Logs of a public repo are public: repofolio masks private repo names and never prints them.
+name: repofolio
+
+on:
+  schedule:
+    - cron: "17 2 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: repofolio
+  cancel-in-progress: true
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - id: repofolio
+        uses: mintguesss/repofolio@v0.6.0
+        with:
+          token: ${{ secrets.REPOFOLIO_TOKEN }}
+          publish-token: ${{ github.token }}
+          config: .github/repofolio.config.yml
+        env:
+          REPOFOLIO_ADMIN_PASSWORD: ${{ secrets.REPOFOLIO_ADMIN_PASSWORD }}
+
+      # Commits made with GITHUB_TOKEN don't trigger other workflows, so start the site's
+      # deploy workflow explicitly (it needs a `workflow_dispatch:` trigger). Remove if your
+      # site deploys straight from the branch.
+      - name: Redeploy the site
+        if: steps.repofolio.outputs.published != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run deploy.yml --ref "${{ github.ref_name }}"
