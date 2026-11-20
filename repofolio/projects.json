@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-20T09:07:49.400Z",
+  "generatedAt": "2026-11-20T09:26:48.645Z",
   "owner": "mintguesss",
   "profile": {
     "login": "mintguesss",
@@ -223,7 +223,7 @@
           "provider": "vercel",
           "url": "https://folio-manager-roan.vercel.app/",
           "ok": true,
-          "ms": 1326,
+          "ms": 1999,
           "status": 200
         }
       ]
@@ -264,7 +264,7 @@
       "forks": 0,
       "license": "MIT",
       "created": "2026-11-20T08:20:14Z",
-      "updated": "2026-11-20T09:07:24Z",
+      "updated": "2026-11-20T09:26:14Z",
       "release": "v0.2.0",
       "featured": false,
       "private": false,
@@ -334,7 +334,7 @@
           "name": "production",
           "url": "https://github.com/mintguesss/repofolio#readme",
           "ok": true,
-          "ms": 724,
+          "ms": 557,
           "status": 200
         }
       ]
@@ -374,7 +374,7 @@
       "stars": 0,
       "forks": 0,
       "created": "2026-08-26T15:08:43Z",
-      "updated": "2026-11-20T08:46:51Z",
+      "updated": "2026-11-20T09:08:37Z",
       "featured": false,
       "private": false,
       "image": "https://opengraph.githubassets.com/1/mintguesss/personal_web",
@@ -444,7 +444,7 @@
           "provider": "github-pages",
           "url": "https://mintguesss.github.io/personal_web/",
           "ok": true,
-          "ms": 1225,
+          "ms": 296,
           "status": 200
         }
       ]
@@ -788,7 +788,7 @@
           "provider": "vercel",
           "url": "https://aidit-weld.vercel.app",
           "ok": true,
-          "ms": 1068,
+          "ms": 1336,
           "status": 200
         }
       ]
@@ -1302,7 +1302,7 @@
           "provider": "vercel",
           "url": "https://prompt-miser.vercel.app",
           "ok": true,
-          "ms": 565,
+          "ms": 245,
           "status": 200
         }
       ]
