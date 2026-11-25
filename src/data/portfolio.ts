@@ -159,6 +159,16 @@ export const siteData = {
 
   builds: [
     {
+      id: "minglu-kneopi",
+      title: "minglu_kneopi",
+      subtitle: "",
+      group: "Applied ML",
+      period: "2026",
+      tags: ["Transformers", "Python", "Shell", "Batchfile"],
+      description: "MingLu on KNEO Pi：視障者的繁中隨身視覺助理，不用電腦，手機連一塊開發板就能用",
+      image: "/personal_web/builds/minglu-kneopi.png",
+    },
+    {
       id: "claude-quota",
       title: "ClaudeQuota",
       subtitle: "Claude 用量上限托盤小工具",
