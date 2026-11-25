@@ -159,6 +159,16 @@ export const siteData = {
 
   builds: [
     {
+      id: "minglu-kneopi",
+      title: "MingLu on KNEO Pi",
+      subtitle: "視障者的繁中隨身視覺助理",
+      group: "Applied ML",
+      period: "2026",
+      tags: ["Python", "YOLOv8n", "Gemma 4", "LiteRT-LM", "whisper.cpp", "Kneron KL730"],
+      description: "給視障者用的隨身視覺助理：手機拍照、錄音，傳給 Kneron KNEO Pi 開發板辨識，再由手機唸出結果。YOLOv8n、Whisper、Gemma 全部在 2GB 記憶體的板子上離線執行，影像和聲音不送到第三方雲端。",
+      image: "/personal_web/builds/minglu-kneopi.png",
+    },
+    {
       id: "claude-quota",
       title: "ClaudeQuota",
       subtitle: "Claude 用量上限托盤小工具",

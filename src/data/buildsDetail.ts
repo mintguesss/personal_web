@@ -1,5 +1,55 @@
 export const buildsDetail = {
 
+  'minglu-kneopi': {
+    oneLiner: "明路的開發板版本：原本由筆電負責辨識，改由 Kneron KNEO Pi（KL730，2GB 記憶體）負責。手機只當眼睛和喇叭，三個模型全在板上離線執行，影像和聲音不送到第三方雲端。",
+    metadata: [
+      { label: "角色", value: "KNEO Pi 版開發（電腦版：kobocawaee/minglu）" },
+      { label: "技術主軸", value: "邊緣裝置推論 · 2GB 記憶體下的模型取捨" },
+      { label: "平台", value: "Android 手機（Chrome）+ Kneron KNEO Pi" },
+    ],
+    links: { github: "https://github.com/mintguesss/minglu_kneopi", demo: "" },
+    highlights: [
+      { title: "一題 9 分鐘 → 22 秒", desc: "Gemma 改用 LiteRT-LM，不用 llama.cpp", detail: "llama.cpp 的模型比記憶體大，每生成一個字都要從 microSD 重讀；LiteRT-LM 版可以常駐記憶體。", color: "#2E6E93" },
+      { title: "周遭描述約 0.5 秒", desc: "YOLOv8n 轉成 NEF，在 KL730 NPU 上跑", detail: "模型切在偵測頭最後一層卷積，DFL 解碼與 NMS 在 CPU 上用 numpy 做；開機後第一次約 7 秒。", color: "#7048e8" },
+      { title: "三個模型塞進 2GB", desc: "YOLOv8n、Whisper base、Gemma 4 E2B 同時常駐", detail: "關閉桌面環境省約 900MB，另開 4GB swap；Whisper 改成常駐服務，避免每次重啟把 Gemma 擠出記憶體。", color: "#3F8869" },
+      { title: "安裝後全程離線", desc: "影像和聲音不送到第三方雲端", detail: "安裝時要下載約 2.7GB 的模型，之後板子可以完全離線使用。", color: "#e67700" },
+    ],
+    problem: [
+      "明路原本是電腦版：筆電負責辨識，手機負責拍照和唸出結果。這個版本拿掉筆電，只用手機加一塊 Kneron KNEO Pi 開發板就能使用。",
+      "難處在板子本身：只有 2GB 記憶體和 4 核 1.1GHz 的 Cortex-A55，NPU 只能加速 YOLO 這類 CNN，不能跑 Gemma。電腦版用的 Gemma 3 4B、Whisper large-v3-turbo、EasyOCR 都放不進來，每個模型都得重新選、重新量。",
+      "這個版本沒有過馬路和紅綠燈判斷，問到時會直接說不提供。",
+    ],
+    features: [
+      { title: "周遭、室內", summary: "說出前方有什麼、在哪個方位、多近", detail: "YOLOv8n 在 KL730 NPU 上偵測，再組成繁中句子，約 0.5 秒；偵測不到才交給 Gemma。" },
+      { title: "物品", summary: "說出拿在鏡頭前的東西是什麼", detail: "交給 Gemma 4 E2B，約 25~36 秒。YOLOv8n 會把耳機認成滑鼠，所以物品不用它認。" },
+      { title: "讀字", summary: "照原樣唸出畫面上的文字", detail: "由 Gemma 4 E2B 讀，約 40~48 秒。" },
+      { title: "語音指令與提問", summary: "切換模式、調語速字體，或直接問「這是什麼」", detail: "Whisper base 辨識語音指令約 6 秒；提問會先唸「聽到了，正在看」，可以追問，整題約 30~40 秒。" },
+      { title: "LCD 狀態顯示", summary: "1602 I2C LCD 顯示板子 IP 和目前狀態", detail: "第一行是手機要連的 IP，熱點換 IP 會自動更新；第二行顯示載入、聆聽、思考，或這次偵測到的東西。" },
+    ],
+    decisions: [
+      {
+        tab: "LiteRT-LM",
+        title: "Gemma 用 LiteRT-LM，不用 llama.cpp",
+        body: ["llama.cpp 的模型比記憶體大，每生成一個字都要從 microSD 重讀，一題約 9 分鐘。LiteRT-LM 版可以常駐，一題約 22 秒。"],
+      },
+      { tab: "影像解析度", title: "影像只用最低解析度（70 tokens）", body: ["影像編碼固定約 19.5 秒，是這塊板子最大的瓶頸；用 140 tokens 要多等約 30 秒。"] },
+      { tab: "常駐服務", title: "Whisper 改成常駐的 whisper-server", body: ["每次重新啟動 whisper-cli 會把 Gemma 擠出記憶體，Gemma 每題要多讀 300~700MB 的 microSD。"] },
+      { tab: "讀字", title: "讀字改用 Gemma，不用 EasyOCR", body: ["EasyOCR 加 PyTorch 在這塊板子上要 90~160 秒，記憶體也不夠和 Gemma 同時常駐。"] },
+      { tab: "swappiness", title: "vm.swappiness 設 180", body: ["Gemma 的權重是 mmap 的檔案快取。調低成 10 時，物品辨識從約 27 秒變成 42 秒。"] },
+      { tab: "試過沒用的", title: "試過但沒採用的方法", body: ["Whisper tiny（更慢，還會重複句子）、先送圖再問（多 6 秒）、縮小圖片、speculative decoding、YNNPACK。"] },
+    ],
+    architecture: [
+      "手機（Chrome：相機、麥克風、TTS 唸出結果）",
+      "  ↓ HTTPS 傳照片、錄音，回傳文字",
+      "KNEO Pi（app/server.py）",
+      "  ├─ YOLOv8n → KL730 NPU（周遭、室內）",
+      "  ├─ Whisper base → whisper-server（常駐）",
+      "  ├─ Gemma 4 E2B → LiteRT-LM（常駐，CPU）",
+      "  └─ I2C LCD：顯示 IP 和狀態",
+    ],
+    techStack: ["Python", "YOLOv8n", "Kneron KL730 NPU", "Gemma 4 E2B", "LiteRT-LM", "Whisper base", "whisper.cpp", "numpy", "systemd"],
+  },
+
   'nobook': {
     oneLiner: "手機當錄音端、自己的筆電當推論伺服器，課堂上即時產出逐字稿、段落摘要與能直接照抄的手抄版筆記。ASR 與 LLM 全部在一張 8GB 顯卡上輪流執行，不呼叫任何雲端 API，錄音與逐字稿不離開自己的機器。",
     metadata: [
