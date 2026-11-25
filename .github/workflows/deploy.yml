@@ -1,12 +1,27 @@
 name: Deploy to GitHub Pages
 
+# Builds the static export and deploys it straight to Pages in one job
+# (no gh-pages branch, so no second "pages build and deployment" run).
 on:
   push:
     branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -15,12 +30,18 @@ jobs:
         with:
           node-version: '20'
           cache: 'npm'
+      - name: Next.js build cache
+        uses: actions/cache@v4
+        with:
+          path: .next/cache
+          key: next-${{ hashFiles('package-lock.json') }}-${{ hashFiles('src/**', 'public/**') }}
+          restore-keys: next-${{ hashFiles('package-lock.json') }}-
       - name: Install dependencies
         run: npm ci
       - name: Build
         run: npm run build
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
+      - uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./out
+          path: ./out
+      - id: deploy
+        uses: actions/deploy-pages@v4
