@@ -1,37 +1,5 @@
 export const buildsDetail = {
 
-  'minglu-kneopi': {
-    oneLiner: "明路 KNEO Pi 版：給視障者的繁中隨身視覺助理，手機連開發板即可使用，模型全在板上執行",
-    metadata: [
-      { label: "角色", value: "明路kneopi版本開發、電腦版 : https://github.com/kobocawaee/minglu" },
-      { label: "技術主軸", value: "Transformers · Python · Shell" },
-    ],
-    links: { github: "https://github.com/mintguesss/minglu_kneopi", demo: "" },
-    highlights: [
-      { title: "Gemma 用 LiteRT-LM，…", desc: "Gemma 用 LiteRT-LM，不用 llama.cpp： llama.cpp 的模型比記憶體大，每生成一個字都要從 microSD 重讀，一題約 9 分鐘。LiteRT-LM 版可以常駐，一題約 22 秒。", detail: "", color: "#2E6E93" },
-      { title: "影像用最低解析度（70 tokens…", desc: "影像用最低解析度（70 tokens）： 影像編碼固定約 19.5 秒，是這塊板子最大的瓶頸。140 tokens 要多等約 30 秒。", detail: "", color: "#7048e8" },
-      { title: "Whisper 常駐： 每次重新啟動…", desc: "Whisper 常駐： 每次重新啟動 whisper-cli 會把 Gemma 擠出記憶體，Gemma 每題要多讀 300700MB 的 microSD。", detail: "", color: "#3F8869" },
-      { title: "讀字改用 Gemma： EasyOC…", desc: "讀字改用 Gemma： EasyOCR 加 PyTorch 在這塊板子上要 90160 秒，記憶體也不夠和 Gemma 同時常駐。", detail: "", color: "#e67700" },
-    ],
-    problem: [
-      "MingLu on KNEO Pi：視障者的繁中隨身視覺助理，不用電腦，手機連一塊開發板就能用",
-      "這是明路的 KNEO Pi 版本。原本由筆電負責辨識，這個版本改由 Kneron KNEO Pi（KL730，2GB 記憶體）負責。手機仍然是眼睛和喇叭：手機用瀏覽器拍照、錄音，傳給板子， 板子回傳文字，再由手機唸出來。所有模型都在板子上離線執行，影像和聲音不會送到第三方雲端。",
-    ],
-    features: [
-      { title: "Gemma 用 LiteRT-LM，不用 llama.cpp： llama.cpp 的模型比記憶體大，每生成一個字都要從 microSD 重讀，一題約 9 分鐘。LiteRT-LM 版可以常駐，一題約 22 秒。", summary: "", detail: "" },
-      { title: "影像用最低解析度（70 tokens）： 影像編碼固定約 19.5 秒，是這塊板子最大的瓶頸。140 tokens 要多等約 30 秒。", summary: "", detail: "" },
-      { title: "Whisper 常駐： 每次重新啟動 whisper-cli 會把 Gemma 擠出記憶體，Gemma 每題要多讀 300700MB 的 microSD。", summary: "", detail: "" },
-      { title: "讀字改用 Gemma： EasyOCR 加 PyTorch 在這塊板子上要 90160 秒，記憶體也不夠和 Gemma 同時常駐。", summary: "", detail: "" },
-      { title: "物品交給 Gemma： YOLOv8n 會把耳機認成滑鼠。601 類的 Open Images 版 YOLOv8n 也試過，耳機 3 張只認對 1 張。", summary: "", detail: "" },
-      { title: "vm.swappiness 設 180： Gemma 的權重是 mmap 的檔案快取。調低成 10 時，物品從約 27 秒變成 42 秒。", summary: "", detail: "" },
-    ],
-    decisions: [
-      { tab: "設計", title: "minglu_kneopi", body: ["明路 KNEO Pi 版：給視障者的繁中隨身視覺助理，手機連開發板即可使用，模型全在板上執行"] },
-    ],
-    architecture: [],
-    techStack: ["Transformers", "Python", "Shell", "Batchfile"],
-  },
-
   'nobook': {
     oneLiner: "手機當錄音端、自己的筆電當推論伺服器，課堂上即時產出逐字稿、段落摘要與能直接照抄的手抄版筆記。ASR 與 LLM 全部在一張 8GB 顯卡上輪流執行，不呼叫任何雲端 API，錄音與逐字稿不離開自己的機器。",
     metadata: [
